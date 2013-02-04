@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>index.html</title>
+	  <%= yield :head %>
+  </head>
+  
+  
+  <body class = "Bbody">
+	 <%= render :file =>'formHeader001.html.erb' %> 
+
+  	 <%= yield %>
+	   
+  	 <div style="display:none"><%= link_to_function "click Next", 'history.go(1)', data: { keybinding: 'alt+pagedown' } %></div>
+  	 <div style="display:none"><%= link_to_function "click Previous", 'history.go(-1)', data: { keybinding: 'alt+pageup' } %></div> 
+     <div style="display:none"><%= link_to_function "Save Item Order", 'saveItemorder()', data: { keybinding: 'alt+s' } %></div>
+  	  
+  	 <h1 align="center" ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color = 'gray'>Item Order:</font> <font color='blue'><%=  if @itemorder.id != nil then @itemorder.id else "<New Item Order>" end %></font></h1> 
+	   <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   		
+   				    <%= render :file =>'createMenu.html.erb' %>      				   
+   			
+  	
+  			<%= render :file =>'MHSTableStart.html' %>
+  			<%= simple_form_for @itemorder do |f| %>
+  				
+		  	 <font color = 'red'> <%= f.error_notification  %></font>
+		  	 <div class = "BeonaForm">  
+		  	 
+  			  <Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  
+  				<tr>
+  							<td><div align="left">&nbsp;<%= f.button :submit, "      Save      ", :id => "saveItemorder"  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+  				</tr>	
+  				
+  				  				
+  				  				
+  				<tr><td colspan="4">  				
+  				    <table class="BTable" bgcolor="#FFFFFF" >
+  				  		<Tr>
+  				  			<td>*<font color = 'gray'>Invoice Id</font></td><td><%= f.input :invoice_id, :label => false, :autofocus =>true %></td>
+  							<td><font color = 'gray'>Sales Date</font></td><td><%= f.input :sales_date, :label => false, :type => "date" %></td>
+  						</Tr>
+  						<Tr>
+  							<td><font color = 'gray'>Item Code</font></td><td><%= f.input :item_code, :label => false %></td>
+  							<td><font color = 'gray'>Item Name</font></td><td><%= f.input :item_name, :label => false %></td>
+  						</Tr>
+  				  	</table>	
+  				</td></tr>  	  				
+  				  				
+  				<tr><td colspan="4">  				
+  				    <table class="BTable" bgcolor="#FFFFFF" >
+  				  		<Tr>
+  				  			<td><font color = 'gray'>Quantity</font></td><td><%= f.input :quantity, :label => false %></td>
+  							<td><font color = 'gray'>Sales Rate Per Unit</font></td><td><%= f.input :sales_rate_per_unit, :label => false %></td>
+  						</Tr>
+  						<Tr>
+  							<td><font color = 'gray'>Total</font></td><td><%= f.input :total, :label => false %></td>
+  							<td><font color = 'gray'>Discount Percentage</font></td><td><%= f.input :discount_percentage, :label => false %></td>
+  						</Tr> 		
+  						<Tr>
+  							<td><font color = 'gray'>Total After Discount</font></td><td><%= f.input :final_total, :label => false %></td>
+  						</Tr>
+  				  	</table>	
+  				</td></tr>  	
+  				
+  				<tr>
+  							<td><div align="left">&nbsp;<%= f.button :submit, "      Save      ", :id => "saveItemorder"  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+  				</tr>	
+  				
+  				  
+  			  </Table>
+  			   
+  			 </div>
+  			<% end %>  
+  		
+  			 </td>
+  		   <%= render :file =>'createRHSButtons.html.erb' %>    
+  		 </tr>
+  	</table>
+  </body>
+</html>
+
+   
+   

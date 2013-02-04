@@ -1,0 +1,133 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>index.html</title>	  	 
+	  <%= yield :head %>	  
+  </head>
+  
+  
+  <body class = "Bbody">
+	 <%= render :file =>'formHeader001.html.erb' %> 
+
+  	 <%= yield %>
+	   
+	  <div style="display:none"><%= link_to_function "click Next", 'clickNextPrev("tabinvoices_itemorders_next")', data: { keybinding: 'right' } %></div>
+  	  <div style="display:none"><%= link_to_function "click Previous", 'clickNextPrev("tabinvoices_itemorders_previous")', data: { keybinding: 'left' } %></div> 
+	   
+  	 <div style="display:none"><%= link_to_function "click Next", 'history.go(1)', data: { keybinding: 'alt+pagedown' } %></div>
+  	 <div style="display:none"><%= link_to_function "click Previous", 'history.go(-1)', data: { keybinding: 'alt+pageup' } %></div> 
+     <div style="display:none"><%= link_to_function "save Invoice", 'saveInvoice()', data: { keybinding: 'alt+s' } %></div>
+
+  	 <%= render :file =>'IndexPageKBShortCuts.html.erb' %>
+  	 
+  	 <% @dr_cr_comp = if @trans_rec_pay_journal.dr_cr != nil then @trans_rec_pay_journal.dr_cr else if params[:trans] == "pay" then  "Cr" else  "Dr" end end  %>
+     <h1 align="center" ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color = 'gray'> <%= if @dr_cr_comp == "Cr" then "Payment: " else "Receipt: " end  %></font> <font color='blue'><%=  if @trans_rec_pay_journal.account_head != nil then @trans_rec_pay_journal.account_head else "<New "+ if @dr_cr_comp == 'Cr' then "Payment: "+params[:acchead] else "Receipt: "+params[:acchead] end + ">" end %></font></h1>
+     
+
+	  <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   			
+ 			<%= render :file =>'createMenu.html.erb' %>      				   
+   			
+  	 
+  		<%= render :file =>'MHSTableStart.html' %>  
+  			  <Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF" width="100%"  > 
+  			  	 
+  				<tr>						  								 									
+  			     <Td>  										
+  					<div style="float: left; width: auto;"><%= button_to "      Edit      ", edit_trans_rec_pay_journal_path , :id => "editTransJournal", :method => :get  %> </div> 									
+  				    <%= button_to "      Delete      ", @trans_rec_pay_journal ,:id => "deleteTransJournal",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %></td>  				    									
+    			</td>  
+    		  </tr>
+  				
+  			 <Tr><td colspan ='2'>
+  					<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  
+  						<tr><td><font color = 'gray'>Entry Date</font></td><td><%= @trans_rec_pay_journal.journal_date %></td></Tr>
+  						<tr>  						
+  							<% @tmpAccHead = params[:acchead] %>  							
+  							<% @custName = if @trans_rec_pay_journal.account_head != nil then @trans_rec_pay_journal.account_head else  if  @hashCust.has_key? @tmpAccHead then  @tmpAccHead else "" end end %>
+  							<td><font color = 'gray'>Account Head: &nbsp;</font></td><td><%= @trans_rec_pay_journal.account_head %></td>  							
+  							<td><font color = 'gray'>Current Balance:&nbsp;<%= @hashCust[@custName].to_s.concat " ".concat @hashCustDrCr[@custName] %> </td>
+  						</Tr>
+  					 </table>	  						
+  				</td></Tr>  			
+  				 
+  			
+  				
+  				
+  				<tr><td colspan = 2 >
+  					<div align = "right" >
+  					<table id = "tabtranspayrecjournal" style="clear: both; margin-left: 10px; width : 100%"  bgcolor="#CCCCCC" >
+  						<thead>	    	
+  							<tr>  	
+  								<th> Entry No. </th>	
+  								<th> <%= if @dr_cr_comp == "Cr" then "Paid To" else "Received From" end  %>  </th>
+  								<th> Amount </th>
+  								<th> Dr / Cr </th>  														
+  								<th></th>
+  								<th></th>
+  							</tr>
+  						</thead>
+  						<tbody>
+  							<% if @journalentries != nil then %>
+  							  <% @journalentries.each do |lineT| %>
+  								<tr>
+  									<td><%= link_to lineT.id, lineT, :class=>"docLinksClass"  %>  </td>
+  									<td><%= lineT.account_head  %>  </td>
+  									<td style = 'float:right'><%= lineT.amount  %> </td>
+  									<td><%= lineT.dr_cr  %>  </td>  									
+        							<td><%= link_to 'Edit', edit_journal_entry_path(lineT) %></td>
+    								<td><%= link_to 'Delete', lineT,  confirm: 'Are you sure you want to delete this record?', :method => :delete %></td>
+  					 			
+  								</tr>
+  							  <% end %>  
+  							<% end%>   							
+  						</tbody>	
+  						<tfoot>
+  							<tr>  	
+  								<th> </th>	
+  								<th>   </th>  								
+  								<th>  </th>
+  								<th>  </th>  														
+  								<th></th>
+  								<th> </th>
+  							</tr> 
+  							</tfoot>
+  					</table>
+  					</div>
+  					<br />
+  				</td></tr>
+  				
+  				<tr><td colspan="2">
+  				  <table class="BTable" bgcolor="#FFFFFF" >
+  					<Tr><td  ><font color = 'gray'>Narration</font></td><td colspan="3"><%= @trans_rec_pay_journal.narration %></td></Tr>
+  					<Tr>
+  						<td><font color = 'gray'>Cheque No.</font></td><td><%= @trans_rec_pay_journal.cheque_no %></td>
+  						<td><font color = 'gray'>Cheque Date</font></td><td><%= @trans_rec_pay_journal.cheque_date %></td></Tr>  					
+  					<Tr>
+  						<td><font color = 'gray'>Cheque Description</font></td><td><%= @trans_rec_pay_journal.cheque_description %></td>
+  						<td><font color = 'gray'>Paid From / To</font></td><td><%= @trans_rec_pay_journal.recd_paid_from_to %></td>  						
+  					</Tr>  
+  				 </table>
+  				<td></tr>	 				
+  				
+  				<tr>						  								 									
+  			     <Td>  										
+  					<div style="float: left; width: auto;"><%= button_to "      Edit      ", edit_trans_rec_pay_journal_path , :id => "editTransJournal", :method => :get  %> </div> 									
+  				    <%= button_to "      Delete      ", @trans_rec_pay_journal ,:id => "deleteTransJournal",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %></td>  				    									
+    			</td>  
+    		  </tr>  
+  			  </Table>
+  			    
+  		
+  			<br />
+  			 <%= render :file =>'createRHSButtons.html.erb' %>  
+  			   				    				   
+   			
+  			</tr>
+  	</table>
+  </body>
+</html>

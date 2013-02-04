@@ -1,0 +1,21 @@
+ <div style="display:none"><%= link_to_function "click Next", 'hideLHSRHS()', data: { keybinding: 'alt+a' } %></div>
+ <div style="display:none"><%= link_to_function "click Next", 'showLHSRHS()', data: { keybinding: 'esc' } %></div>
+ 
+<div class = 'Bbody-TreeView'>
+<div id="sidetree" >
+  <div align = 'right' class="treeheader">&nbsp; <b><%= link_to_function '> Refresh', "refreshGroupTree()" , data: { keybinding: 'alt+r'} %></b></div>
+  
+  <div id="sidetreecontrol" margin-left:10px>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><%= link_to 'Collapse All', "?#" , data: { keybinding: 'alt+c'} %></b> | <b><%= link_to 'Expand All', "?#" , data: { keybinding: 'alt+v'} %> </b></div> 
+	<br/>
+  <ul class="treeview" id="tree">
+
+
+		<%=  raw @assetHTML %>	
+		
+</div>
+
+</div>
+</div>
+
+<body class= 'Bbody-TreeView'>
+</body>

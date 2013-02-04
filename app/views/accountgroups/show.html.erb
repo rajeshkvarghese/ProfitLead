@@ -1,0 +1,79 @@
+<div style="display:none"><%= link_to_function "click Next", 'clickNextPrev("tabcustomersfromaccountgroup_next")', data: { keybinding: 'right' } %></div>
+<div style="display:none"><%= link_to_function "click Previous", 'clickNextPrev("tabcustomersfromaccountgroup_previous")', data: { keybinding: 'left' } %></div>
+ 
+ <div style="display:none"><%= link_to_function "click Next", 'hideLHSRHS()', data: { keybinding: 'alt+a' } %></div>
+ <div style="display:none"><%= link_to_function "click Next", 'showLHSRHS()', data: { keybinding: 'esc' } %></div>
+  
+<%= render :file =>'IndexPageKBShortCuts.html.erb' %>
+
+<% varNewChildGroupFunction = "createNewChildGroup('" << new_accountgroup_path << "', '" << @accountgroup.id.to_s  << "')" %>
+<% varNewLedgerFunction = "newLedgerFromAccountGroup('" << new_ledger_path << "', '" << @accountgroup.group_name  << "')" %>
+<center><h1>Account Group: <font  color = 'blue'><%= @accountgroup.group_name %></font></h1></center>
+
+	<body class='Bbody'>
+		<div id='accGroup' style='display:block'>
+		<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF" margin-left="20px" >  
+			<tr><td>Group Name</td><td> <%= @accountgroup.group_name %></td></tr>	
+			<tr><td>Book Type</td><td><%= @accountgroup.book_type %></td></tr>
+			<tr><td>Schedule No.</td><td> <%= @accountgroup.schedule_no %></td></tr>	
+			<tr>
+				<td colspan = "2"><div style="float:left;"> <%= button_to_function 'Create Child Group', varNewChildGroupFunction %> <%= button_to_function 'Create Ledger', varNewLedgerFunction %>&nbsp; </div>
+			 		<div style="float:left;"> <%= button_to "Delete", @accountgroup ,:id => "deleteaccountgroup",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %>&nbsp;</div> 
+			 		 
+			 		<%= button_to 'Edit', edit_accountgroup_path(@accountgroup), :method => :get  %>
+			 	</td>
+			</tr>	
+		</table>	
+		<br/>
+		</div>
+		
+		<b><font size ='2' color = 'blue'><%= link_to_function '> Show/Hide Ledgers', 'showLedgersFromAccountGroups()', data: { keybinding: 'alt+h' }   %></font></b>
+		
+		 <div id='showLedgersFromAccountGroups' style='display:none'>
+		 	<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF" margin-left="20px" >
+		 		<tr><td><div id = 'max' style = "display:block; float:right"><b><%= link_to_function 'Maximize',  'accGroupLedgersMaximize()', data: { keybinding: 'alt+m' }  %></b> </div>
+						<div id = 'min' style = "display:none; float:right"><b><%= link_to_function 'Minimize',  'accGroupLedgersMinimize()', data: { keybinding: 'alt+n' }  %></b> </div>		 			
+		 			
+		 		</td></tr>
+		 		
+		 		<tr><td>
+		 		  
+		 	 	<table id = "tabcustomersfromaccountgroup" style="clear: both; margin-left: 10px; width : 90%">
+  					<thead>	    	
+  						<tr>
+  							<th> Ledger Name </th>
+  							<th> Current Balance </th>
+  							<th> Dr/Cr </th>
+  							<th> Active?</th>  						
+  							<th></th>
+  							<th></th>
+  						</tr>
+  					</thead> 
+  					<tbody>
+  						<% @ledgers.each do |custT| %>
+  							<tr>
+  								<td><%= link_to custT.name, custT, :class=>"docLinksClass",:target => '_blank'     %>  </td>
+  								<td><%= custT.current_balance  %>  </td>
+  								<td><%= custT.dr_cr  %>  </td>
+  								<td><%= if custT.is_active =="1" then "Yes" else "No" end %> </td>
+        						<td><%= link_to 'Edit', edit_ledger_path(custT),:target => '_blank' %></td>
+    							<td><%= link_to 'Delete', custT,  confirm: 'Are you sure you want to delete this record?', :method => :delete, :redirect_to => :back %></td>
+  					 			
+  							</tr>
+  						<% end %>  
+  					</tbody>	
+  				</table>
+  			</td></tr></table>
+	  	</div>  	
+</body>
+
+
+
+
+
+
+
+
+
+
+

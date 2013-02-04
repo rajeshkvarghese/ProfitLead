@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>show.html</title>	 
+	  <%= yield :head %>
+  </head>
+  
+  <body class = "Bbody">
+	<%= render :file =>'formHeader001.html.erb' %> 
+
+  	<%= yield %>
+  
+    
+  	<div style="display:none"><%= link_to_function "click Next", 'history.go(1)', data: { keybinding: 'alt+pagedown' } %></div>
+  	<div style="display:none"><%= link_to_function "click Previous", 'history.go(-1)', data: { keybinding: 'alt+pageup' } %></div>
+  	<div style="display:none"><%= link_to "edit customer", edit_customer_path, data: { keybinding: 'alt+q' } %></div>  
+  	<div style="display:none"><%= link_to_function "delete customer", 'deleteCustomer()', data: { keybinding: 'alt+shift+backspace' } %></div>
+
+
+  	<h2 align="center" ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class = 'Blabel'>Ledger:</font> <font color='blue'><%=  @customer.name %></font></h2>
+    <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   			  				  
+   				     <%= render :file =>'createMenu.html.erb' %>   
+   			
+  	
+  		<%= render :file =>'MHSTableStart.html' %>
+  			<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  				  				
+  				<tr>						  								 									
+  			     <Td>  										
+  					<div style="float: left; width: auto;"><%= button_to "      Edit      ", edit_customer_path , :id => "editCustomer", :method => :get  %> </div> 									
+  				    <%= button_to "      Delete      ", @customer ,:id => "deleteCustomer",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %></td>  				    									
+    			</td>  
+    		  </tr>
+    		  <tr>
+    		   <td colspan = "3" valign="top">
+    			<div id ="tabs" valign="top">
+  					<ul>  			
+  						<li><a href = "#tabs-1"> General </a></li>
+  						<li><a href = "#tabs-2"> Office/Contact Address </a></li>
+  						<li><a href = "#tabs-3"> Others </a></li>
+  						<li><a href = "#tabs-4"> Delivery </a></li>
+  					</ul>
+  					
+  					<div id="tabs-1">
+  						<table>  	
+  							<Tr>
+  								<td colspan = "4">
+  									<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  > 
+  							<Tr>
+  								<td></td><td></td><td></td><td><div style="float:left"><font color = 'blue'>Active:</font></div><div class = 'Bfield'><%= if @customer.is_active =="1" then "Yes" else "No" end %></td>  	
+  							</Tr>						
+  							<Tr>
+  								<td colspan = "1"><div class = 'Blabel'>Ledger Name</div></td><td><div class = 'Bfield'><%= @customer.name %></div></td>
+  								<td colspan = "1"><div class = 'Blabel'>Short Name</div></td><td><div class = 'Bfield'><%= @customer.short_name %></div></td>
+  								
+  								
+  							</Tr>
+  							<Tr>
+  								<td colspan = "1"><div class = 'Blabel'>Code</div></td><td><div class = 'Bfield'><%= @customer.code %></div></td>
+  								<td  colspan = "1"><div class = 'Blabel'>Group</div></td><td><div class = 'Bfield'><%= @customer.group %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Opening Balance</div></td><td><div class = 'Bfield'><%= @customer.opening_balance %></div></td>
+  								<td><div class = 'Blabel'>Dr/Cr</div>&nbsp;&nbsp;&nbsp;</td><td><div class = 'Bfield'><%= @customer.dr_cr %></div></td>  								
+  							</Tr>  							
+  							<Tr>
+  								<td><div class = 'Blabel'>Current Balance</div></td><td><div class = 'Bfield'><%= @customer.current_balance %></div></td>
+  								<td><div class = 'Blabel'>Set as party</div></td><td><div class = 'Bfield'><%= if @customer.set_as_party =="1" then "Yes" else "No" end %></div></td>  								  								
+  							</Tr
+  							<Tr>
+  								<td><div class = 'Blabel'>Name to print in cheque</div></td><td><div class = 'Bfield'><%= @customer.name_to_print %></div></td>
+  								<td><div class = 'Blabel'>Comments</div></td><td><div class = 'Bfield'><%= @customer.comments %></div></td>
+  							</Tr>
+  							 							
+  							</table></td></tr>
+  							
+  						</table>  				
+  					</div>
+  					
+  					<div id="tabs-2">
+  						<table>  							
+  							<Tr>
+  								<td colspan = "4">
+  									<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  > 
+  							<Tr><td colspan ="1"><div class = 'Blabel'>Address</div></td><td colspan ="3"><div class = 'Bfield'><%= @customer.cont_addr_bill_to %></div></td></Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>City</div></td><td><div class = 'Bfield'><%= @customer.cont_city %></div></td>
+  								<td><div class = 'Blabel'>District</div></td><td><div class = 'Bfield'><%= @customer.cont_district %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>State</div></td><td><div class = 'Bfield'><%= @customer.cont_state %></div></td>
+  								<td><div class = 'Blabel'>Country</div></td><td><div class = 'Bfield'><%= @customer.cont_country %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>PIN Code</div></td><td><div class = 'Bfield'><%= @customer.cont_pin_code %></div></td>
+  								<td><div class = 'Blabel'>website</div></td><td><div class = 'Bfield'><%= @customer.cont_website %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Contact Person</div></td><td><div class = 'Bfield'><%= @customer.cont_contact_person %></div></td>
+  								<td><div class = 'Blabel'>Designation</div></td><td><div class = 'Bfield'><%= @customer.cont_designation %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Phone</div></td><td><div class = 'Bfield'><%= @customer.cont_phone %></div></td>
+  								<td><div class = 'Blabel'>Fax</div></td><td><div class = 'Bfield'><%= @customer.cont_fax %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Mobile</div></td><td><div class = 'Bfield'><%= @customer.cont_mobile_no %></div></td>
+  								<td><div class = 'Blabel'>Email Id</div></td><td><div class = 'Bfield'><%= @customer.cont_email_id %></div></td>
+  							</Tr> 
+  							</table></td></tr>
+  						</table>
+  					</div>
+  					<div id="tabs-3">  						
+  						<table>  
+  							<Tr>
+  							<td colspan = "4">
+  									<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  > 							
+  							<Tr>
+  								<td><div class = 'Blabel'>TIN</div></td><td><div class = 'Bfield'><%= @customer.tin_no %></div></td>
+  								<td><div class = 'Blabel'>CST No.</div></td><td><div class = 'Bfield'><%= @customer.cst_no %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Acct. No.</div></td><td><div class = 'Bfield'><%= @customer.acct_no %></div></td>
+  								<td><div class = 'Blabel'>Bank</div></td><td><div class = 'Bfield'><%= @customer.bank_name %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>IFSC Code</div></td><td><div class = 'Bfield'><%= @customer.bank_ifsc %></div></td>
+  								<td><div class = 'Blabel'>Branch of the Bank</div></td><td><div class = 'Bfield'><%= @customer.bank_branch %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>License No.</div></td><td><div class = 'Bfield'><%= @customer.license_no %></div></td>
+  								<td><div class = 'Blabel'>Rate Used</div></td><td><div class = 'Bfield'><%= @customer.rate %></div></td>  								
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Central Excise No.</div></td><td><div class = 'Bfield'><%= @customer.central_excise_no %></div></td>
+  								<td><div class = 'Blabel'>Salesman</div></td><td><div class = 'Bfield'><%= @customer.salesman %></div></td>  								
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Income Tax No.</div></td><td><div class = 'Bfield'><%= @customer.income_tax_no %></div></td>
+  								<td><div class = 'Blabel'>Use Voucher</div></td><td><div class = 'Bfield'><%= @customer.use_voucher %></div></td>
+  							</Tr>
+  							<Tr>
+  								
+  								<td><div class = 'Blabel'>Discount Percentage</div></td><td><div class = 'Bfield'><%= @customer.discount_percentage %></div></td>
+  							</Tr>
+  							</table>
+  							</td> </tr>
+  							<Tr>
+  								<td colspan = "4">
+  									<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  	
+  										<tr>
+  											<td><div class = 'Blabel'>Credit Period</div></td><td><div class = 'Bfield'><%= @customer.credit_period %></div></td>  
+  											<td><div class = 'Blabel'>Maximum Credit Limit</div></td><td><div class = 'Bfield'><%= @customer.maximum_credit_limit %></div></td>
+  											<td><div class = 'Blabel'>Maximum Debit Limit</div></td><td><div class = 'Bfield'><%= @customer.maximum_debit_limit %></div></td>
+  										</tr>
+  										<tr>
+  											<td><div class = 'Blabel'>Stop if period exceeded</div></td><td><div class = 'Bfield'><%= if @customer.stop_if_period_exceed =="1" then "Yes" else "No" end  %></div></td>
+  											<td><div class = 'Blabel'>Stop if amount exceeded</div></td><td><div class = 'Bfield'><%= if @customer.stop_if_amount_exceed =="1" then "Yes" else "No" end  %></div></td>
+  										</tr>	
+  									</Table>		
+  								</td>  								
+  							</Tr>  							
+  							<Tr>
+  								<td colspan = "4">
+  									<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  	
+  										<tr>
+  											<td colspan><div class = 'Blabel'>Segment</div></td><td><div class = 'Bfield'><%= @customer.segment %></div></td>
+  											<td><div class = 'Blabel'>Grade</div></td><td><div class = 'Bfield'><%= @customer.grade %></div></td>
+  											<td colspan><div class = 'Blabel'>Fleet Order</div></td><td><div class = 'Bfield'><%= @customer.fleet_order %></div></td>  								
+  										</Tr> 
+  									</Table>		
+  								</td>  								
+  							</Tr>  		 							
+  						</table>  	
+  					</div>
+  					<div id="tabs-4">
+  						<table>
+  							<Tr>
+  								<td colspan = "4">
+  									<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  > 
+  							<Tr><td colspan ="1"><div class = 'Blabel'>Address</div></td><td colspan ="3"><div class = 'Bfield'><%= @customer.dely_addr_ship_to %></div></td></Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>City</div></td><td><div class = 'Bfield'><%= @customer.dely_city %></div></td>
+  								<td><div class = 'Blabel'>District</div></td><td><div class = 'Bfield'><%= @customer.dely_district %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>State</div></td><td><div class = 'Bfield'><%= @customer.dely_state %></div></td>
+  								<td><div class = 'Blabel'>Country</div></td><td><div class = 'Bfield'><%= @customer.dely_country %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><class = 'Blabel'>PIN Code</div></td><td><div class = 'Bfield'><%= @customer.dely_pin_code %></div></td>
+  								<td><div class = 'Blabel'>website</div></td><td><div class = 'Bfield'><%= @customer.dely_website %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Contact Person</div></td><td><div class = 'Bfield'><%= @customer.dely_contact_person %></div></td>
+  								<td><div class = 'Blabel'>Designation</div></td><td><div class = 'Bfield'><%= @customer.dely_designation %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Phone</div></td><td><div class = 'Bfield'><%= @customer.dely_phone %></div></td>
+  								<td><div class = 'Blabel'>Fax</div></td><td><div class = 'Bfield'><%= @customer.dely_fax %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Mobile</div></td><td><div class = 'Bfield'><%= @customer.dely_mobile_no %></div></td>
+  								<td><div class = 'Blabel'>Email Id</div></td><td><div class = 'Bfield'><div class = 'Bfield'><%= @customer.dely_email_id %></div></td>
+  							</Tr> 
+  							</table></td></tr>
+  						</table>	
+  					</div> 
+  				</div>
+			</td>
+		</tr>
+  		<tr>		
+  			<Td>
+  				<div style="float: left; width: auto;"><%= button_to "      Edit      ", edit_customer_path , :id => "editCustomer", :method => :get  %> </div>
+  				<%= button_to "      Delete      ", @customer ,:id => "deleteCustomer",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %></td>
+    		</td> 
+    		 								
+    	</tr>
+	   </Table>
+	  
+	   </td>
+	   <%= render :file =>'createRHSButtons.html.erb' %>    
+	   </tr>
+	  
+  	  <br />
+  	</table>
+  </body>
+  
+  
+</html>
+

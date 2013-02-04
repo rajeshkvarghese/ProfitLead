@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: accountgroups
+#
+#  id           :integer          not null, primary key
+#  group_name   :string(255)
+#  parent_group :string(255)      not null
+#  book_type    :string(255)
+#  schedule_no  :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  group_name: MyString
+  parent_group: MyString
+  book_type: MyString
+  schedule_no: 1
+
+two:
+  group_name: MyString
+  parent_group: MyString
+  book_type: MyString
+  schedule_no: 1

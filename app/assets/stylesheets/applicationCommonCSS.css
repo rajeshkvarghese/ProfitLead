@@ -1,0 +1,282 @@
+.selectIndicator{
+	font-size:15px;
+}
+
+
+.rhs-background  {
+	bgcolor:"#338533";
+}
+
+
+
+.ul{ 
+  margin:0; 
+  padding:0;
+}
+
+
+.smallField{
+	width:70px;	
+}
+
+.verysmallField{
+	width:50px;	
+}
+
+.veryverysmallField{
+	width:35px;	
+}
+
+.mediumField{
+	width:150px;	
+}
+
+
+.largeField{
+	width:300px;	
+}
+
+
+.extralargeField{
+	width:450px;	
+}
+
+.veryextralargeField{
+	width:600px;	
+}
+
+.XXLField{
+	width:780px;	
+}
+
+
+.BeonaForm {
+
+	font-size:8px;
+
+	font-family:Verdana;
+
+	font-weight:normal;
+	margin-left: 0px;
+	/*.input-mysize { width: 150px }*/
+}
+
+.Blabel { color:#505050      }
+.Bfield { color:#000000;font-weight:bold
+
+ }
+
+.error { background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4; }
+
+.Bbody-TreeView
+{
+	
+background-color :#EEEEEE;	
+	
+}
+
+.Bbody
+{
+margin-left:0px;
+background-color :#F7F7F7;
+margin-right:0px;
+
+}
+
+.BTreeViewBG
+{
+
+background-color :#FFFFFF;
+
+}
+
+
+.BTable {
+	margin:00px;padding:0px;
+	width:97%;
+	box-shadow: 10px 10px 5px #888888;
+	border:1px solid #7f7f7f;
+	-moz-border-radius-bottomleft:12px;
+	-webkit-border-bottom-left-radius:12px;
+	border-bottom-left-radius:12px;
+	-moz-border-radius-bottomright:12px;
+	-webkit-border-bottom-right-radius:12px;
+	border-bottom-right-radius:12px;
+	-moz-border-radius-topright:12px;
+	-webkit-border-top-right-radius:12px;
+	border-top-right-radius:12px;
+	-moz-border-radius-topleft:12px;
+	-webkit-border-top-left-radius:12px;
+	border-top-left-radius:12px;
+}
+
+.BTable table{
+	width:100%;
+	height:100%;
+	margin:1px;padding:0px;
+}
+
+.BTable tr:last-child td:last-child {
+	-moz-border-radius-bottomright:12px;
+	-webkit-border-bottom-right-radius:12px;
+	border-bottom-right-radius:12px;
+}
+
+.BTable table tr:first-child td:first-child {
+	-moz-border-radius-topleft:12px;
+	-webkit-border-top-left-radius:12px;
+	border-top-left-radius:12px;
+}
+
+.BTable table tr:first-child td:last-child {
+	-moz-border-radius-topright:12px;
+	-webkit-border-top-right-radius:12px;
+	border-top-right-radius:12px;
+}
+
+.BTable tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:12px;
+	-webkit-border-bottom-left-radius:12px;
+	border-bottom-left-radius:12px;
+}
+
+.BTable tr:hover td{
+	background-color:#ffffff;
+}
+
+.BTable td{
+	vertical-align:middle;
+	background-color:#ffffff;
+	border:1px solid #7f7f7f;
+	border-width:0px 0px 0px 0px;
+	text-align:left;
+	padding:10px;
+	font-size:12px;
+	font-family:Arial;
+	font-weight:normal;
+	color:#000000;
+}
+
+.BTable tr:last-child td{
+	border-width:0px 0px 0px 0px;
+}
+
+.BTable tr td:last-child{
+	border-width:0px 0px 0px 0px;
+}
+
+.BTable tr:last-child td:last-child{
+	border-width:0px 0px 0px 0px;
+}
+
+.BTable tr:first-child td{
+	background:-o-linear-gradient(bottom, #ffffff 5%, #ffffff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #ffffff) );
+	background:-moz-linear-gradient( center top, #ffffff 5%, #ffffff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#ffffff");	background: -o-linear-gradient(top,#ffffff,ffffff);
+	background-color:#ffffff;
+	border:0px solid #7f7f7f;
+	border-width:0px 0px 0px 0px;
+	font-size:12px;
+	font-family:Arial;
+	font-weight:normal;
+	color:#000000;
+}
+
+.BTable tr:first-child:hover td{
+	background:-o-linear-gradient(bottom, #ffffff 5%, #ffffff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #ffffff) );
+	background:-moz-linear-gradient( center top, #ffffff 5%, #ffffff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#ffffff");	background: -o-linear-gradient(top,#ffffff,ffffff);
+	background-color:#ffffff;
+}
+
+.BTable tr:first-child td:first-child{
+	border-width:0px 0px 0px 0px;
+}
+
+.BTable tr:first-child td:last-child{
+	border-width:0px 0px 0px 0px;
+}
+
+
+
+
+.Bbutton {
+	-moz-box-shadow:inset 1px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 1px 1px 0px 0px #ffffff;
+	box-shadow:inset 1px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:Arial;
+	font-size:11px;
+	font-weight:bold;
+	padding:0px 10px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+}.Bbutton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+}.Bbutton:active {
+	position:relative;
+	top:1px;
+}
+/* This imageless css button was generated by CSSButtonGenerator.com */
+
+.a {
+  color: #8099CC;
+  &:visited {
+   color: #8099CC;
+    //background-color: #FFFF00;
+  }
+  &:hover {
+    color: #000000;    
+    background-color: #FFFF00;
+  }
+    &:active {
+    color: #000;
+    background-color: #bbb;
+  }
+}
+
+
+
+
+
+.BButtonFrm {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	border:2px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:14px;
+	font-weight:normal;
+	padding:4px 29px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+}.BButtonFrm:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+}.BButtonFrm:active {
+	position:relative;
+	top:1px;
+}

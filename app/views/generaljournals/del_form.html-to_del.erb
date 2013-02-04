@@ -1,0 +1,16 @@
+<%= simple_form_for(@generaljournal) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :journal_date %>
+    <%= f.input :job %>
+    <%= f.input :dr_total %>
+    <%= f.input :cr_total %>
+    <%= f.input :total_amount %>
+    <%= f.input :narration %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

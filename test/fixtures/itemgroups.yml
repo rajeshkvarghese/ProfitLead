@@ -1,0 +1,47 @@
+# == Schema Information
+#
+# Table name: itemgroups
+#
+#  id                :integer          not null, primary key
+#  name              :string(255)      not null
+#  code              :string(50)       not null
+#  main_group        :string(50)
+#  tax               :string(50)
+#  discount_per      :decimal(10, 2)
+#  description       :string(100)
+#  category          :string(50)
+#  print_only_sum    :string(50)
+#  print_name        :string(100)
+#  update_tax_child  :string(50)
+#  update_disc_child :string(50)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  code: MyString
+  main_group: MyString
+  tax: MyString
+  discount_per: 9.99
+  description: MyString
+  category: MyString
+  print_only_sum: MyString
+  print_name: MyString
+  update_tax_child: MyString
+  update_disc_child: MyString
+
+two:
+  name: MyString
+  code: MyString
+  main_group: MyString
+  tax: MyString
+  discount_per: 9.99
+  description: MyString
+  category: MyString
+  print_only_sum: MyString
+  print_name: MyString
+  update_tax_child: MyString
+  update_disc_child: MyString

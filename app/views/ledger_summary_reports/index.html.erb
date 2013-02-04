@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>index.html</title>
+	  <%= yield :head %>
+  </head>
+  
+  
+  <body class = "Bbody">
+  	<%= render :file =>'formHeader001.html.erb' %>
+ 
+  	<%= yield %>
+  
+  
+  	  
+  	<div style="display:none"><%= link_to_function "click Next", 'clickNextPrev("tabcustomers_next")', data: { keybinding: 'right' } %></div>
+  	<div style="display:none"><%= link_to_function "click Previous", 'clickNextPrev("tabcustomers_previous")', data: { keybinding: 'left' } %></div> 
+  	
+  	<%= render :file =>'IndexPageKBShortCuts.html.erb' %>
+
+  <div id="aaa"> </div>
+  	<br>
+  	<h1 align="center" "> Day Book </h1>
+  	  <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   			
+   		
+   				    <%= render :file =>'createMenu.html.erb' %>    	   				   
+   			
+  	
+  		<%= render :file =>'MHSTableStart.html' %>
+  				
+  				<table id = "tabcustomers" style="clear: both; margin-left: 10px; width : 100%">
+  					<thead>	    	
+  						<tr>
+  							<!-- ><th> Ledger Name </th>
+  							<th> Current Balance </th>
+  							<th> Dr/Cr </th>
+  							<th> Active?</th>  		-->
+  							<% @colTitleHTML = ""
+  								@cnt = 0
+  								@columnsTitleDisp.each do |colTitle|
+  									@colTitleHTML = @colTitleHTML + "<th width="+@columnsWidth[@cnt]+"% >" + colTitle + "</th>"
+  									@cnt = @cnt + 1
+  								end	
+  							 %>				
+  							<%= raw @colTitleHTML %>
+  						</tr>
+  						
+  							<%  if @repType == "daybook" then %>  
+  								<% @colTitleHTML ="<th></th>"+"<th></th>"+"<th></th>" %>
+  								<% @colTitleHTML = @colTitleHTML + "<th>OPENING BALANCE</th>" %>
+  								<% if @getCashInHandOpBalance.split("@")[1] != "Dr" then %> 
+  									<%@colTitleHTML = @colTitleHTML + "<th></th>"+"<th>"+@getCashInHandOpBalance.split("@")[0]+"</th>" %>
+  								<%	else	 %>
+  									<%@colTitleHTML = @colTitleHTML + "<th>"+@getCashInHandOpBalance.split("@")[0]+"</th><th></th>" %>
+  								<%	end	 %>
+  								
+  								<tr> <%= raw @colTitleHTML %> </tr>
+  								
+  							<%	else if @repType == "bankbook" then	 %>
+  								
+  							  <%	end	 %>	
+  							<%	end	 %>
+  							
+  						
+  					</thead> 
+  					<tbody>
+  						<% @rowItems.each do |custT| %>
+  							<tr>	
+  								<% @colHTML = "" %>
+  								<%	@intCntr = 0 %>
+  								<%	@columnsDisp.each do |colData| %>
+  									<%	if @intCntr == 0  %>
+  											
+  										<% if @repType == "daybook" then %>
+  										 	 <% parTableName = DynamicModel.table_name %>
+  										 	 <% parId =  custT["id"] %>
+  										 	
+  										 	    <% if custT["trans_rec_pay_journal_id"] != nil then %>
+  										 	   		<% parTableName = "trans_rec_pay_journals" %>
+  										 	   		<% parId = custT["trans_rec_pay_journal_id"] %>
+  										 	   	<% else %>	
+  										 	   		<% if custT["generaljournal_id"]!= nil then  %>	
+  										 	   			<% parTableName = "generaljournals" %>
+  										 	   			<% parId = custT["generaljournal_id"] %>
+  										 	   		<% else %>	
+  										 	   			<% parTableName = "invoices" %>
+  										 	   			<% parId = custT["invoice_id"] %>
+  										 	   		<% end %>	
+  										 	   	<% end %>	  										 	   
+  										 	
+  										 	 <td> <%=	link_to parId.to_s , parTableName+"/"+parId.to_s, :target => :blank %>   </td>
+  										<% else if @repType == "bankbook" or @repType == "cashbook" then %> 	
+  												 <td>  <%= custT[colData].to_s %>  </td>
+  										  
+  										<% end %> 
+  										
+  									 <% end %> 			
+  										 	
+  									<%	else	 %>
+  										<% if (@intCntr == @DebitCol and custT["dr_cr"] != "Dr") or (@intCntr == @CreditCol and custT["dr_cr"] != "Cr") then %>
+  										 	 <td>   </td>
+  										<%	else	 %>
+  											 <td>  <%= custT[colData].to_s %>  </td>
+  									    <% end %> 
+  										
+  										 
+  									
+  									<% end %>
+  										<% @intCntr = @intCntr + 1  %>
+  								<% end %>
+  							</tr>
+  						<% end %>  
+  					</tbody>
+  					
+  					<tfoot>
+  						<%  if @repType == "daybook" then %>  
+  						<tr>
+  							<th></th><th></th><th></th><th></th><th></th><th></th>
+  						</tr>	
+  						<tr>
+  							<%  if @repType == "daybook" then %>  
+  								<% @colTitleHTML ="<th></th>"+"<th></th>"+"<th></th>" %>
+  								<% @colTitleHTML = @colTitleHTML + "<th>BALANCE</th>" %>
+  								<% if @getCashInHandClBalance.split("@")[1] != "Dr" then %> 
+  									<%@colTitleHTML = @colTitleHTML + "<th></th>"+"<th>"+@getCashInHandClBalance.split("@")[0]+"</th>" %>
+  								<%	else	 %>
+  									<%@colTitleHTML = @colTitleHTML + "<th>"+@getCashInHandClBalance.split("@")[0]+"</th><th></th>" %>
+  								<%	end	 %>
+  								
+  							<%	else	 %>
+  							<%	end	 %>
+  							<%= raw @colTitleHTML %>
+  						</tr>
+  						<% end %>
+  					</tfoot>
+  						
+  				</table>
+  			</td>
+  			 <%= render :file =>'createRHSButtons.html.erb' %>  
+  		</Tr>
+  	</table>
+  
+  </body>
+</html>
+

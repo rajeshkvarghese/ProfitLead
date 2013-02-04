@@ -1,0 +1,37 @@
+<h1>Listing data_configs</h1>
+
+<table>
+  <tr>
+    <th>Ledger designation list</th>
+    <th>Ledger area list</th>
+    <th>Ledger salesman list</th>
+    <th>Ledger use voucher list</th>
+    <th>Ledger rate used list</th>
+    <th>Ledger grade list</th>
+    <th>Ledger grade list</th>
+    <th>Ledger fleetorder list</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @data_configs.each do |data_config| %>
+  <tr>
+    <td><%= data_config.ledger_designation_list %></td>
+    <td><%= data_config.ledger_area_list %></td>
+    <td><%= data_config.ledger_salesman_list %></td>
+    <td><%= data_config.ledger_use_voucher_list %></td>
+    <td><%= data_config.ledger_rate_used_list %></td>
+    <td><%= data_config.ledger_grade_list %></td>
+    <td><%= data_config.ledger_grade_list %></td>
+    <td><%= data_config.ledger_fleetorder_list %></td>
+    <td><%= link_to 'Show', data_config %></td>
+    <td><%= link_to 'Edit', edit_data_config_path(data_config) %></td>
+    <td><%= link_to 'Destroy', data_config, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Data config', new_data_config_path %>

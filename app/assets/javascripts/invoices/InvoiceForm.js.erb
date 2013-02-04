@@ -1,0 +1,212 @@
+
+
+function saveAfterValidation(){
+	
+	if (document.getElementById("invoice_cash_credit_credit").checked){
+		if (document.getElementById("invoice_customer_name").selectedIndex == 0){
+			alert('Please select a customer inorder to perform a credit transaction');
+			return false;
+		}
+	}
+	this.document.forms[0].submit();
+	return true;
+	
+}	
+
+function populateInvoiceAddress(itemName){
+	
+	var custnameP = document.getElementById(itemName).value;
+	arrCust = gon.customers;
+	//alert(arrCust)
+	
+	
+	for (var i=0; i<=arrCust.length; i++){
+		var arrSplitCust = arrCust[i].split("^")
+		if (arrSplitCust[0] == custnameP){
+		
+			document.forms[0].invoice_phone.value = 	arrSplitCust[1]
+			document.forms[0].invoice_email.value = 	arrSplitCust[2]
+			document.forms[0].invoice_address_line_1.value = 	arrSplitCust[0]
+			if (arrSplitCust[3] != "")
+				document.forms[0].invoice_address_line_2.value = 	arrSplitCust[3] + ", "+ arrSplitCust[4]
+			else
+				document.forms[0].invoice_address_line_2.value = ""
+			document.forms[0].invoice_address_line_3.value = 	arrSplitCust[5]
+			if(document.forms[0].invoice_address_line_3.value != "")
+				document.forms[0].invoice_address_line_3.value = document.forms[0].invoice_address_line_3.value + ", "+ arrSplitCust[6]
+			else
+				document.forms[0].invoice_address_line_3.value =  arrSplitCust[6]	
+			
+			if(document.forms[0].invoice_address_line_3.value != "")
+				document.forms[0].invoice_address_line_3.value = document.forms[0].invoice_address_line_3.value + ", "+ arrSplitCust[7]
+			else
+				document.forms[0].invoice_address_line_3.value =  arrSplitCust[7]	
+				
+			if(document.forms[0].invoice_address_line_3.value != "")
+				document.forms[0].invoice_address_line_3.value = document.forms[0].invoice_address_line_3.value + ", "+ arrSplitCust[8]
+			else
+				document.forms[0].invoice_address_line_3.value =  arrSplitCust[8]	
+				
+			
+			
+			break;
+		}	
+		else
+			document.forms[0].invoice_phone.value = 	""
+			document.forms[0].invoice_email.value = 	""
+			document.forms[0].invoice_address_line_1.value = 	""
+			document.forms[0].invoice_address_line_2.value = 	""
+			document.forms[0].invoice_address_line_3.value = ""
+	}		
+}
+
+
+//document.observe('dom:loaded', function() {
+  //showInvoicesAddresses();
+  //alert('eee');
+ // $('invoice_customer_name').observe('change', abc()}; // showInvoicesAddresses);
+//});
+
+function changeLineItemCode(id){	
+	
+	var suffKey = "invoice_itemorders_attributes";
+	var a = id.substr(0,id.indexOf("_item_code"))
+	var b = a.substr(a.lastIndexOf("_")+1)
+		
+	var itemP = document.getElementById(suffKey+"_"+b+"_"+"item_code").value;
+	arrItems = gon.items;
+	//alert(arrItems);
+	
+	try{	
+	  for (var i=0; i<arrItems.length; i++){
+	  	//alert(arrItems);
+	  	if (arrItems[i]){
+	  		var arrSplitItms = arrItems[i].split("^")
+			if (arrSplitItms[0] == itemP){
+				
+				
+				
+				
+				document.getElementById(suffKey+"_"+b+"_"+"item_name").value = 	arrSplitItms[1];
+				document.getElementById(suffKey+"_"+b+"_"+"sales_rate_per_unit").value = 	arrSplitItms[3];
+				document.getElementById(suffKey+"_"+b+"_"+"discount_percentage").value = 	arrSplitItms[4];
+					
+				document.getElementById(suffKey+"_"+b+"_"+"base_unit").value = 	arrSplitItms[2];
+				document.getElementById(suffKey+"_"+b+"_"+"vat_account").value = 	arrSplitItms[5];
+				document.getElementById(suffKey+"_"+b+"_"+"quantity_on_hand").value = 	arrSplitItms[6];			 			
+			}
+		}				
+	  }
+	  //
+	  refreshLineTotal(suffKey, b);
+	  refreshColTotal();
+		
+	} catch ( err){}
+	
+}
+
+
+function refreshLineTotal(suffKey, b){
+	try{		
+		 var finalTotal = 0.0;
+		 var salesRate =  document.getElementById(suffKey+"_"+b+"_"+"sales_rate_per_unit").value;
+		 var quantity = document.getElementById(suffKey+"_"+b+"_"+"quantity").value;
+		 var discount = document.getElementById(suffKey+"_"+b+"_"+"discount_percentage").value
+		 var tax = document.getElementById(suffKey+"_"+b+"_"+"vat_account").value
+			 if (isNumber(salesRate) && isNumber(quantity)){			 		
+			 	finalTotal = parseFloat(salesRate) *  parseFloat(quantity)				
+			 		if(isNumber(discount)){		
+			 			var discountAmnt = 	 (finalTotal * parseFloat(discount))/100
+			 			 document.getElementById(suffKey+"_"+b+"_"+"discount_amount").value = discountAmnt.toFixed(2);
+			 			 finalTotal = finalTotal - discountAmnt				
+			 		}	
+			 }		
+			 var taxAmnt =	(finalTotal * parseFloat(tax))/100;
+			 document.getElementById(suffKey+"_"+b+"_"+"tax_amount").value = taxAmnt.toFixed(2);	
+			  finalTotal = 	finalTotal + taxAmnt	
+			 document.getElementById(suffKey+"_"+b+"_"+"final_total").value = finalTotal.toFixed(2);
+	
+	 } catch ( err){}
+	
+}
+
+
+function refreshColTotal(){
+	
+	var elArr = document.getElementsByClassName("lineTotal");
+	colTot = 0.0;
+	//try{
+	  for (i = 0; i < elArr.length; i++){
+	 // 	alert(elArr[i].value);
+	 	if (isNumber(elArr[i].value))
+		   colTot = colTot + parseFloat(elArr[i].value);	
+	  }	
+		
+	  document.getElementById("idColTotal").value = colTot.toFixed(2);
+	 // if (document.getElementById("invoice_total").value != "")
+//  	document.getElementById("invoice_total").value =  document.getElementById("invoice_total").value + colTot.toFixed(2);
+	//  else
+	//alert(document.getElementById("id_total_hid").value);
+	//alert( colTot.toFixed(2))
+	  	document.getElementById("invoice_total").value = parseFloat(document.getElementById("id_total_hid").value) +  parseFloat(document.getElementById("idColTotal").value);
+	  
+	//}catch(err){}
+	
+}
+
+function changeLineItemName(id){
+	var suffKey = "invoice_itemorders_attributes";
+	var a = id.substr(0,id.indexOf("_item_name"))
+	var b = a.substr(a.lastIndexOf("_")+1)
+		
+	var itemP = document.getElementById(suffKey+"_"+b+"_"+"item_name").value;
+	arrItems = gon.items;
+	
+	try{	
+	  for (var i=0; i<arrItems.length; i++){
+	  	//alert(arrItems);
+	  	if (arrItems[i]){
+	  		var arrSplitItms = arrItems[i].split("^")
+			if (arrSplitItms[1] == itemP){
+				document.getElementById(suffKey+"_"+b+"_"+"item_code").value = 	arrSplitItms[0];
+				document.getElementById(suffKey+"_"+b+"_"+"sales_rate_per_unit").value = 	arrSplitItms[3];
+				document.getElementById(suffKey+"_"+b+"_"+"discount_percentage").value = 	arrSplitItms[4];
+					
+				document.getElementById(suffKey+"_"+b+"_"+"base_unit").value = 	arrSplitItms[2];
+				document.getElementById(suffKey+"_"+b+"_"+"vat_account").value = 	arrSplitItms[5];
+				document.getElementById(suffKey+"_"+b+"_"+"quantity_on_hand").value = 	arrSplitItms[6];		 			
+			}
+		}				
+	  }
+	  //
+	  refreshLineTotal(suffKey, b);
+	  refreshColTotal();
+		
+	} catch ( err){}
+}
+
+
+function changeLineItemQuantity(id){
+	//alert('aaaa');	
+	var suffKey = "invoice_itemorders_attributes";
+	var a = id.substr(0,id.indexOf("_quantity"))
+	var b = a.substr(a.lastIndexOf("_")+1)
+	refreshLineTotal(suffKey, b);
+	refreshColTotal();
+	//alert(id)
+}
+
+function changeLineItemRate(id){
+	var suffKey = "invoice_itemorders_attributes";
+	var a = id.substr(0,id.indexOf("_sales_rate_per_unit"))
+	var b = a.substr(a.lastIndexOf("_")+1)
+	refreshLineTotal(suffKey, b);
+	refreshColTotal();
+}
+function changeLineItemDiscount(id){
+	var suffKey = "invoice_itemorders_attributes";
+	var a = id.substr(0,id.indexOf("_discount_percentage"))
+	var b = a.substr(a.lastIndexOf("_")+1)
+	refreshLineTotal(suffKey, b);
+	refreshColTotal();
+}

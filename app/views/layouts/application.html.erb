@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ProfitLead01</title>
+
+  <%= include_gon%>   
+  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag  params[:controller] +"/" + params[:action]  %>  
+  <%= javascript_include_tag "application" %>   
+  <%= javascript_include_tag params[:controller] +"/" + params[:action] %>  
+  
+
+  <%= csrf_meta_tags  %>
+    
+  <%= yield(:head) %>
+
+</head>
+
+
+<%= yield %>
+
+
+</html>

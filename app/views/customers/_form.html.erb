@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>show.html</title>	 
+	  <%= yield :head %>
+  </head>
+  
+  <body class = "Bbody">
+	<%= render :file =>'formHeader001.html.erb' %> 
+
+  	<%= yield %>
+  
+    
+  	<div style="display:none"><%= link_to_function "click Next", 'history.go(1)', data: { keybinding: 'alt+pagedown' } %></div>
+  	<div style="display:none"><%= link_to_function "click Previous", 'history.go(-1)', data: { keybinding: 'alt+pageup' } %></div> 
+    <div style="display:none"><%= link_to_function "click Next", 'saveCustomer()', data: { keybinding: 'alt+s' } %></div>
+
+  	<h2 align="center" ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class = 'Blabel' >Ledger:</font> <font color='blue'><%=  if @customer.name != nil then @customer.name else "<New Ledger>" end %></font></h2>
+  	  <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   				  
+   		 <%= render :file =>'createMenu.html.erb' %>   
+   		
+  	
+  			<%= render :file =>'MHSTableStart.html' %>
+  			
+  			<%= simple_form_for @customer do |f| %>
+  				
+		  	 <font color = 'red'> <%= f.error_notification  %></font>
+		  	 <div class = "BeonaForm">  		
+  			<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  				  				
+  				<tr>						  								 									
+  			     <Td>  										
+  					<div style="float: left; width: auto;"><%= f.button :submit, "      Save      ", :id => "saveCustomer"  %> </div> 				       									
+    			</td>  
+    		  </tr>
+    		  <tr>
+    		   <td colspan = "3" valign="top">
+    			<div id ="tabs" valign="top">
+  					<ul>  			
+  						<li><a href = "#tabs-1"> General </a></li>
+  						<li><a href = "#tabs-2"> Office/Contact Address </a></li>
+  						<li><a href = "#tabs-3"> Others </a></li>
+  						<li><a href = "#tabs-4"> Delivery </a></li>
+  					</ul>
+  					
+  					<div id="tabs-1">
+  						<table>  	
+  							<Tr>
+  								<td colspan = "4">
+  									<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  > 
+  							<Tr>
+  								<td></td><td></td><td></td><td><font color = 'blue'><div style="float:left">Active:</div></font><div class = 'Bfield'><%= f.input :is_active,  :as => :boolean, :label => false %></div></td>  	
+  							</Tr>						
+  							<Tr>
+  								<td colspan = "1"><div class = 'Blabel'>Ledger Name</div></td><td><div class = 'Bfield'><%= f.input :name, :label => false, :autofocus =>true, :input_html => {:size => 30}  %></div></td>
+  								<td colspan = "1"><div class = 'Blabel'>Short Name</div></td><td><div class = 'Bfield'><%= f.input :short_name, :label => false, :input_html => {:size => 30}   %></div></td>
+  								
+  								
+  							</Tr>
+  							<Tr>
+  								<td colspan = "1"><div class = 'Blabel'>Code</div></td><td><div class = 'Bfield'><%= f.input :code, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td  colspan = "1"><div class = 'Blabel'>Group</div></td><td><div class = 'Bfield'><%= f.input :group, :collection => Accountgroup.pluck(:group_name), :label => false, :as =>:select,  :selected  => if @customer.group != nil  then @customer.group else params[:parGroupId] end    %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Opening Balance</div></td><td><div class = 'Bfield'><%= f.input :opening_balance, :label => false, :input_html => {:width => 30, :value => if @customer.opening_balance != nil then @customer.opening_balance else 0.00 end }   %></td>
+  								<td><div class = 'Blabel'>Dr/Cr</div>&nbsp;&nbsp;&nbsp;</td><td><div class = 'Bfield'><%= f.input :dr_cr, :collection => ["Dr", "Dr"], :label => false,  :include_blank =>false   %></td>  								
+  							</Tr>  							
+  							<Tr>
+  								<td><div class = 'Blabel'>Current Balance</div></td><td><div class = 'Bfield'><%= f.input :current_balance, :label => false, :input_html => {:size => 30}   %></td>
+  								<td><div style="float: left; width: auto;"><%= f.button :submit, "      Opening details      ", :id => "saveCustomer"  %> </div></td>   								  								
+  							</Tr
+  							<Tr>
+  								<td><div class = 'Blabel'>Name to print in cheque</div></td><td><div class = 'Bfield'><%= f.input :name_to_print, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Set as party</div></td><td><div class = 'Bfield'><%= f.input :set_as_party,  :as => :boolean, :label => false %></div></td>  								
+  							</Tr>
+  							<tr>							
+  								<td><div class = 'Blabel'>Comments</div></td><td colspan = "3"><div class = 'Bfield'><%= f.input :comments, :label => false, :as => :string, :input_html => {:size => 70}   %></div></td>
+  							</tr>	
+  							</table></td></tr>
+  						</table>  				
+  					</div>
+  					
+  					<div id="tabs-2">
+  						<table>
+  							<Tr>
+  								<td colspan = "4">
+  									<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  > 
+  							<Tr><td colspan ="1"><div class = 'Blabel'>Address</div></td><td colspan ="3"><div class = 'Bfield'><%= f.input :cont_addr_bill_to, :label => false, :input_html => {:size => 70}, :as => :string   %></div></td></Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>City</div></td><td><div class = 'Bfield'><%= f.input :cont_city, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>District</div></td><td><div class = 'Bfield'><%= f.input :cont_district, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>State</div></td><td><div class = 'Bfield'><%= f.input :cont_state, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Country</div></td><td><div class = 'Bfield'><%= f.country_select :cont_country,["India"], :label => false %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>PIN Code</div></td><td><div class = 'Bfield'><%= f.input :cont_pin_code, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>website</div></td><td><div class = 'Bfield'><%= f.input :cont_website, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Contact Person</div></td><td><div class = 'Bfield'><%= f.input :cont_contact_person, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Designation</div></td><td><div class = 'Bfield'><%= f.input :cont_designation, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Phone</div></td><td><div class = 'Bfield'><%= f.input :cont_phone, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Fax</div></td><td><div class = 'Bfield'><%= f.input :cont_fax, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Mobile</div></td><td><div class = 'Bfield'><%= f.input :cont_mobile_no, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Email Id</div></td><td><div class = 'Bfield'><%= f.input :cont_email_id, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr> 
+  							</table></td></tr>
+  						</table>
+  					</div>
+  					<div id="tabs-3">  						
+  						<table>  	
+  							<Tr>
+  								<td colspan = "4">
+  									<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  > 						
+  							<Tr>
+  								<td><div class = 'Blabel'>TIN</div></td><td><div class = 'Bfield'><%= f.input :tin_no, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>CST No.</div></td><td><div class = 'Bfield'><%= f.input :cst_no, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Acct. No.</div></td><td><div class = 'Bfield'><%= f.input :acct_no, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Bank</div></td><td><div class = 'Bfield'><%= f.input :bank_name, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>IFSC Code</div></td><td><div class = 'Bfield'><%= f.input :bank_ifsc, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Branch of the Bank</div></td><td><div class = 'Bfield'><%= f.input :bank_branch, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>License No.</div></td><td><div class = 'Bfield'><%= f.input :license_no, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Rate Used</div></td><td><div class = 'Bfield'><%= f.input :rate, :label => false, :input_html => {:size => 30}   %></div></td>  								
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Central Excise No.</div></td><td><div class = 'Bfield'><%= f.input :central_excise_no, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Salesman</div></td><td><div class = 'Bfield'><%= f.input :salesman, :label => false, :input_html => {:size => 30}   %></div></td>  								
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Income Tax No.</div></td><td><div class = 'Bfield'><%= f.input :income_tax_no, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Use Voucher</div></td><td><div class = 'Bfield'><%= f.input :use_voucher, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr>
+  							<Tr>
+  								
+  								<td><div class = 'Blabel'>Discount Percentage</div></td><td><div class = 'Bfield'><%= f.input :discount_percentage, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr>
+  							</table></td></tr>
+  							<Tr>
+  								<td colspan = "4">
+  									<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  	
+  										<tr>
+  											<td><div class = 'Blabel'>Credit Period</div></td><td><div class = 'Bfield'><%= f.input :credit_period, :label => false, :input_html => {:size => 17}   %></div></td>  
+  											<td><div class = 'Blabel'>Maximum Credit Limit</div></td><td><div class = 'Bfield'><%= f.input :maximum_credit_limit, :label => false, :input_html => {:size => 17}   %></div></td>
+  											<td><div class = 'Blabel'>Maximum Debit Limit</div></td><td><div class = 'Bfield'><%= f.input :maximum_debit_limit, :label => false, :input_html => {:size => 17}   %></div></td>
+  										</tr>
+  										<tr>
+  											<td><div class = 'Blabel'>Stop if period exceeded</div></td><td colspan="2"><div class = 'Bfield'><%= f.input :stop_if_period_exceed, :label => false, :as => :boolean  %></div></td>
+  											<td><div class = 'Blabel'>Stop if amount exceeded</div></td><td colspan="2"><div class = 'Bfield'><%= f.input :stop_if_amount_exceed, :label => false, :as => :boolean   %></div></td>
+  										</tr>	
+  									</Table>		
+  								</td>  								
+  							</Tr>  							
+  							<Tr>
+  								<td colspan = "4">
+  									<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  	
+  										<tr>
+  											<td colspan><div class = 'Blabel'>Segment</div></td><td><div class = 'Bfield'><%= f.input :segment, :label => false, :input_html => {:size => 17}   %></div></td>
+  											<td><div class = 'Blabel'>Grade</div></td><td><div class = 'Bfield'><%= f.input :grade, :label => false, :input_html => {:size => 17}   %></div></td>
+  											<td colspan><div class = 'Blabel'>Fleet Order</div></td><td><div class = 'Bfield'><%= f.input :fleet_order, :label => false, :input_html => {:size => 17}   %></div></td>  								
+  										</Tr> 
+  									</Table>		
+  								</td>  								
+  							</Tr>  		 							
+  						</table>  	
+  					</div>
+  					<div id="tabs-4">
+  						<table>
+  							<Tr>
+  								<td colspan = "4">
+  									<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  > 
+  							<Tr>
+  								<td colspan ="1"><div class = 'Blabel'>Address</div></td><td colspan ="1"><div class = 'Bfield'><%= f.input :dely_addr_ship_to, :label => false, :as => :string, :input_html => {:size => 30}   %></div></td>
+  								<td colspan ="2">  									
+  									<div style="float: left; width: auto;"><input type = "button" value = "      Populate from Office/Contact Address   " onclick = "populateOffAddressToDely('customer_dely_add_same_cont')"    %></div>	
+  								</td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>City</div></td><td><div class = 'Bfield'><%= f.input :dely_city, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>District</div></td><td><div class = 'Bfield'><%= f.input :dely_district, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>State</div></td><td><div class = 'Bfield'><%= f.input :dely_state, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Country</div></td><td><div class = 'Bfield'><%= f.country_select :dely_country,["India"], :label => false    %></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>PIN Code</div></td><td><div class = 'Bfield'><%= f.input :dely_pin_code, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>website</div></td><td><div class = 'Bfield'><%= f.input :dely_website, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Contact Person</div></td><td><div class = 'Bfield'><%= f.input :dely_contact_person, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Designation</div></td><td><div class = 'Bfield'><%= f.input :dely_designation, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Phone</div></td><td><div class = 'Bfield'><%= f.input :dely_phone, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Fax</div></td><td><div class = 'Bfield'><%= f.input :dely_fax, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Mobile</div></td><td><div class = 'Bfield'><%= f.input :dely_mobile_no, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Email Id</div></td><td><div class = 'Bfield'><div class = 'Bfield'><%= f.input :dely_email_id, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr> 
+  							</table></td></tr>
+  						</table>	
+  					</div> 
+  				</div>
+			</td>
+		</tr>
+  		<tr>		
+  			<Td>
+  				<div style="float: left; width: auto;"><%= f.button :submit, "      Save      ", :id => "saveCustomer"  %></div>  				
+    		</td>    								
+    	</tr>
+	  </Table>
+  	  <br />
+  	  	<% end %>  
+  	  </td>
+  	   <%= render :file =>'createRHSButtons.html.erb' %>  
+  	  </tr>
+  	</table>
+  </body>
+  
+  
+</html>
+

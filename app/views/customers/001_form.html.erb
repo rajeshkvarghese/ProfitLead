@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>index.html</title>
+	  <%= javascript_include_tag :defaults %>
+	  <%= yield :head %>
+  </head>
+  
+  
+  <body class = "Bbody">
+	 <%= render :file =>'formHeader001.html.erb' %> 
+
+  	 <%= yield %>
+	   
+  	 <div style="display:none"><%= link_to_function "click Next", 'history.go(1)', data: { keybinding: 'alt+pagedown' } %></div>
+  	 <div style="display:none"><%= link_to_function "click Previous", 'history.go(-1)', data: { keybinding: 'alt+pageup' } %></div> 
+     <div style="display:none"><%= link_to_function "click Next", 'saveCustomer()', data: { keybinding: 'alt+s' } %></div>
+  	  
+  	 <h1 align="center" ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color = 'gray'>Customer:</font> <font color='blue'><%=  if @customer.name != nil then @customer.name else "<New Customer>" end %></font></h1> 
+	 <table width="100%" style="height: 100%;" cellpadding="10" cellspacing="0" border="0">
+   		<tr>
+   			<td width="20%" valign="top" bgcolor="#F4FFEF">
+   				    <%= render :file =>'createMenu.html.erb' %>      				   
+   			</td>
+  	
+  			<td width="80%" valign="top" bgcolor="#F4FFEF" style="padding:0px;">  	
+  			<%= simple_form_for @customer do |f| %>
+  				
+		  	 <font color = 'red'> <%= f.error_notification  %></font>
+		  	 <div class = "BeonaForm">  
+		  	 
+  			  <Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  
+  				<Tr></Tr>
+  				<tr><td></td><td><div align="right">&nbsp;<%= f.button :submit, "      Save      ", :id => "saveCustomer"  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td></tr>
+  				<Tr><td>*<font color = 'gray'>Name</font></td><td><%= f.input :name, :label => false, :autofocus =>true  %></td></Tr>
+  				<Tr><td>*<font color = 'gray'>Salutation</font></td><td><%= f.input :salutation, :collection => ["Mr.", "Mrs."], :include_blank => false, :label => false %></td></Tr>
+  				<Tr><td><font color = 'gray'>Phone</font></td><td><%= f.input :phone, :label => false %></td></Tr>
+  				<Tr><td><font color = 'gray'>Email Id</font></td><td><%= f.input :email_id, :label => false %></td></Tr>
+  				<Tr><td><font color = 'gray'>Fax</font></td><td><%= f.input :fax, :label => false %></td></Tr>
+  				<Tr><td><font color = 'gray'>Website</font></td><td><%= f.input :website, :label => false %></td></Tr>
+  				<Tr><td><font color = 'gray'>Address bill to</font></td><td><%= f.input :addr_bill_to, :label => false %></td></Tr>
+  				<Tr><td><font color = 'gray'>Address ship to</font></td><td><%= f.input :addr_ship_to, :label => false %></td></Tr>
+  				<Tr><td><font color = 'gray'>Comments</font></td><td><%= f.input :comments, :label => false %></td></Tr> 			
+  				<tr><td></td><td><div align="right">&nbsp;<%= f.button :submit, "      Save      ", :id => "saveCustomer"  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td></tr>  
+  			  </Table>
+  			   
+  			 </div>
+  			<% end %>  
+  			<br />
+  	</table>
+  </body>
+</html>
+
+   
+   

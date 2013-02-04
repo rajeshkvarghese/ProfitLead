@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>index.html</title>
+	  <%= yield :head %>
+  </head>
+  
+  
+  <body class = "Bbody">
+  	<%= render :file =>'formHeader001.html.erb' %>
+ 
+  	<%= yield %>
+  
+  
+  	  
+  	<div style="display:none"><%= link_to_function "click Next", 'clickNextPrev("tabitemorders_next")', data: { keybinding: 'right' } %></div>
+  	<div style="display:none"><%= link_to_function "click Previous", 'clickNextPrev("tabitemorders_previous")', data: { keybinding: 'left' } %></div> 
+  	
+  	<%= render :file =>'IndexPageKBShortCuts.html.erb' %>
+
+  
+  	<br>
+  	<h1 align="center" "> Item Orders </h1>
+  	  <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   			
+   			
+   				    <%= render :file =>'createMenu.html.erb' %>    	   				   
+   		
+  	
+  		<%= render :file =>'MHSTableStart.html' %>
+  				
+  				<table id = "tabitemgroups" style="clear: both; margin-left: 10px; width : 100%">
+  					<thead>	    	
+  						<tr>
+  							<th> Name </th>
+  							<th> Group Code </th>
+  							<th> Category </th>  												
+  							<th></th>
+  							<th></th>
+  						</tr>
+  					</thead>
+  					<tbody>
+  						<% @itemgroups.each do |itgrpT| %>
+  							<tr>
+  								<td><%= link_to itgrpT.name, itgrpT, :class=>"docLinksClass"  %>  </td>
+  								<td><%= itgrpT.code  %>  </td>
+  								<td><%= itgrpT.category  %>  </td>  								    						      						
+        						
+        						<td><%= link_to 'Edit', edit_itemgroup_path(itgrpT) %></td>
+    							<td><%= link_to 'Delete', itgrpT,  confirm: 'Are you sure you want to delete this record?', :method => :delete %></td>
+  					 			
+  							</tr>
+  						<% end %>  
+  					</tbody>	
+  				</table>
+  			</td>
+  			 <%= render :file =>'createRHSButtons.html.erb' %>    
+  		</Tr>
+  	</table>
+  
+  </body>
+</html>
+

@@ -1,0 +1,2 @@
+module BookwiseReportsHelper
+end

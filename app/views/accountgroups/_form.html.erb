@@ -1,0 +1,29 @@
+
+  <div class="form-inputs">
+   
+   
+   
+    
+  </div> 
+
+  <div class="form-actions">
+
+  </div>
+
+
+
+<body class='Bbody'>
+<%= simple_form_for(@accountgroup) do |f| %>
+ <font color = red> <%= f.error_notification %> </font>
+
+<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF" margin-left="20px" >  
+	<tr><td>Group Name</td><td>  <%= f.input :group_name, :label => false %></td></tr>
+	<tr><%=  f.input :parent_group, :label => false, :as => :hidden,  :input_html => { :value => if @accountgroup.parent_group != nil  then @accountgroup.parent_group else params[:parGroupId] end } %> </td></tr>
+	<tr><td>Book Type</td><td> <%= f.input :book_type, :label => false, :collection => ["General", "Bank ", "Cash "], :as => :radio_buttons , :checked  => "General" %></td></tr>
+	<tr><td>Schedule No.</td><td> <%= f.input :schedule_no, :label => false%></td></tr>	  
+	<tr>
+		<td colspan = '2'>  <%= f.button :submit %></td>
+	</tr>
+</table>
+<% end %>	
+</body>

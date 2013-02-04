@@ -1,0 +1,206 @@
+
+function saveAfterValidation(){
+	//alert('yea');
+	if (document.getElementById("generaljournal_dr_total").value <= 0 & document.getElementById("generaljournal_cr_total").value <= 0){
+		alert("Sum is almost equal to zero!");
+		return false;
+	}
+	if (document.getElementById("generaljournal_dr_total").value != document.getElementById("generaljournal_cr_total").value){
+		alert("Debit and Credit Totals are not equal!");
+		return false;
+	}
+	
+	if (!checkForEmptyRow()){
+		alert("Some rows are empty! or almost equal to zero!");
+		return false;
+	}
+	
+//	alert('aaaa')
+	this.document.forms[0].submit();
+	return true;
+	
+	
+}
+
+
+function checkForEmptyRow(){
+	var elArr = document.getElementsByClassName("total_amount_class");
+	//alert('333')
+	colTot = 0.0;
+	try{
+	  for (i = 0; i < elArr.length; i++){	
+	  	
+	 		if (isNumber(elArr[i].value) ){	 			
+		   		if (parseFloat(elArr[i].value) <= 0.00){
+		   		//	alert('dddd')
+		   			return false;
+		   		}
+		   		else{
+		   		//	alert('0')
+		   			//return true;
+		   		}
+			}			
+			else{
+			//	alert('qqqq')
+				return false;
+			}
+		   		
+	  }		
+	return true;
+	}catch(err){alert(err)}
+	
+}
+
+
+
+
+
+function checkSubmit(){
+	//alert('ss');
+	if (document.getElementById("generaljournal_dr_total").value != document.getElementById("generaljournal_cr_total").value){
+		alert("Debit and Credit Totals are not equal!");
+		return false;
+	}
+}
+
+
+
+function refreshColDrCr(){
+	
+	var elArr = document.getElementsByClassName("dr_amount_class");
+	
+	colTot = 0.0;
+	try{
+	  for (i = 0; i < elArr.length; i++){	
+	  	if (elArr[i].style.display != "none"){
+	 		if (isNumber(elArr[i].value)){
+		   		colTot = colTot + parseFloat(elArr[i].value);
+			}
+		}	   		
+	  }		
+	document.getElementById("generaljournal_dr_total").value = colTot.toFixed(2)
+	}catch(err){alert(err)}
+	
+	var elArr = document.getElementsByClassName("cr_amount_class");
+	
+	colTot = 0.0;
+	try{
+	  for (i = 0; i < elArr.length; i++){	
+	  	if (elArr[i].style.display != "none"){
+	 		if (isNumber(elArr[i].value)){
+		   		colTot = colTot + parseFloat(elArr[i].value);
+			}
+		}	   		
+	  }		
+	document.getElementById("generaljournal_cr_total").value = colTot.toFixed(2)
+	
+	if (document.getElementById("generaljournal_dr_total").value == document.getElementById("generaljournal_cr_total").value){
+		document.getElementById("generaljournal_total_amount").value = document.getElementById("generaljournal_dr_total").value;
+	}
+	else{
+		document.getElementById("generaljournal_total_amount").value = 0.00;
+	}
+	
+	
+	}catch(err){alert(err)}
+	
+}
+
+
+function lineTotalCalc(nameKey, thisid){
+	
+	var id = thisid;
+	//alert(nameKey)
+	//alert(id);
+	var suffKey = "generaljournal_journal_entries_attributes";
+	var a = id.substr(0,id.indexOf(nameKey));
+	//alert(a)
+	var b = a.substr(a.lastIndexOf("_")+1);
+	//alert(b)
+	
+	//alert(suffKey+"_"+b+"_"+"amount");
+	//alert(document.getElementById(suffKey+"_"+b+"_"+"amount").value)
+	//alert(document.getElementById(suffKey+"_"+b+nameKey).value)
+	document.getElementById(suffKey+"_"+b+"_"+"amount").value = document.getElementById(suffKey+"_"+b+nameKey).value; //thisvalue;
+	
+	refreshColDrCr();
+	
+}
+
+
+
+
+function dr_cr_change(thisid, thisvalue){
+	//generaljournal_journal_entries_attributes_1357669033757_dr_cr
+	var id = thisid;
+	//alert(id);
+	var suffKey = "generaljournal_journal_entries_attributes";
+	var a = id.substr(0,id.indexOf("_dr_cr"));
+	var b = a.substr(a.lastIndexOf("_")+1);
+	var itemDr = document.getElementById(suffKey+"_"+b+"_"+"dr_amount");
+	var itemCr = document.getElementById(suffKey+"_"+b+"_"+"cr_amount");
+	
+	if (thisvalue =="Cr"){
+		itemDr.style.display = "none";
+		itemCr.style.display = "block";	
+		lineTotalCalc("_cr_amount", suffKey+"_"+b+"_"+"cr_amount")	
+	}
+	else{
+		itemDr.style.display = "block";
+		itemCr.style.display = "none";
+		lineTotalCalc("_dr_amount", suffKey+"_"+b+"_"+"dr_amount")		
+	}
+		
+	//alert(thisid);	
+	//alert(thisvalue);
+	
+	//if (thisvalue == "Cr")
+	//	document.getElementById('id_dr_amount').style.display = 'none'
+	//	
+}
+
+
+
+function refreshColTotal(trans, main_dr_cr){
+	
+
+	
+	var elArr = document.getElementsByClassName("lineTotal");
+	colTot = 0.0;
+	try{
+	  for (i = 0; i < elArr.length; i++){	
+	 	if (isNumber(elArr[i].value))
+		   colTot = colTot + parseFloat(elArr[i].value);		
+	  }		
+	document.getElementById("trans_rec_pay_journal_amount").value = colTot.toFixed(2)
+	var currentBalance = 0.00	
+	if (trans == 'pay'){
+	  currentBalance = parseFloat(document.getElementById("curBalanceHid").value) - parseFloat(colTot.toFixed(2))
+	}  
+	 else{
+	  currentBalance =  parseFloat(document.getElementById("curBalanceHid").value) + parseFloat(colTot.toFixed(2))
+	 } 
+	 
+	var dr_cr = main_dr_cr;
+	currentBalance = currentBalance.toFixed(2);
+	 if (currentBalance < 0 ){ 
+      	if (main_dr_cr == "Cr"){
+           dr_cr = "Dr"
+         }  
+       	 else{
+           dr_cr = "Cr"
+         }
+       currentBalance = currentBalance * -1  
+      }   
+     else{     
+      if (currentBalance == 0.00){
+         dr_cr  = ""
+      }
+    }
+	
+	
+	 document.getElementById("curBalance").value = currentBalance.toString()+" " +  dr_cr
+	 
+	}catch(err){alert(err)}
+	
+}

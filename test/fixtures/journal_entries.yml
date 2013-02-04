@@ -1,0 +1,42 @@
+# == Schema Information
+#
+# Table name: journal_entries
+#
+#  id                       :integer          not null, primary key
+#  trans_rec_pay_journal_id :integer
+#  journal_date             :date
+#  account_head             :string(255)
+#  other_account_head       :string(255)
+#  amount                   :decimal(10, 2)
+#  dr_cr                    :string(255)
+#  trans_type               :string(255)
+#  master_leg               :string(255)
+#  description              :text
+#  dr_amount                :decimal(10, 2)
+#  cr_amount                :decimal(10, 2)
+#  generaljournal_id        :string(45)
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  transrecpayjournal_id: 1
+  journal_date: 2013-01-06
+  account_head: MyString
+  amount: 9.99
+  dr_cr: MyString
+  trans_type: MyString
+  master_leg: MyString
+  description: MyText
+
+two:
+  transrecpayjournal_id: 1
+  journal_date: 2013-01-06
+  account_head: MyString
+  amount: 9.99
+  dr_cr: MyString
+  trans_type: MyString
+  master_leg: MyString
+  description: MyText

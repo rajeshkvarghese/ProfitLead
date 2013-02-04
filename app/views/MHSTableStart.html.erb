@@ -1,0 +1,5 @@
+<% @widthPer = 75%>
+<% @widthPer =  if cookies[:LHSDisplay] = "none" then @widthPer = @widthPer + 12.4   end %>
+<% @widthPer =  if cookies[:RHSDisplay] = "none" then @widthPer = @widthPer + 12.4   end %>
+
+<td width="<%= @widthPer %>%" valign="top" bgcolor="#FFFFFF" id = "MHS">

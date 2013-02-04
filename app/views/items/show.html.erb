@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>show.html</title>
+	  <%= yield :head %>
+  </head>
+  
+  <body class = "Bbody">
+	<%= render :file =>'formHeader001.html.erb' %> 
+
+  	<%= yield %>
+  
+    
+  	<div style="display:none"><%= link_to_function "click Next", 'history.go(1)', data: { keybinding: 'alt+pagedown' } %></div>
+  	<div style="display:none"><%= link_to_function "click Previous", 'history.go(-1)', data: { keybinding: 'alt+pageup' } %></div>
+  	<div style="display:none"><%= link_to "edit item", edit_item_path, data: { keybinding: 'alt+q' } %></div>  
+  	<div style="display:none"><%= link_to_function "delete item", 'deleteitem()', data: { keybinding: 'alt+shift+backspace' } %></div>
+
+
+  	<h2 align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class = 'Blabel'>Item:</font> <font color='blue'><%=  @item.name %></font></h2>
+    <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   		
+   				     <%= render :file =>'createMenu.html.erb' %>   
+   			
+  	
+  		<%= render :file =>'MHSTableStart.html' %>	
+  			<table width = 100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  				  				
+  				<tr>						  								 									
+  			     <Td>  										
+  					<div style="float: left; width: auto;"><%= button_to "      Edit      ", edit_item_path , :id => "edititem", :method => :get  %> </div> 									
+  				    <%= button_to "      Delete      ", @item ,:id => "deleteitem",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %>    									
+    			</td>  
+    		  </tr>
+    		  <tr>
+    		   <td colspan = "3" valign="top">    			
+  					
+  						<table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >
+  							<tr><td colspan="4">  				
+  				    			<table class="BTable" bgcolor="#FFFFFF" > 
+  									<Tr>
+  										<td></td><td></td><td></td><td><div style="float:left"><font color = 'blue'>Active:</font></div><div class = 'Bfield'><%= if @item.is_active =="1" then "Yes" else "No" end %></div></td>  	
+  									</Tr>						
+  									<Tr>
+  										<td colspan = "1"><div class = 'Blabel'>Code</div></td><td><div class = 'Bfield'><%= @item.code %></div></td>
+  										<td colspan = "1"><div class = 'Blabel'>Alias</div></td><td><div class = 'Bfield'><%= @item.alias %></div></td>
+  									</Tr>
+  									<tr>
+  										<td colspan = "1"><div class = 'Blabel'>Name</div></td><td colspan = "1"><div class = 'Bfield'><%= @item.name %></div></td>
+  										<td colspan = "1"><div class = 'Blabel'>Group</div></td><td><div class = 'Bfield'><%= @item.group %></div></td>
+  									</tr>	
+  								</table>
+  							</td></tr>	
+  							
+  							<tr><td colspan="4">  				
+  				    			<table class="BTable" bgcolor="#FFFFFF" > 	
+  									<Tr>  							
+  										<td><div class = 'Blabel'>Opening Qty</div></td><td><div class = 'Bfield'><%= @item.opening_quantity %></div></td>	
+  										<td  colspan = "1"><div class = 'Blabel'>Base Unit</div></td><td><div class = 'Bfield'><%= @item.base_unit %></div></td>
+  									</Tr>
+  									<Tr>  								
+  										<td><div class = 'Blabel'>Quantity On Hand</div></td><td><div class = 'Bfield'><%= @item.quantity_on_hand %></div></td>
+  										<td><div class = 'Blabel'>Opening Stock Value</div></td><td><div class = 'Bfield'><%= @item.opening_stock_value %></div></td>
+  									</Tr>  							
+  									<Tr>
+  										<td><div class = 'Blabel'>Reorder Level</div></td><td><div class = 'Bfield'><%= @item.reorder_level %></div></td>
+  										<td><div class = 'Blabel'>Indicator Level</div></td><td><div class = 'Bfield'><%= @item.indicator_level %></div></td>  								  								
+  									</Tr>
+  								</table>
+  							</td></tr>		
+  							
+  							<tr><td colspan="4">  				
+  				    			<table class="BTable" bgcolor="#FFFFFF" > 	
+  				    				<Tr>
+  										<td><div class = 'Blabel'>Purchase Rate</div></td><td><div class = 'Bfield'><%= @item.purchase_rate %></div></td>
+  										<td><div class = 'Blabel'>VAT Account</div></td><td><div class = 'Bfield'><%= @item.vat_account %></div></td>
+  									</Tr>
+  									<Tr>
+  										<td><div class = 'Blabel'>Sales Rate</div></td><td><div class = 'Bfield'><%= @item.sales_rate %></div></td>
+  										<td><div class = 'Blabel'>Costing</div></td><td><div class = 'Bfield'><%= @item.costing %></div></td>
+  									</Tr>
+  				    				<Tr>
+  										<td><div class = 'Blabel'>Other Rate</div></td><td><div class = 'Bfield'><%= @item.other_rate %></div></td>
+  										<td><div class = 'Blabel'>Market Rate</div></td><td><div class = 'Bfield'><%= @item.market_rate %></div></td>
+  									</tr>	
+  										
+  									<tr>
+  										<td><div class = 'Blabel'>Max. Retail Price</div></td><td><div class = 'Bfield'><%= @item.max_retail_price %></div></td>
+  										<td><div class = 'Blabel'>Min. Retail Price</div></td><td><div class = 'Bfield'><%= @item.min_retail_price %></div></td>
+  									</tr>	
+  										
+  				    			</table>
+  				    		</td></tr>		
+  							
+  							<tr><td colspan="4">  				
+  				    			<table class="BTable" bgcolor="#FFFFFF" > 	
+  				    				<Tr>
+  										<td><div class = 'Blabel'>Discount %</div></td><td><div class = 'Bfield'><%= @item.discount_percentage %></div></td>
+  										<td><div class = 'Blabel'>Number In A Pack</div></td><td><div class = 'Bfield'><%= @item.pack_numbers %></div></td>
+  									</Tr>  		
+  									<tr>
+  										<td><div class = 'Blabel'>Update Stock With Bonus</div></td><td><div class = 'Bfield'><%= if @item.update_stock_with_bonus =="1" then "Yes" else "No" end %></div></td>
+  										<td><div class = 'Blabel'>Set As Container</div></td><td colspan = "3"><div class = 'Bfield'><%= if @item.set_as_container =="1" then "Yes" else "No" end %></div></td>
+  									</tr>	
+  									
+  									<Tr>
+  										<td><div class = 'Blabel'>Manufacturer</div></td><td><div class = 'Bfield'><%= @item.manufacturer %></div></td>
+  										<td><div class = 'Blabel'>Category</div></td><td><div class = 'Bfield'><%= @item.category %></div></td>
+  									</Tr>	
+  									<Tr>  							
+  										<td><div class = 'Blabel'>HSN Code</div></td><td><div class = 'Bfield'><%= @item.hsn_code %></div></td>
+  										<td><div class = 'Blabel'>EAN Code</div></td><td><div class = 'Bfield'><%= @item.ean_code %></div></td>
+  									</Tr>
+  									<Tr>
+  										<td><div class = 'Blabel'>Comments</div></td><td><div class = 'Bfield'><%= @item.comments %></div></td>
+  									</Tr>				
+  								</table>
+  				    		</td></tr>		
+  												
+  							</table>
+				</td>
+			</tr>
+  			<tr>		
+  			<td>
+  				<div style="float: left; width: auto;"><%= button_to "      Edit      ", edit_item_path , :id => "editCustomer", :method => :get  %> </div>
+  				<%= button_to "      Delete      ", @item ,:id => "deleteItem",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %>
+    		</td>    								
+    		</tr>
+	 	 </table>
+	 	</td>
+	 	  <%= render :file =>'createRHSButtons.html.erb' %>    
+	 	</tr>
+  	 	 <br/>
+  	</table>
+  </body>
+  
+  
+</html>
+

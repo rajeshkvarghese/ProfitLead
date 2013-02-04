@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>show.html</title>
+	  <%= yield :head %>
+  </head>
+  
+  <body class = "Bbody">
+	<%= render :file =>'formHeader001.html.erb' %> 
+
+  	<%= yield %>
+  
+    
+  	<div style="display:none"><%= link_to_function "click Next", 'history.go(1)', data: { keybinding: 'alt+pagedown' } %></div>
+  	<div style="display:none"><%= link_to_function "click Previous", 'history.go(-1)', data: { keybinding: 'alt+pageup' } %></div> 
+    <div style="display:none"><%= link_to_function "Save Item", 'saveItem()', data: { keybinding: 'alt+s' } %></div>
+
+  	<h2 align="center" ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class = 'Blabel'>Item:</font> <font color='blue'><%=  if @item.name != nil then @item.name else "<New Item>" end %></font></h2>
+    <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   							  
+   				     <%= render :file =>'createMenu.html.erb' %>   
+   			
+  	
+  		<%= render :file =>'MHSTableStart.html' %>
+  			<%= simple_form_for @item do |f| %>
+  				
+		  	 <font color = 'red'> <%= f.error_notification  %></font>
+		  	 <div class = "BeonaForm">  		
+  			<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  				  				
+  				<tr>						  								 									
+  			     <Td>  										
+  					<div style="float: left; width: auto;"><%= f.button :submit, "      Save      ", :id => "saveItem"  %> </div> 				       									
+    			</td>  
+    		   </tr>
+    		   <tr>
+				<td valign="top">
+					
+					
+					
+  						  <Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  > 
+  						  	<tr><td colspan="4">  				
+  				    			<table class="BTable" bgcolor="#FFFFFF" > 
+  						  				<Tr>
+  											<td></td><td></td><td></td><td><font color = 'blue'><div style="float:left">Active:</div></font><div class = 'Bfield'><%= f.input :is_active,  :as => :boolean, :label => false %></div></td>  	
+  										</Tr>	  												
+  										<Tr>
+  											<td colspan = "1"><div class = 'Blabel'>Code</div></td><td><div class = 'Bfield'><%= f.input :code, :label => false, :input_html => {:size => 30}   %></div></td>
+  											<td colspan = "1"><div class = 'Blabel'>Alias</div></td><td><div class = 'Bfield'><%= f.input :alias, :label => false, :input_html => {:size => 30}   %></div></td>
+  										</Tr>
+  										<Tr>
+  											<td colspan = "1"><div class = 'Blabel'>Name</div></td><td><div class = 'Bfield'><%= f.input :name, :label => false, :input_html => {:size => 30}   %></div></td>
+  											<% @taxPop = @itemGroupDiscount %>
+  											<td  colspan = "1"><div class = 'Blabel'>Group</div></td><td><div class = 'Bfield'><%= f.input :group, :collection => Itemgroup.pluck(:name), :label => false, :input_html => {:onchange => "11alert("+ 'aaaaa' + ")"  }   %></div></td>
+  										</Tr>
+  								</table>
+  							</td></tr>		
+  							
+  							<tr><td colspan="4">  				
+  				    			<table class="BTable" bgcolor="#FFFFFF" > 
+  				    				<Tr>
+  										<td><div class = 'Blabel'>Opening Qty</div></td><td><div class = 'Bfield'><%= f.input :opening_quantity, :label => false, :input_html => {:size => 30}   %></div></td>
+  										<td><div class = 'Blabel'>Base Unit</div></td><td><div class = 'Bfield'><%= f.input :base_unit, :label => false,:collection => DataConfig.pluck(:item_base_unit)[0].split(","),  :include_blank =>false,  :input_html => {}   %></div></td>  								
+  									</Tr>  							
+  									<Tr>
+  										<td><div class = 'Blabel'>Quantity On Hand</div></td><td><div class = 'Bfield'><%= f.input :quantity_on_hand, :label => false, :input_html => {:size => 30}   %></div></td>
+  										<td><div class = 'Blabel'>Opening Stock Value</div></td><td><div class = 'Bfield'><%= f.input :opening_stock_value, :label => false, :input_html => {:size => 30}   %></div></td>  								  								
+  									</Tr
+  									<tr>
+  										<td><div class = 'Blabel'>Reorder Level</div></td><td><div class = 'Bfield'><%= f.input :reorder_level, :label => false, :input_html => {:size => 30}   %></div></td>
+  										<td colspan = "1"><div class = 'Blabel'>Indicator Level</div></td><td><div class = 'Bfield'><%= f.input :indicator_level, :label => false, :input_html => {:size => 30} %></div></td>
+  									</tr>
+  				    			
+  				    			</table>
+  							</td></tr>		
+  								
+  								
+  							<tr><td colspan="4">  				
+  				    			<table class="BTable" bgcolor="#FFFFFF" > 
+  				    				<Tr>
+  										<td><div class = 'Blabel'>Purchase Rate</div></td><td><div class = 'Bfield'><%= f.input :purchase_rate, :label => false, :input_html => {:size => 30}   %></div></td>
+  										<td><div class = 'Blabel'>VAT Account</div></td><td><div class = 'Bfield'><%= f.input :vat_account, :label => false, :input_html => {:size => 30}   %></div></td>		
+  									</Tr>  
+  									<Tr>
+  										<td><div class = 'Blabel'>Sales Rate</div></td><td><div class = 'Bfield'><%= f.input :sales_rate, :label => false, :input_html => {:size => 30}   %></div></td>
+  										<td><div class = 'Blabel'>Costing</div></td><td><div class = 'Bfield'><%= f.input :costing, :label => false, :input_html => {:size => 30}   %></div></td>		
+  									</Tr>  	
+  									<Tr>
+  										<td><div class = 'Blabel'>Other Rate</div></td><td><div class = 'Bfield'><%= f.input :other_rate, :label => false, :input_html => {:size => 30}   %></div></td>
+  										<td><div class = 'Blabel'>Market Rate</div></td><td><div class = 'Bfield'><%= f.input :market_rate, :label => false, :input_html => {:size => 30}   %></div></td>		
+  									</Tr> 
+  									<Tr>
+  										<td><div class = 'Blabel'>Max. Retail Price</div></td><td><div class = 'Bfield'><%= f.input :max_retail_price, :label => false, :input_html => {:size => 30}   %></div></td>
+  										<td><div class = 'Blabel'>Min. Retail Price</div></td><td><div class = 'Bfield'><%= f.input :min_retail_price, :label => false, :input_html => {:size => 30}   %></div></td>		
+  									</Tr> 
+  				    		
+  				    			</table>
+  							</td></tr>			
+  							
+  							
+  							<tr><td colspan="4">  				
+  				    			<table class="BTable" bgcolor="#FFFFFF" > 
+  									<Tr>
+  										<td><div class = 'Blabel'>Discount %</div></td><td><div class = 'Bfield'><%= f.input :discount_percentage, :label => false, :input_html => {:size => 30}   %></div></td>
+  										<td><div class = 'Blabel'>Number In A Pack</div></td><td><div class = 'Bfield'><%= f.input :pack_numbers, :label => false, :input_html => {:size => 30}   %></div></td>		
+  									</Tr> 
+  									<Tr>
+  										<td><div class = 'Blabel'>Update Stock With Bonus</div></td><td><div class = 'Bfield'><%= f.input :update_stock_with_bonus ,  :as => :boolean, :label => false %></div></td>
+  										<td><div class = 'Blabel'>Set As Container</div></td><td><div class = 'Bfield'><%= f.input :set_as_container ,  :as => :boolean, :label => false %></div></td>		
+  									</Tr> 
+  									<Tr>
+  										<td><div class = 'Blabel'>Manufacturer</div></td><td><div class = 'Bfield'><%= f.input :manufacturer, :label => false, :input_html => {:size => 30}   %></div></td>
+  										<td><div class = 'Blabel'>Category</div></td><td><div class = 'Bfield'><%= f.input :category, :label => false, :input_html => {:size => 30}   %></div></td>		
+  									</Tr> 
+  									<Tr>
+  										<td><div class = 'Blabel'>HSN Code</div></td><td><div class = 'Bfield'><%= f.input :hsn_code, :label => false, :input_html => {:size => 30}   %></div></td>
+  										<td><div class = 'Blabel'>EAN Code</div></td><td><div class = 'Bfield'><%= f.input :ean_code, :label => false, :input_html => {:size => 30}   %></div></td>		
+  									</Tr> 
+  							
+  									<Tr>
+  										<td><div class = 'Blabel'>Comments</div></td><td colspan="3"><div class = 'Bfield'><%= f.input :comments,  :label => false, :input_html => {:size => 100, :rows => "3"}   %></div></td>  										
+  									</Tr>  	
+  								</table>
+  							</td></tr>		
+  						</table>	
+				</td>
+			  </tr>
+			  <tr>		
+  			<Td>
+  				<div style="float: left; width: auto;"><%= f.button :submit, "      Save      ", :id => "saveItem"  %></div>  				
+    		</td>    								
+    	</tr>
+	  </Table>
+  	  <br />
+  	  	<% end %>  
+  	  </td>
+  	   <%= render :file =>'createRHSButtons.html.erb' %>    
+  	  </tr>
+  	</table>
+  </body>
+  
+  
+</html>

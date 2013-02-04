@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>index.html</title>	  	 
+	  <%= yield :head %>
+	  
+  </head>
+  
+  
+  <body class = "Bbody">
+	 <%= render :file =>'formHeader001.html.erb' %> 
+
+  	 <%= yield %>
+	   
+	  <div style="display:none"><%= link_to_function "click Next", 'clickNextPrev("tabinvoices_itemorders_next")', data: { keybinding: 'right' } %></div>
+  	  <div style="display:none"><%= link_to_function "click Previous", 'clickNextPrev("tabinvoices_itemorders_previous")', data: { keybinding: 'left' } %></div> 
+	   
+  	 <div style="display:none"><%= link_to_function "click Next", 'history.go(1)', data: { keybinding: 'alt+pagedown' } %></div>
+  	 <div style="display:none"><%= link_to_function "click Previous", 'history.go(-1)', data: { keybinding: 'alt+pageup' } %></div> 
+     <div style="display:none"><%= link_to_function "save Invoice", 'saveInvoice()', data: { keybinding: 'alt+s' } %></div>
+
+  	 <%= render :file =>'IndexPageKBShortCuts.html.erb' %>
+  	 <%
+  	 	@transRet = ""
+  	 	if  params[:trans] != nil then
+  	 		if params[:trans] == "sales" then
+  	 			@transRet = "Sales Invoice"
+  	 		end 
+  	 		if params[:trans] == "purchase" then
+  	 			@transRet = "Purchase Invoice"
+  	 		end 
+  	 		if params[:trans] == "purchaseret" then
+  	 			@transRet = "Purchase Returns"
+  	 		end 
+  	 		if params[:trans] == "salesret" then
+  	 			@transRet = "Sales Returns"
+  	 		end 	
+  		 end 
+  	 %>
+  	 
+  	 <% @titleTrans = if @invoice.transaction_name != nil then  @invoice.transaction_name else if  params[:trans] != nil then @transRet else "" end end    %>
+  	
+  	 
+     <h1 align="center" ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color = 'gray'><%= @titleTrans %>:</font> <font color='blue'><%=  if @invoice.id != nil then @invoice.id else "<New " + @titleTrans +">" end %></font></h1>
+     
+
+	  <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   			
+   				    <%= render :file =>'createMenu.html.erb' %>      				   
+   
+  	 
+  		<%= render :file =>'MHSTableStart.html' %>  	
+  			<%= simple_form_for @invoice do |f| %>
+  				
+		  	 <font color = 'red'> <%= f.error_notification  %></font>
+		  	 <div class = "BeonaForm">  
+		  	
+  			  <Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  
+  				<Tr>
+  					
+  					<td> <div style = "display:none"> <%= f.input :account_head, :input_html => {:value => if @invoice.account_head != nil then @invoice.account_head else params[:acchead] end }%> </div></td>
+  					<td> <div style = "display:none"> <%= f.input :other_account_head, :input_html => {:value => if @invoice.other_account_head != nil then @invoice.other_account_head else params[:otheracchead] end }%> </div></td>
+  					<td> <div style = "display:none"> <%= f.input :transaction_name, :input_html => {:value => if @invoice.transaction_name != nil then @invoice.transaction_name else @titleTrans end }%> </div></td>
+  				</Tr>
+  				<tr>
+  					<td><div style = "float:left"><%= button_to_function "      Save      ", "saveAfterValidation()", :id => "saveInvoice"  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+  				</tr>
+  				<tr>
+  				<td colspan = '2'>
+  					<table class = 'BTable'>
+  						<tr>
+  							<td><font color = 'gray'>Cash / Credit</font></td><td><%= f.input :cash_credit, :collection =>["Cash", "Credit"],:as => :radio, :id => :id , :checked => "Cash",  :label => false,:autofocus =>true, :input_html => {}   %></td>
+  							<td><font color = 'gray'>Invoice Date</font></td><td><%= f.input :invoice_date, :class => 'date' , :label => false %></td>
+  						</tr>
+  						<tr>	
+  							<td><font color = 'gray'>Customer Name</font></td><td><%= f.input :customer_name, :collection => Ledger.pluck(:name),:name => :name, :id => :id , :label => false, :input_html => {:onchange => "populateInvoiceAddress('invoice_customer_name')"}   %>
+  							<td><font color = 'gray'>Address Line 1:</font> </td><td><%= f.input :address_line_1, :label => false, :input_html => {:size => 50}, :as => :string   %></td>
+  						</tr>
+  						<tr>
+  							<td><font color = 'gray'>Phone:</font> </td><td><%= f.input :phone, :label => false, :input_html => {:size => 30}, :as => :string   %></td>
+  							<td><font color = 'gray'>Address Line 2:</font> </td><td><%= f.input :address_line_2, :label => false, :input_html => {:size => 50}, :as => :string   %></td>
+  						</tr>
+  					
+  						<tr>
+  							<td><font color = 'gray'>EMail:</font> </td><td><%= f.input :email, :label => false, :input_html => {:size => 30}, :as => :string   %></td>
+  							<td><font color = 'gray'>Address Line 3: </font></td><td><%= f.input :address_line_3, :label => false, :input_html => {:size => 50}, :as => :string   %></td>
+  						</tr>
+  												
+  							
+  					</table>	
+  				<td>
+  					
+  				</tr>	
+  				
+  				
+  				<div id ='lineItemH'>
+  				<tr><td colspan="4">
+  				
+  				  <table class="BTable" bgcolor="#FFFFFF" >
+  					<tr> <td>
+  						<table class="BTable001" style="margin-left = 0 border-collapse: collapse border = 1 cellspacing = 1 cellpadding = 1" > 					
+  							<tr>
+  								<td width="5px"></td>
+  								<td><center>Item Code</center></td>
+  								<td><center>Item Name</center></td>
+  								<td><center>Quantity</center></td>
+  								<td><center>Unit</center></td>
+  								<td><center>Rate</center></td>
+  								<td><center>Discount%</center></td>
+  								<td><center>TAX%</center></td>
+  								<td><center>Bal. Qty</center></td>
+  								<td><center>Discount</center></td> 
+  								<td><center>TAX</center></td> 
+  								<td><center>Total</center></td>
+  							</tr>
+  							<tr>
+  							<td colspan ="3">
+  								<p><%= link_to_add_fields ">> Add Line Item", f, :itemorders %></p>  
+  							</td>
+  							<td></td>
+  							<td></td>
+  							<td></td>
+  							<td></td>
+  							<td></td>
+  							<td></td>
+  							<td></td>
+  							<td>Column Total: </td>
+  							<td><input name ="colTotal" id = "idColTotal" class = "smallField" value = 0.0 readonly  ></td>
+  							</tr>
+  						</table>
+  					</td></tr>
+  				  </table>
+  					
+  				</td></tr>
+  				</div>
+  				
+  				
+  				
+  				
+  				<tr><td colspan = 2 ><div align = "right" >
+  					<table id = "tabinvoices_itemorders" style="clear: both; margin-left: 10px; width : 100%"  bgcolor="#CCCCCC" >
+  						<thead>	    	
+  							<tr>  		
+  								<th>Item Code</th>
+  								<th> Item Name </th>
+  								<th> Quantity </th>
+  								<th> Rate </th> 
+  								<th> Discount </th>  
+  								<th> Final Total </th>   						
+  								<th></th>
+  								<th></th>
+  							</tr>
+  						</thead>
+  						<tbody>
+  							<% if @itemorders != nil then %>
+  							<% @itemorders.each do |lineT| %>
+  								<tr>
+  									<td><%= link_to lineT.item_code, lineT, :class=>"docLinksClass"  %>  </td>
+  									<td><%= lineT.item_name  %>  </td>
+  									<td><%= lineT.quantity  %>  </td>
+  									<td><%= lineT.sales_rate_per_unit  %>  </td> 
+  									<td><%= lineT.discount_percentage  %>  </td>
+  									<td><%= lineT.final_total  %>  </td>
+        							<td><%= link_to 'Edit', edit_itemorder_path(lineT) %></td>
+    								<td><%= link_to 'Delete', lineT,  confirm: 'Are you sure you want to delete this record?', :method => :delete %></td>
+  					 			
+  								</tr>
+  							<% end %>  
+  							<% end%>
+  						</tbody>	
+  					</table>
+  					</div>
+  					<br />
+  				</td></tr>
+  				
+  				
+  				
+  				<tr>
+  				<td colspan = '2'>
+  					<table class = 'BTable'>
+  						<tr>
+  							<td><font color = 'gray'>Sub Total</font></td><td><%= f.input :sub_total, :label => false %></td>
+  							<td><font color = 'gray'>VAT</font></td><td><%= f.input :vat, :label => false %></td>
+  						</tr>
+  						<Tr>
+  						<td><font color = 'gray'>Total</font></td><td><div style = "display:none"><input name = 'total_hid'  id = 'id_total_hid' value = <%= if @invoice.total != nil then @invoice.total else 0.00 end  %>></div><%= f.input :total, :label => false %></td>
+  							<td><font color = 'gray'>Paid</font></td><td><%= f.input :Paid, :label => false %></td>
+  						</Tr> 
+  						<Tr>
+  							<td><font color = 'gray'>Balance</font></td><td><%= f.input :balance, :label => false %></td> 				
+  							<td><font color = 'gray'>Bill To Address</font></td><td><%= f.input :bill_to_address, :label => false , :input_html => {:size => 100, :rows => "5"} %></td>
+  						</Tr>
+  						<Tr>
+  							<td><font color = 'gray'>Ship To Address</font></td><td><%= f.input :ship_to_address, :label => false, :input_html => {:size => 100, :rows => "5"}  %></td>  				
+  	    					<td><font color = 'gray'>Comments</font></td><td><%= f.input :comments, :label => false,  :input_html => {:size => 100, :rows => "5"}  %></td>
+  	    				</Tr>	
+  						<tr>
+  							<td><div style = "float:left"><%= f.button :submit, "      Save      ", :id => "saveInvoice"  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+  						</tr>	
+  					</table>	
+  				<td>
+  					
+  				</tr>	
+  				
+  				
+  				  
+  			  </Table>
+  			    
+  			 </div>
+  			<% end %>  
+  			<br />
+  			</td>
+  				 <%= render :file =>'createRHSButtons.html.erb' %>    
+  			</tr>
+  	</table>
+  </body>
+</html>
+
+   
+   

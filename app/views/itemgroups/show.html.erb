@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>show.html</title>
+	  <%= yield :head %>
+  </head>
+  
+  <body class = "Bbody">
+	<%= render :file =>'formHeader001.html.erb' %> 
+
+  	<%= yield %>
+  
+    
+  	<div style="display:none"><%= link_to_function "click Next", 'history.go(1)', data: { keybinding: 'alt+pagedown' } %></div>
+  	<div style="display:none"><%= link_to_function "click Previous", 'history.go(-1)', data: { keybinding: 'alt+pageup' } %></div>
+  	<div style="display:none"><%= link_to "edit itemgroup", edit_itemgroup_path, data: { keybinding: 'alt+q' } %></div>  
+  	<div style="display:none"><%= link_to_function "delete itemgroup", 'deleteItemgroup()', data: { keybinding: 'alt+shift+backspace' } %></div>
+
+
+  	<h2 align="center" ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class = 'Blabel'>Item Group:</font> <font color='blue'><%=  @itemgroup.name %></font></h2>
+  	  <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   		 				  
+   			<%= render :file =>'createMenu.html.erb' %>   
+   			
+  	
+  		<%= render :file =>'MHSTableStart.html' %>
+  			<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  				  				
+  				<tr>						  								 									
+  			     <Td>  										
+  					<div style="float: left; width: auto;"><%= button_to "      Edit      ", edit_itemgroup_path , :id => "editItemgroup", :method => :get  %> </div> 									
+  				    <%= button_to "      Delete      ", @itemorder ,:id => "deleteItemgroup",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %></td>    									
+    			</td>  
+    		  </tr>
+    		  
+			  <tr>
+				<td>
+  					  <Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >   												
+  							<Tr>
+  								<td colspan = "1"><div class = 'Blabel'>Name</div></td><td><div class = 'Bfield'><%= @itemgroup.name %></div></td>
+  								<td colspan = "1"><div class = 'Blabel'>Group Code</div></td><td><div class = 'Bfield'><%= @itemgroup.code %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td colspan = "1"><div class = 'Blabel'>Main Group</div></td><td><div class = 'Bfield'><%= @itemgroup.main_group %></div></td>
+  								<td  colspan = "1"><div class = 'Blabel'>Print Name</div></td><td><div class = 'Bfield'><%= @itemgroup.print_name %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Tax</div></td><td><div class = 'Bfield'><%= @itemgroup.tax %></div></td>
+  								<td><div class = 'Blabel'>Update Tax Child Items</div></td><td><div class = 'Bfield'><%= if @itemgroup.update_tax_child =="1" then "Yes" else "No" end %></div></td>  								
+  							</Tr>  							
+  							<Tr>
+  								<td><div class = 'Blabel'>Discount %</div></td><td><div class = 'Bfield'><%= @itemgroup.discount_per %></div></td>
+  								<td><div class = 'Blabel'>Update Discount Child Items</div></td><td><div class = 'Bfield'><%= if @itemgroup.update_disc_child =="1" then "Yes" else "No" end %></div></td>  								  								
+  							</Tr
+  							<tr>
+  								<td><div class = 'Blabel'>Category</div></td><td><div class = 'Bfield'><%= @itemgroup.category %></div></td>
+  								<td colspan = "1"><div class = 'Blabel'>Print Only Group Summary in Entry</div></td><td><div class = 'Bfield'><%= if @itemgroup.print_only_sum =="1" then "Yes" else "No" end %></div></td>
+  							</tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Description</div></td><td><div class = 'Bfield'><%= @itemgroup.description %></div></td>  								
+  							</Tr>  							
+  							 							
+  						
+  						</table>  				
+				</td>
+			  </tr>
+			  
+			<tr>
+				<td>
+					<center><h3><ul>Items</ul></h3></center>
+				</td>	
+			</tr>
+				
+				
+			  <tr>
+    		  	<td>
+    		  		
+    		  		<table id = "tabitems" style="clear: both; margin-left: 10px; width : 100%">
+  					<thead>	    	
+  						<tr>
+  							<th> Item Code </th>
+  							<th> Item Name </th>
+  							<th> Alias </th>
+  							<th> QOH </th>  							  	
+  							<th></th>
+  							<th></th>					
+  						</tr>
+  					</thead> 
+  					<tbody>
+  						<% @items.each do |itemT| %>
+  							<tr>
+  								<td><%= link_to itemT.code, itemT, :class=>"docLinksClass"   %>  </td>
+  								<td><%= itemT.name  %>  </td>
+  								<td><%= itemT.alias  %>  </td>
+  								<td><%= itemT.quantity_on_hand  %>  </td>
+  								<td><%= link_to 'Edit', edit_item_path(itemT) %></td>
+    							<td><%= link_to 'Delete', itemT, method: :delete, confirm: 'Are you sure you want to delete this record?', :method => :delete %></td>				 			
+  							</tr>
+  						<% end %>  
+  					</tbody>	
+  				</table>
+    	
+    		  	</td>	
+    		  </tr>
+		
+			  		  
+			  
+			  <tr>		
+  				<Td>
+  					<div style="float: left; width: auto;"><%= button_to "      Edit      ", edit_itemgroup_path , :id => "editItemgroup", :method => :get  %> </div>
+  					<%= button_to "      Delete      ", @itemorder ,:id => "deleteItemgroup",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %></td>
+    			</td>    								
+    		  </tr>
+    		
+	  		</Table>
+	  		</td>
+	  		 <%= render :file =>'createRHSButtons.html.erb' %>    
+	  		</tr>
+  	  		<br />
+  		</table>
+  	</body>
+</html>

@@ -1,0 +1,136 @@
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>index.html</title>	  	 
+	  <%= yield :head %>	  
+  </head>
+  
+  
+  <body class = "Bbody">
+	 <%= render :file =>'formHeader001.html.erb' %> 
+
+  	 <%= yield %>
+	   
+	  <div style="display:none"><%= link_to_function "click Next", 'clickNextPrev("tabinvoices_itemorders_next")', data: { keybinding: 'right' } %></div>
+  	  <div style="display:none"><%= link_to_function "click Previous", 'clickNextPrev("tabinvoices_itemorders_previous")', data: { keybinding: 'left' } %></div> 
+	   
+  	 <div style="display:none"><%= link_to_function "click Next", 'history.go(1)', data: { keybinding: 'alt+pagedown' } %></div>
+  	 <div style="display:none"><%= link_to_function "click Previous", 'history.go(-1)', data: { keybinding: 'alt+pageup' } %></div> 
+     <div style="display:none"><%= link_to_function "save Invoice", 'saveInvoice()', data: { keybinding: 'alt+s' } %></div>
+
+  	 <%= render :file =>'IndexPageKBShortCuts.html.erb' %>
+  	   	
+     <h1 align="center" ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color = 'gray'>General Journal:&nbsp;</font> <font color='blue'><%= if @generaljournal.id != nil then @generaljournal.id else "<New General Journal>" end  %></font></h1>
+     
+
+	  <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   			
+   				 <%= render :file =>'createMenu.html.erb' %>      				   
+   			
+  	 
+  		<%= render :file =>'MHSTableStart.html' %>
+  			
+		  	 <div class = "BeonaForm">  
+		  	
+		  	 	
+  			  <Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF" width="100%"  >   
+  				<Tr></Tr>
+  				<tr>						  								 									
+  			     <Td>  										
+  					<div style="float: left; width: auto;"><%= button_to "      Edit      ", edit_generaljournal_path , :id => "editGeneralJournal", :method => :get  %> </div> 									
+  				    <%= button_to "      Delete      ", @generaljournal ,:id => "deleteGeneralJournal",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %></td>  				    									
+    			</td>  
+    		  </tr>
+  				<!-- ><Tr><td><font color = 'gray'>Entry No.</font></td><td>(Transrecpayjournal.maximum("id")+1).to_s</td></Tr> -->
+  				<Tr><td colspan ='2'>
+  					<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  
+  						<tr><td><font color = 'gray'>Entry Date</font></td><td><%= @generaljournal.journal_date %></td></Tr>
+  						<tr>  							
+  							<td><font color = 'gray'>Job</font></td><td><%= @generaljournal.job %></td></Tr>
+  						</Tr>
+  					 </table>	  						
+  				</td></Tr>  			
+  				 
+  				
+  				<tr><td colspan = 2 ><div align = "right" >
+  					<table id = "tabgeneraljournal" style="clear: both; margin-left: 10px; width : 100%"  bgcolor="#CCCCCC" >
+  						<thead>	    	
+  							<tr>  	
+  								<th> Entry No. </th>
+  								<th> Dr / Cr </th>	
+  								<th> Account Heads </th>
+  								<th> Amount </th>  								  														
+  								<th></th>
+  								<th></th>
+  							</tr>
+  						</thead>
+  						<tbody>
+  							<% if @journalentries != nil then %>
+  							  <% @journalentries.each do |lineT| %>
+  								<tr>
+  									<td><%= link_to lineT.id, lineT, :class=>"docLinksClass"  %>  </td>
+  									<td><%= lineT.dr_cr  %>  </td>  
+  									<td><%= lineT.account_head  %>  </td>
+  									<td><%= lineT.amount  %>  </td>  																		
+        							<td><%= link_to 'Edit', edit_journal_entry_path(lineT) %></td>
+    								<td><%= link_to 'Delete', lineT, :retURL =>  generaljournal_path(@generaljournal),  confirm: 'Are you sure you want to delete this record?', :method => :delete %></td>
+  					 			
+  								</tr>  								
+  							  <% end %>  
+  							<% end%>
+  						</tbody>	
+  						<tfoot>
+  									<tr>  	
+  										<th>  </th>	
+  										<th>  </th>  								
+  										<th>  </th>
+  										<th>  </th>  														
+  										<th>  </th>
+  										<th>  </th>
+  									</tr> 
+  								</tfoot>
+  					</table>
+  					</div>
+  					<br />
+  				</td></tr>
+  				
+  				<tr><td colspan="2">
+  				  <table class="BTable" bgcolor="#FFFFFF" >
+  					<Tr><td  ><font color = 'gray'>Narration</font></td><td colspan="3"><%= @generaljournal.narration %></td></Tr>
+  					
+  					<div style= 'display:none'>
+  					  <Tr>
+  						<td><font color = 'gray'>Cheque No.</font></td><td><%= @generaljournal.dr_total %></td>
+  						<td><font color = 'gray'>Cheque Date</font></td><td><%= @generaljournal.cr_total %></td>
+  					  </Tr>
+  					</div>
+  						  
+  				 </table>
+  				<td></tr>	 				
+  				
+  				<tr>						  								 									
+  			     <Td>  										
+  					<div style="float: left; width: auto;"><%= button_to "      Edit      ", edit_generaljournal_path , :id => "editGeneralJournal", :method => :get  %> </div> 									
+  				    <%= button_to "      Delete      ", @generaljournal ,:id => "deleteGeneralJournal",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %></td>  				    									
+    			</td>  
+    		  </tr>  
+  			  </Table>
+  			   
+  			 </div>
+  			
+  			<br />
+  			 <%= render :file =>'createRHSButtons.html.erb' %>  
+  			 
+   				    				   
+   			
+  			</tr>
+  	</table>
+  </body>
+</html>

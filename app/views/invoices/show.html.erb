@@ -1,0 +1,165 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>index.html</title>	  	 
+	  <%= yield :head %>	  
+  </head>
+  
+  
+  <body class = "Bbody">
+	 <%= render :file =>'formHeader001.html.erb' %> 
+
+  	 <%= yield %>
+	   
+	  <div style="display:none"><%= link_to_function "click Next", 'clickNextPrev("tabinvoices_itemorders_next")', data: { keybinding: 'right' } %></div>
+  	  <div style="display:none"><%= link_to_function "click Previous", 'clickNextPrev("tabinvoices_itemorders_previous")', data: { keybinding: 'left' } %></div> 
+	   
+  	<div style="display:none"><%= link_to_function "click Next", 'history.go(1)', data: { keybinding: 'alt+pagedown' } %></div>
+  	<div style="display:none"><%= link_to_function "click Previous", 'history.go(-1)', data: { keybinding: 'alt+pageup' } %></div>
+  	<div style="display:none"><%= link_to "edit invoice", edit_invoice_path, data: { keybinding: 'alt+q' } %></div>  
+  	<div style="display:none"><%= link_to_function "delete invoice", 'deleteInvoice()', data: { keybinding: 'alt+shift+backspace' } %></div>
+
+
+  	 <%= render :file =>'IndexPageKBShortCuts.html.erb' %>
+  	 
+  	
+    
+     <h1 align="center" ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color = 'gray'>Invoice:</font> <font color='blue'><%=  @invoice.id %></font></h1>
+
+	  <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   			
+ 			<%= render :file =>'createMenu.html.erb' %>      				   
+   			
+  	 
+  		<%= render :file =>'MHSTableStart.html' %>  
+  			  <Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF" width="100%"  > 
+  			  	 
+  				<tr>						  								 									
+  			     <Td>  										
+  					<div style="float: left; width: auto;"><%= button_to "      Edit      ", edit_invoice_path , :id => "editInvoice", :method => :get  %> </div> 									
+  				   <%= button_to "      Delete      ", @invoice ,:id => "deleteInvoice",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %></td>  				    									
+    			</td>  
+    		  </tr>
+  				
+  			 <Tr><td colspan ='2'>
+  					<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  
+  						<tr>
+  							<td><font color = 'gray'>Invoice No.</font></td><td><%= @invoice.id %></td>
+  							<td><font color = 'gray'>Invoice Date</font></td><td><%= @invoice.invoice_date %></td>
+  						</Tr>  						
+  						<Tr>
+  							<td><font color = 'gray'>Customer Name</font></td><td><%= @invoice.customer_name %></td>
+  					
+  						</Tr>  		  				
+  						
+  						
+  						
+  					
+  					 </table>	  						
+  				</td></Tr>  	
+  				<tr><td colspan = 2 >
+  					<div align = "right" >
+  					<table id = "tabinvoices_itemorders" style="clear: both; margin-left: 10px; width : 100%"  bgcolor="#CCCCCC" >
+  						<thead>	    	
+  							<tr>  		
+  								<th>Item Code</th>
+  								<th> Item Name </th>
+  								<th> Quantity </th>
+  								<th> Rate </th> 
+  								<th> Discount </th>  
+  								<th> Final Total </th>   						
+  								<th></th>
+  								<th></th>
+  							</tr>
+  						</thead>
+  						<tbody>
+  							<% @itemorders.each do |lineT| %>
+  								<tr>
+  									<td><%= link_to lineT.item_code, lineT, :class=>"docLinksClass"  %>  </td>
+  									<td><%= lineT.item_name  %>  </td>
+  									<td><%= lineT.quantity  %>  </td>
+  									<td><%= lineT.sales_rate_per_unit  %>  </td> 
+  									<td><%= lineT.discount_percentage  %>  </td>
+  									<td><%= lineT.final_total  %>  </td>
+        							<td><%= link_to 'Edit', edit_itemorder_path(lineT) %></td>
+    								<td><%= link_to 'Delete', lineT,  confirm: 'Are you sure you want to delete this record?', :method => :delete %></td>
+  					 			
+  								</tr>
+  							<% end %>  
+  						</tbody>	
+  					</table>
+  					</div>
+  					<br />
+  				</td></tr>
+  				
+  				<tr><td colspan="2">
+  				  <table class="BTable" bgcolor="#FFFFFF" >
+  					<Tr>
+  						<td><font color = 'gray'>Sub Total</font></td><td><%= @total %></td>
+  				        <td><font color = 'gray'>VAT</font></td><td><%= @invoice.vat %></td>
+  				    </Tr>
+  					<Tr>
+  						<td><font color = 'gray'>Total</font></td><td><%= @invoice.total %></td>
+  				        <td><font color = 'gray'>Paid</font></td><td><%= @invoice.Paid %></td>
+  				    </Tr> 		
+  				    	<Tr><td><font color = 'gray'>Balance</font></td><td><%= @invoice.balance %></td> 				
+  				    	<td><font color = 'gray'>Bill To Address</font></td><td><%= @invoice.bill_to_address %></td>
+  				    </Tr>
+  					<Tr>
+  						<td><font color = 'gray'>Ship To Address</font></td><td><%= @invoice.ship_to_address %></td>
+  						<td><font color = 'gray'>Comments</font></td><td><%= @invoice.comments %></td>
+  					</Tr>
+  				 </table>
+  				<td></tr>	 				
+  				
+  				<tr>						  								 									
+  			     <Td>  										
+  					<div style="float: left; width: auto;"><%= button_to "      Edit      ", edit_invoice_path , :id => "editInvoice", :method => :get  %></div> 									
+  				    <%= button_to "      Delete      ", @invoice ,:id => "deleteInvoice",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %></td>  				    									
+    			</td>  
+    		  </tr>  
+  			  </Table>
+  			    
+  		
+  			<br />
+  			 <%= render :file =>'createRHSButtons.html.erb' %>  
+  			   				    				   
+   			
+  			</tr>
+  	</table>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

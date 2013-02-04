@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>index.html</title>
+	  <%= yield :head %>
+  </head>
+  
+  
+  <body class = "Bbody">
+  	<%= render :file =>'formHeader001.html.erb' %>
+ 
+  	<%= yield %>
+  
+  
+  	  
+  	<div style="display:none"><%= link_to_function "click Next", 'clickNextPrev("tabcustomers_next")', data: { keybinding: 'right' } %></div>
+  	<div style="display:none"><%= link_to_function "click Previous", 'clickNextPrev("tabcustomers_previous")', data: { keybinding: 'left' } %></div> 
+  	
+  	<%= render :file =>'IndexPageKBShortCuts.html.erb' %>
+
+  <div id="aaa"> </div>
+  	<br>
+  	<h1 align="center" "> Customers </h1>
+  	  <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   			
+   		
+   				    <%= render :file =>'createMenu.html.erb' %>    	   				   
+   			
+  	
+  		<%= render :file =>'MHSTableStart.html' %>
+  				
+  				<table id = "tabcustomers" style="clear: both; margin-left: 10px; width : 100%">
+  					<thead>	    	
+  						<tr>
+  							<!-- ><th> Ledger Name </th>
+  							<th> Current Balance </th>
+  							<th> Dr/Cr </th>
+  							<th> Active?</th>  		-->
+  							<% @colTitleHTML = ""
+  								@cnt = 0
+  								@columnsTitleDisp.each do |colTitle|
+  									@colTitleHTML = @colTitleHTML + "<th width="+@columnsWidth[@cnt]+"% >" + colTitle + "</th>"
+  									@cnt = @cnt + 1
+  								end	
+  							 %>				
+  							<%= raw @colTitleHTML %>
+  						</tr>
+  					</thead> 
+  					<tbody>
+  						<% @rowItems.each do |custT| %>
+  							<tr>	
+  								<% @colHTML = "" %>
+  								<%	@intCntr = 0 %>
+  								<%	@columnsDisp.each do |colData| %>
+  									<%	if @intCntr == 0 and @firstLink != "" then %>
+  										<%	if @firstLink != "entt" then %>
+  											<%		@alink = @firstLink + "" + custT["dateColumnP"].to_s << ";" %>
+  											<%		logger.debug '!!!!!!!!!!!!!@firstLink:'+@alink %>
+  										 	 <td> <%=	link_to custT[colData].to_s , @alink %>   </td>	
+  										 <%	else %>
+  										 	 <% parTableName = DynamicModel.table_name %>
+  										 	 <% parId =  custT["id"] %>
+  										 	 <% if DynamicModel.table_name == "journal_entries" then  %>
+  										 	    <% if custT["trans_rec_pay_journal_id"] != nil then %>
+  										 	   		<% parTableName = "trans_rec_pay_journals" %>
+  										 	   		<% parId = custT["trans_rec_pay_journal_id"] %>
+  										 	   	<% else %>	
+  										 	   		<% if custT["generaljournal_id"]!= nil then  %>	
+  										 	   			<% parTableName = "generaljournals" %>
+  										 	   			<% parId = custT["generaljournal_id"] %>
+  										 	   		<% else %>	
+  										 	   			<% parTableName = "invoices" %>
+  										 	   			<% parId = custT["invoice_id"] %>
+  										 	   		<% end %>	
+  										 	   	<% end %>	  										 	   
+  										 	 <% end %>  
+  										 	 <td> <%=	link_to parId.to_s , parTableName+"/"+parId.to_s %>   </td>	
+  										 <% end %>	
+  										
+  									<%	else	 %>
+  										
+  										 <td>  <%= custT[colData].to_s %>  </td>
+  										 
+  									
+  									<% end %>
+  										<% @intCntr = @intCntr + 1  %>
+  								<% end %>
+  							</tr>
+  						<% end %>  
+  					</tbody>	
+  				</table>
+  			</td>
+  			 <%= render :file =>'createRHSButtons.html.erb' %>  
+  		</Tr>
+  	</table>
+  
+  </body>
+</html>
+

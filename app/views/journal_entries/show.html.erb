@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>show.html</title>
+	  <%= yield :head %>
+  </head>
+  
+  <body class = "Bbody">
+	<%= render :file =>'formHeader001.html.erb' %> 
+
+  	<%= yield %>
+  
+    
+  	<div style="display:none"><%= link_to_function "click Next", 'history.go(1)', data: { keybinding: 'alt+pagedown' } %></div>
+  	<div style="display:none"><%= link_to_function "click Previous", 'history.go(-1)', data: { keybinding: 'alt+pageup' } %></div> 
+    <div style="display:none"><%= link_to "edit item", edit_item_path, data: { keybinding: 'alt+q' } %></div>  
+  	<div style="display:none"><%= link_to_function "delete item", 'deleteitem()', data: { keybinding: 'alt+shift+backspace' } %></div>
+
+
+  	<h2 align="center" ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class = 'Blabel'>Item:</font> <font color='blue'><%=  if @journal_entry.id != nil then @journal_entry.id else "<New Journal>" end %></font></h2>
+  	  <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   						  
+   			<%= render :file =>'createMenu.html.erb' %>   
+   			
+  	
+  			<%= render :file =>'MHSTableStart.html' %>			
+  				
+		  	 
+  			<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  				  				
+  				<tr>						  								 									
+  			     <Td>  										
+  					<div style="float: left; width: auto;"><%= button_to "      Edit      ", edit_journal_entry_path , :id => "edititem", :method => :get  %> </div> 									
+  				    <%= button_to "      Delete      ", @journal_entry ,:id => "deleteitem",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %>   									
+    			</td>  
+    		  </tr>
+    		   <tr>
+				 <td colspan = "3" valign="top">    	
+					
+					
+  						  <Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  						  	 												
+  							<Tr>
+  								<td colspan = "1"><div class = 'Blabel'>Journal No</div></td><td><div class = 'Bfield'><%= @journal_entry.trans_rec_pay_journal_id   %></div></td>
+  								<td colspan = "1"><div class = 'Blabel'>Journal Date</div></td><td><div class = 'Bfield'><%= @journal_entry.journal_date %></div></td>
+  								
+  							</Tr>
+  							<Tr>
+  								<td colspan = "1"><div class = 'Blabel'>Account Head</div></td><td><div class = 'Bfield'><%= @journal_entry.account_head  %></div></td>
+  								<td  colspan = "1"><div class = 'Blabel'>Transaction Type</div></td><td><div class = 'Bfield'><%= @journal_entry.trans_type   %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Amount</div></td><td><div class = 'Bfield'><%= @journal_entry.amount   %></div></td>
+  								<td><div class = 'Blabel'>Dr/Cr</div></td><td><div class = 'Bfield'><%= @journal_entry.dr_cr   %></div></td>  								
+  							</Tr>  							 
+  							<Tr>
+  								<td><div class = 'Blabel'>Master Code</div></td><td><div class = 'Bfield'><%= @journal_entry.master_leg   %></div></td>
+  								<td><div class = 'Blabel'>Description</div></td><td><div class = 'Bfield'><%= @journal_entry.description  %></div></td>  								  								
+  							</Tr>
+  											
+  							 							
+  						</table>	
+  					
+				</td>
+			</tr>
+  			<tr>		
+  			<Td>
+  				<div style="float: left; width: auto;"><%= button_to "      Edit      ", edit_journal_entry_path , :id => "editCustomer", :method => :get  %> </div>
+  				<%= button_to "      Delete      ", @journal_entry ,:id => "deleteItem",  confirm: 'Are you sure you want to delete this record?' , :method => :delete  %></td>
+    		</td>    								
+    		</tr>
+	 	 </Table>
+  	 	 <br />
+  	 	 </td>
+  	 	 <%= render :file =>'createRHSButtons.html.erb' %> 
+  	 	</tr>
+  	</table>
+  </body>
+  
+  
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

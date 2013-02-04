@@ -1,0 +1,121 @@
+
+<script>
+
+function setCookie(c_name,value,exdays)
+{
+var exdate=new Date();
+exdate.setDate(exdate.getDate() + exdays);
+var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+document.cookie=c_name + "=" + c_value;
+}
+
+function getCookie(c_name)
+{
+var i,x,y,ARRcookies=document.cookie.split(";");
+for (i=0;i<ARRcookies.length;i++)
+{
+  x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+  y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+  x=x.replace(/^\s+|\s+$/g,"");
+  if (x==c_name)
+    {
+    return unescape(y);
+    }
+  }
+}
+
+
+function hideRHS(){
+	document.getElementById('RHS').style.display = 'none';
+	document.getElementById('RHStd').width = ".1%"
+	document.getElementById('showRHS').style.display = 'block';
+	document.getElementById('MHS').width = "'"+toString(parseFloat(document.getElementById('MHS').width) + 12.4)+ "%'"
+	
+	setCookie('RHSDisplay','none',30)
+	
+}	
+	
+function showRHS(){
+	document.getElementById('RHStd').width = "12.5%";
+	document.getElementById('RHS').style.display = 'inline';
+	document.getElementById('showRHS').style.display = 'none';
+	document.getElementById('MHS').width = "'"+toString(parseFloat(document.getElementById('MHS').width) - 12.4)+ "%'"
+	document.getElementById('RHS').style.backgroundColor =  "#8099CC" ;
+	setCookie('RHSDisplay','inline',30)
+
+	//alert(document.getElementById('LHS').innerHTML)
+	
+}	
+
+
+	
+</script>
+
+
+ <td width=<%= if cookies[:RHSDisplay] = "none" then ".1%" else "12.5%" end %> height = "100%" valign="top" bgcolor="#8099CC" id = 'RHStd' class = "RHSClass">
+ 	<div id = 'RHS' style = "display:<%= cookies[:RHSDisplay] %>">
+ 	<center><font color = '#800000'><b>CREATE</b></font></center>
+ 	
+ 	<br/> 	
+ 	<div style="background-color:#8099CC; z-index: 1; ">
+ 	<center><%= link_to 'Bank Receipt', new_trans_rec_pay_journal_path + "?trans=rec&acchead=Bank Current Account"  ,:method => :get, :class => "Bbutton",:style => "padding:0px 22px;", data: { keybinding: 'alt+shift+g' } %></center>
+ 	</br> 	
+ 	
+ 	<center><%= link_to 'Cash Receipt', new_trans_rec_pay_journal_path + "?trans=rec&acchead=Cash in Hand"  ,:method => :get, :class => "Bbutton",:style => "padding:0px 19px;", data: { keybinding: 'alt+shift+g' } %></center>
+ 	</br> 	
+ 	
+ 	<center><%= link_to 'Bank Payment', new_trans_rec_pay_journal_path + "?trans=pay&acchead=Bank Current Account"  ,:method => :get, :class => "Bbutton", :style => "padding:0px 15px;",data: { keybinding: 'alt+shift+g' } %></center>
+ 	</br>
+ 	 	
+ 	<center><%= link_to 'Cash Payment', new_trans_rec_pay_journal_path + "?trans=pay&acchead=Cash in Hand"  ,:method => :get, :class => "Bbutton",:style => "padding:0px 15px;", data: { keybinding: 'alt+shift+g' } %></center>
+ 	</br> 	
+ 	
+ 	<center><%= link_to 'General Journal', new_generaljournal_path ,:method => :get, :class => "Bbutton",:style => "padding:0px 15px;", data: { keybinding: 'alt+shift+g' } %></center>
+ 	</div> 	
+ 	<hr/>  	
+ 	<br/>
+	<center><%= link_to 'Sales', new_invoice_path+ "?trans=sales&acchead=Sales Account&otheracchead=Cash in Hand" , :method => :get, :class => "Bbutton",:style => "padding:0px 38px;", data: { keybinding: 'alt+i' } %></center>
+	
+	<br/>
+	<center><%= link_to 'Purchase', new_invoice_path+ "?trans=purchase&acchead=Cash in Hand&otheracchead=Purchase Account" , :method => :get, :class => "Bbutton",:style => "padding:0px 38px;", data: { keybinding: 'alt+i' } %></center>
+	
+	<br/>
+	<center><%= link_to 'Sales Returns', new_invoice_path+ "?trans=salesret&acchead=Cash in Hand&otheracchead=Sales Return Account" , :method => :get, :class => "Bbutton",:style => "padding:0px 10px;", data: { keybinding: 'alt+i' } %></center>
+	
+	<br/>
+	<center><%= link_to 'Purchase Returns', new_invoice_path+ "?trans=purchaseret&acchead=Purchase Return Account&otheracchead=Cash in Hand" , :method => :get, :class => "Bbutton",:style => "padding:0px 10px;", data: { keybinding: 'alt+i' } %></center>
+	
+	<hr/>
+	<br/> 	
+	
+	<div style="background-color:#8099CC; z-index: 1; "> 	
+	<center><%= link_to 'Item', new_item_path,:method => :get, :class => "Bbutton",:style => "padding:0px 45px;", data: { keybinding: 'alt+i' } %></center>
+	</br> 
+		 	
+	<center><%= link_to 'Item Group', new_itemgroup_path,:method => :get, :class => "Bbutton",:style => "padding:0px 27px;", data: { keybinding: 'alt+i' } %></center>
+	</div>
+	<div style="float:right"><font size = '1'><a href = '#' onclick = 'hideRHS()' style = "text-decoration: none"> &gt; &gt;</a></font></div>  	
+	<hr/>	
+	
+	<div style="background-color:#8099CC; z-index: 1; ">
+	<center><%= link_to 'Ledger', new_ledger_path ,:method => :get, :class => "Bbutton",:style => "padding:0px 30px;", data: { keybinding: 'alt+c' } %></center>
+	</br> 	 	
+	<center><%= link_to 'Customer', new_ledger_path+"?parGroupId=Customers/Debtors" ,:method => :get, :class => "Bbutton",:style => "padding:0px 30px;", data: { keybinding: 'alt+c' } %></center>
+	</br> 
+	<center><%= link_to 'Supplier', new_ledger_path+"?parGroupId=Suppliers/Creditors" ,:method => :get, :class => "Bbutton",:style => "padding:0px 30px;", data: { keybinding: 'alt+c' } %></center>
+	</div>
+
+	
+ 	 	
+ 	</div>
+	<br/>
+	<br/>
+
+	<br/>
+	<br/>
+
+	<br/>
+	
+ </td>
+
+<td ><div style="display:<%= if cookies[:RHSDisplay] = "none" then "inline" else "none" end %>" id = 'showRHS'><font size = '1'> <a href = "#" onclick = "showRHS()" style = "text-decoration: none">&lt;&lt;</a> </font></div></td>

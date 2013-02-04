@@ -1,0 +1,31 @@
+
+			<tr  class = "fields">
+			<td width="5px"></td>
+  			<td  style = "float:center"><div><%= f.input :account_head, :collection => Ledger.pluck(:name), :label => false,  :include_blank =>false,  :input_html => {:class => 'mousetrap extralargeField', :onchange => "changeLineItemCode(this.id)"} %></div></td>
+  			<% parmTrans = if @trans != nil then @trans else params[:trans] end %>  			
+  			<% main_dr_cr = @hashCustDrCr[@custName] %>
+  			<% @dr_cr_comp_Journal = if @trans_rec_pay_journal.dr_cr != nil then if @trans_rec_pay_journal.dr_cr == "Cr" then "Dr" else "Cr" end else if params[:trans] == "pay" then  "Dr" else  "Cr" end end   %>
+
+  			<td><div style = "float:center"><%= f.input :amount, :label => false,  :input_html => {:value => 0.0, :class => 'mediumField lineTotal', :onblur => "refreshColTotal('" + parmTrans + "','" + main_dr_cr +"')"} %></div></td>
+  			
+  			<td><div style = "float:center"><%= f.input :dr_cr,:collection => ["Dr", "Cr"], :selected => @dr_cr_comp_Journal , :label => false,  :include_blank =>false,  :input_html => {:class => 'mousetrap', :onchange => "changeLineItemName(this.id)"} %></div></td>
+  				
+  			<td>
+  					<div style = "display:none"><%= f.input :master_leg, :label => false,  :input_html => {:value => @dr_cr_comp_Journal} %></div>
+  			
+  					<div style = "display:none"><%= f.input :trans_type, :label => false,  :input_html => {:value => @custName} %></div>
+  			
+  					<div style = "display:none"><%= f.input :journal_date, :label => false,  :input_html => {:value => Date.today} %></div>
+  					
+  					<div style = "display:none"><%= f.input :other_account_head, :label => false,  :input_html => {:value => @custName} %></div>
+  					
+  					<div style = "display:none"><%= f.input :line_item_ref, :label => false,  :input_html => {:value => ""} %></div>
+  					
+  			</td>
+  			
+  		
+  			<td><div style = "float:center"><%= f.hidden_field :_destroy %><%= link_to_function "remove", "remove_fields(this,'" + parmTrans + "','" + main_dr_cr + "' )" %></div></td>
+  			</tr>
+  		
+		
+	

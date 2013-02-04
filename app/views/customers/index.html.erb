@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>index.html</title>
+	  <%= yield :head %>
+  </head>
+  
+  
+  <body class = "Bbody">
+  	<%= render :file =>'formHeader001.html.erb' %>
+ 
+  	<%= yield %>
+  
+  
+  	  
+  	<div style="display:none"><%= link_to_function "click Next", 'clickNextPrev("tabcustomers_next")', data: { keybinding: 'right' } %></div>
+  	<div style="display:none"><%= link_to_function "click Previous", 'clickNextPrev("tabcustomers_previous")', data: { keybinding: 'left' } %></div> 
+  	
+  	<%= render :file =>'IndexPageKBShortCuts.html.erb' %>
+
+  <div id="aaa"> </div>
+  	<br>
+  	<h1 align="center" "> Customers </h1>
+  	  <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   			
+   		
+   				    <%= render :file =>'createMenu.html.erb' %>    	   				   
+   			
+  	
+  		<%= render :file =>'MHSTableStart.html' %>
+  				
+  				<table id = "tabcustomers" style="clear: both; margin-left: 10px; width : 100%">
+  					<thead>	    	
+  						<tr>
+  							<th> Ledger Name </th>
+  							<th> Current Balance </th>
+  							<th> Dr/Cr </th>
+  							<th> Active?</th>  						
+  							<th></th>
+  							<th></th>
+  						</tr>
+  					</thead> 
+  					<tbody>
+  						<% @customers.each do |custT| %>
+  							<tr>
+  								<td><%= link_to custT.name, custT, :class=>"docLinksClass"    %>  </td>
+  								<td><%= custT.current_balance  %>  </td>
+  								<td><%= custT.dr_cr  %>  </td>
+  								<td><%= if custT.is_active =="1" then "Yes" else "No" end %> </td>
+        						<td><%= link_to 'Edit', edit_customer_path(custT) %></td>
+    							<td><%= link_to 'Delete', custT,  confirm: 'Are you sure you want to delete this record?', :method => :delete %></td>
+  					 			
+  							</tr>
+  						<% end %>  
+  					</tbody>	
+  				</table>
+  			</td>
+  			 <%= render :file =>'createRHSButtons.html.erb' %>  
+  		</Tr>
+  	</table>
+  
+  </body>
+</html>
+

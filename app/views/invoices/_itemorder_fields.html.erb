@@ -1,0 +1,28 @@
+
+	
+			<tr  class = "fields">
+			<td width="1px"></td>
+  			<td><div style = "float:center"><%= f.input :item_code, :collection => Item.pluck(:code), :label => false, :input_html => {:class => 'mousetrap', :onchange => "changeLineItemCode(this.id)"} %></div></td>
+  			<td><div style = "float:center"><%= f.input :item_name,:collection => Item.pluck(:name), :label => false,  :input_html => {:class => 'mousetrap', :onchange => "changeLineItemName(this.id)"} %></div></td>
+  			<td><div style = "float:center"><%= f.input :quantity, :label => false,  :input_html => {:value => 1, :class => 'verysmallField', :onchange => "changeLineItemQuantity(this.id)"} %></div></td>
+  			<td><div style = "float:center"><%= f.input :base_unit, :label => false, :readonly => true,  :input_html => {:class => 'verysmallField'} %></div></td>
+  			<td><div style = "float:center"><%= f.input :sales_rate_per_unit, :label => false,  :input_html => {:value => 0.00, :class => 'smallField mousetrap', :onchange => "changeLineItemRate(this.id)"} %></div></td>
+  			<td><div style = "float:center"><%= f.input :discount_percentage, :label => false,  :input_html => {:class => 'verysmallField mousetrap',  :onchange => "changeLineItemDiscount(this.id)"} %></div></td>
+  			<td><div style = "float:center"><%= f.input :vat_account, :label => false, :readonly => true,  :input_html => {:class => 'smallField mousetrap',  :onchange => "changeLineVAT(this.id)"} %></div></td>
+  			<td><div style = "float:center"><%= f.input :quantity_on_hand, :label => false, :readonly => true,  :input_html => {:class => 'smallField mousetrap',  :onchange => "changeLineItemDiscount(this.id)"} %></div></td>
+  			<td><div style = "float:center"><%= f.input :discount_amount, :label => false, :readonly => true,   :input_html => {:class => 'smallField mousetrap',  :onchange => "changeLineItemDiscount(this.id)"} %></div></td>
+  			<td><div style = "float:center"><%= f.input :tax_amount, :label => false, :readonly => true,   :input_html => {:class => 'smallField mousetrap',  :onchange => "changeLineItemDiscount(this.id)"} %></div></td>
+  			<td><div style = "float:center"><%= f.input :final_total, :label => false, :readonly => true, :input_html => {:class => 'smallField mousetrap lineTotal'} %></div></td>
+  			
+  			<td> <div style = "display:none"> <%= f.input :other_account_head, :input_html => {:value => if @invoice.account_head != nil then @invoice.account_head else params[:acchead] end  }%> </div></td>
+  			<td> <div style = "display:none"> <%= f.input :transaction_name, :input_html => {:value => @titleTrans }%> </div></td>
+  			
+  			
+  			
+  			<td><div style = "float:center"><%= f.hidden_field :_destroy %><%= link_to_function "remove", "remove_fields(this)" %></div></td>
+  			</tr>
+  		
+		
+	
+	
+

@@ -1,0 +1,34 @@
+
+			<tr  class = "fields">
+			<td width="5px"></td>
+			
+			
+			<% parmTrans = if @trans != nil then @trans else params[:trans] end %>  			
+  			<% main_dr_cr = @hashCustDrCr[@custName] %>
+  			
+  			<td><div style = "float:center"><%= f.input :dr_cr,:collection => ["Dr", "Cr"], :label => false,  :include_blank =>false,  :input_html => {:class => 'mousetrap', :onchange => "dr_cr_change(this.id, this.value)"} %></div></td>
+			
+  			<td  style = "float:center"><div><%= f.input :account_head, :collection => Ledger.pluck(:name), :label => false,  :include_blank =>false,  :input_html => {:class => 'mousetrap mediumField'} %></div></td>
+  			
+  			<td> <%= f.input :dr_amount,  :label => false, :input_html => { :onblur => "lineTotalCalc('_dr_amount',this.id)", :class => 'dr_amount_class' } %></td>
+  			
+  			<td> <%= f.input :cr_amount,  :label => false, :input_html => { :onblur => "lineTotalCalc('_cr_amount',this.id)", :style => "display:none" , :class => 'cr_amount_class' }%> </td> 
+  			  
+  			<td><div style = "float:center"><%= f.input :amount, :label => false,  :input_html => {:value => 0.0, :class => 'mediumField lineTotal', :onblur => "refreshColTotal()", :class => 'total_amount_class'} %></div></td>
+  			
+  			
+  				
+  			<td>
+  					<div style = "display:none"><%= f.input :master_leg, :label => false,  :input_html => {:value => 0.0} %></div>
+  			
+  					<div style = "display:none"><%= f.input :trans_type, :label => false,  :input_html => {:value => @custName} %></div>
+  			
+  					<div style = "display:none"><%= f.input :journal_date, :label => false,  :input_html => {:value => Date.today} %></div>
+  			</td>
+  			
+  		
+  			<td><div style = "float:center"><%= f.hidden_field :_destroy %><%= link_to_function "remove", "remove_fields_gen_journal(this)" %></div></td>
+  			</tr>
+  		
+		
+	

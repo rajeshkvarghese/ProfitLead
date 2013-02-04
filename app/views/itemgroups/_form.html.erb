@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>show.html</title>
+	  <%= yield :head %>
+  </head>
+  
+  <body class = "Bbody">
+	<%= render :file =>'formHeader001.html.erb' %> 
+
+  	<%= yield %>
+  
+    
+  	<div style="display:none"><%= link_to_function "click Next", 'history.go(1)', data: { keybinding: 'alt+pagedown' } %></div>
+  	<div style="display:none"><%= link_to_function "click Previous", 'history.go(-1)', data: { keybinding: 'alt+pageup' } %></div> 
+    <div style="display:none"><%= link_to_function "SaveItem Group", 'saveItemgroup()', data: { keybinding: 'alt+s' } %></div>
+
+  	<h2 align="center" ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class = 'Blabel'>Item Group:</font> <font color='blue'><%=  if @itemgroup.name != nil then @itemgroup.name else "<New Item Group>" end %></font></h2>
+    <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   				  
+   				     <%= render :file =>'createMenu.html.erb' %>   
+   		
+  	
+  			<%= render :file =>'MHSTableStart.html' %>
+  			<%= simple_form_for @itemgroup do |f| %>
+  				
+		  	 <font color = 'red'> <%= f.error_notification  %></font>
+		  	 <div class = "BeonaForm">  		
+  			<Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >  				  				
+  				<tr>						  								 									
+  			     <Td>  										
+  					<div style="float: left; width: auto;"><%= f.button :submit, "      Save      ", :id => "saveItemgroup"  %> </div> 				       									
+    			</td>  
+    		   </tr>
+    		   <tr>
+				<td>
+					  <Table width:100% valign="top" class="BTable" bgcolor="#FFFFFF"  >   												
+  							<Tr>
+  								<td colspan = "1"><div class = 'Blabel'>Name</div></td><td><div class = 'Bfield'><%= f.input :name, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td colspan = "1"><div class = 'Blabel'>Group Code</div></td><td><div class = 'Bfield'><%= f.input :code, :label => false, :input_html => {:size => 30}   %></div></td>
+  								
+  							</Tr>
+  							<Tr>
+  								<td colspan = "1"><div class = 'Blabel'>Main Group</div></td><td><div class = 'Bfield'><%= f.input :main_group, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td  colspan = "1"><div class = 'Blabel'>Print Name</div></td><td><div class = 'Bfield'><%= f.input :print_name, :label => false, :input_html => {:size => 30}   %></div></td>
+  							</Tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Tax</div></td><td><div class = 'Bfield'><%= f.input :tax, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Update Tax Child Items</div></td><td><div class = 'Bfield'><%= f.input :update_tax_child,  :as => :boolean, :label => false %></div></td>  								
+  							</Tr>  							
+  							<Tr>
+  								<td><div class = 'Blabel'>Discount %</div></td><td><div class = 'Bfield'><%= f.input :discount_per, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div class = 'Blabel'>Update Discount Child Items</div></td><td><div class = 'Bfield'><%= f.input :update_disc_child,  :as => :boolean, :label => false %></div></td>  								  								
+  							</Tr
+  							<tr>
+  								<td><div class = 'Blabel'>Category</div></td><td><div class = 'Bfield'><%= f.input :category, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td colspan = "1"><div class = 'Blabel'>Print Only Group Summary in Entry</div></td><td><div class = 'Bfield'><%= f.input :print_only_sum,  :as => :boolean, :label => false %></div></td>
+  							</tr>
+  							<Tr>
+  								<td><div class = 'Blabel'>Description</div></td><td><div class = 'Bfield'><%= f.input :description, :label => false, :input_html => {:size => 30}   %></div></td>
+  								<td><div style="float: left; width: auto;"><%= f.button :submit, "      Accounting Details      ", :id => "saveItemgroup"  %></div> </td>  								
+  							</Tr>  							
+  							 							
+  							
+  						</table>  				
+				</td>
+			  </tr>
+			  
+			 
+			  
+			  <tr>		
+  			<Td>
+  				<div style="float: left; width: auto;"><%= f.button :submit, "      Save      ", :id => "saveItemgroup"  %></div>  				
+    		</td>    								
+    	</tr>
+	  </Table>
+  	  <br />
+  	  	<% end %>  
+  	  </td>
+  	   <%= render :file =>'createRHSButtons.html.erb' %>    
+  	  </tr>
+  	</table>
+  </body>
+  
+  
+</html>

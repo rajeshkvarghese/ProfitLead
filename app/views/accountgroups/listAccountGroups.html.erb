@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>index.html</title>
+	  
+	  <%= yield :head %>
+  </head>
+  
+  
+  <body class = "Bbody">
+  	<%= render :file =>'formHeader001.html.erb' %>
+ 
+  	<%= yield %>
+  
+  
+  	  
+  	<div style="display:none"><%= link_to_function "click Next", 'clickNextPrev("tabcustomers_next")', data: { keybinding: 'right' } %></div>
+  	<div style="display:none"><%= link_to_function "click Previous", 'clickNextPrev("tabcustomers_previous")', data: { keybinding: 'left' } %></div> 
+  	
+  	<%= render :file =>'IndexPageKBShortCuts.html.erb' %>
+
+  <div id="aaa"> </div>
+  	
+  	<h1 align="center" "> Account Groups </h1>
+  	  <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   			
+   			
+   			<%= render :file =>'createMenu.html.erb' %>    	   				   
+   	
+  	  
+			<%= render :file =>'MHSTableStart.html' %>
+
+					
+					<table  border = "0px">
+						
+						<tr>
+							<td  width="35%">	
+												<iframe  id = 'accGrpNavTree' src = <%= accountgroups_path %> width = '95%' height='550px' marginheight='0px' bgcolor = blue></iframe>
+							</td>						
+							<td  colspan = "2" width="70%">
+												<iframe class = 'BTable' name = 'accGrpContent' id = 'accGrpContent'  src= ''  width = '100%' height='555px' marginheight='0px'   ></iframe>
+							</td>
+							<td >
+												
+							</td>
+							
+					</tr>
+					</table>
+				
+			</td>
+			
+  			 <%= render :file =>'createRHSButtons.html.erb' %>  
+  		</Tr>
+  	</table>
+  
+  </body>
+</html>	

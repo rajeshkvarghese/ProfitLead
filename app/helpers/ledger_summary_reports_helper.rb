@@ -1,0 +1,2 @@
+module LedgerSummaryReportsHelper
+end
