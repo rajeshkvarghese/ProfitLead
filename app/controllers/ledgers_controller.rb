@@ -23,7 +23,7 @@ add_breadcrumb "index", ledgers_path
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @ledgers }
+      format.json { render :json => @ledgers }
     end
   end
 
@@ -37,7 +37,7 @@ add_breadcrumb "index", ledgers_path
     
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @ledger }
+      format.json { :json => @ledgers  }
     end
   end
 
@@ -48,7 +48,7 @@ add_breadcrumb "index", ledgers_path
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @ledger }
+      format.json { :json => @ledgers  }
     end
   end
 
