@@ -58,32 +58,32 @@ function showRHS(){
  	
  	<br/> 	
  	<div style="background-color:#8099CC; z-index: 1; ">
- 	<center><%= link_to 'Bank Receipt', new_trans_rec_pay_journal_path + "?trans=rec&acchead=Bank Current Account"  ,:method => :get, :class => "Bbutton",:style => "padding:0px 22px;", data: { keybinding: 'alt+shift+g' } %></center>
+ 	<center><%= link_to 'Bank Receipt', new_trans_rec_pay_journal_path + "?trans=rec&acchead=Bank Current Account"  ,:method => :get, :class => "Bbutton",:style => "padding:0px 25px;", data: { keybinding: 'alt+shift+g' } %></center>
  	</br> 	
  	
- 	<center><%= link_to 'Cash Receipt', new_trans_rec_pay_journal_path + "?trans=rec&acchead=Cash in Hand"  ,:method => :get, :class => "Bbutton",:style => "padding:0px 19px;", data: { keybinding: 'alt+shift+g' } %></center>
+ 	<center><%= link_to 'Cash Receipt', new_trans_rec_pay_journal_path + "?trans=rec&acchead=Cash in Hand"  ,:method => :get, :class => "Bbutton",:style => "padding:0px 25px;", data: { keybinding: 'alt+shift+g' } %></center>
  	</br> 	
  	
- 	<center><%= link_to 'Bank Payment', new_trans_rec_pay_journal_path + "?trans=pay&acchead=Bank Current Account"  ,:method => :get, :class => "Bbutton", :style => "padding:0px 15px;",data: { keybinding: 'alt+shift+g' } %></center>
+ 	<center><%= link_to 'Bank Payment', new_trans_rec_pay_journal_path + "?trans=pay&acchead=Bank Current Account"  ,:method => :get, :class => "Bbutton", :style => "padding:0px 21px;",data: { keybinding: 'alt+shift+g' } %></center>
  	</br>
- 	 	
- 	<center><%= link_to 'Cash Payment', new_trans_rec_pay_journal_path + "?trans=pay&acchead=Cash in Hand"  ,:method => :get, :class => "Bbutton",:style => "padding:0px 15px;", data: { keybinding: 'alt+shift+g' } %></center>
+ 	 	 
+ 	<center><%= link_to 'Cash Payment', new_trans_rec_pay_journal_path + "?trans=pay&acchead=Cash in Hand"  ,:method => :get, :class => "Bbutton",:style => "padding:0px 21px;", data: { keybinding: 'alt+shift+g' } %></center>
  	</br> 	
  	
- 	<center><%= link_to 'General Journal', new_generaljournal_path ,:method => :get, :class => "Bbutton",:style => "padding:0px 15px;", data: { keybinding: 'alt+shift+g' } %></center>
+ 	<center><%= link_to 'General Journal', new_generaljournal_path ,:method => :get, :class => "Bbutton",:style => "padding:0px 17px;", data: { keybinding: 'alt+shift+g' } %></center>
  	</div> 	
  	<hr/>  	
  	<br/>
-	<center><%= link_to 'Sales', new_invoice_path+ "?trans=sales&acchead=Sales Account&otheracchead=Cash in Hand" , :method => :get, :class => "Bbutton",:style => "padding:0px 38px;", data: { keybinding: 'alt+i' } %></center>
+	<center><%= link_to 'Sales', new_invoice_path+ "?trans=sales&acchead=Sales Account&otheracchead=Cash in Hand" , :method => :get, :class => "Bbutton",:style => "padding:0px 44px;", data: { keybinding: 'alt+i' } %></center>
 	
 	<br/>
-	<center><%= link_to 'Purchase', new_invoice_path+ "?trans=purchase&acchead=Cash in Hand&otheracchead=Purchase Account" , :method => :get, :class => "Bbutton",:style => "padding:0px 38px;", data: { keybinding: 'alt+i' } %></center>
+	<center><%= link_to 'Purchase', new_invoice_path+ "?trans=purchase&acchead=Cash in Hand&otheracchead=Purchase Account" , :method => :get, :class => "Bbutton",:style => "padding:0px 34px;", data: { keybinding: 'alt+i' } %></center>
 	
 	<br/>
-	<center><%= link_to 'Sales Returns', new_invoice_path+ "?trans=salesret&acchead=Cash in Hand&otheracchead=Sales Return Account" , :method => :get, :class => "Bbutton",:style => "padding:0px 10px;", data: { keybinding: 'alt+i' } %></center>
+	<center><%= link_to 'Sales Returns', new_invoice_path+ "?trans=salesret&acchead=Cash in Hand&otheracchead=Sales Return Account" , :method => :get, :class => "Bbutton",:style => "padding:0px 20px;", data: { keybinding: 'alt+i' } %></center>
 	
 	<br/>
-	<center><%= link_to 'Purchase Returns', new_invoice_path+ "?trans=purchaseret&acchead=Purchase Return Account&otheracchead=Cash in Hand" , :method => :get, :class => "Bbutton",:style => "padding:0px 10px;", data: { keybinding: 'alt+i' } %></center>
+	<center><%= link_to 'Purchase Returns', new_invoice_path+ "?trans=purchaseret&acchead=Purchase Return Account&otheracchead=Cash in Hand" , :method => :get, :class => "Bbutton",:style => "padding:0px 9px;", data: { keybinding: 'alt+i' } %></center>
 	
 	<hr/>
 	<br/> 	
@@ -95,14 +95,15 @@ function showRHS(){
 	<center><%= link_to 'Item Group', new_itemgroup_path,:method => :get, :class => "Bbutton",:style => "padding:0px 27px;", data: { keybinding: 'alt+i' } %></center>
 	</div>
 	<div style="float:right"><font size = '1'><a href = '#' onclick = 'hideRHS()' style = "text-decoration: none"> &gt; &gt;</a></font></div>  	
+	<br/>
 	<hr/>	
 	
 	<div style="background-color:#8099CC; z-index: 1; ">
-	<center><%= link_to 'Ledger', new_ledger_path ,:method => :get, :class => "Bbutton",:style => "padding:0px 30px;", data: { keybinding: 'alt+c' } %></center>
+	<center><%= link_to 'Ledger', new_ledger_path ,:method => :get, :class => "Bbutton",:style => "padding:0px 38px;", data: { keybinding: 'alt+c' } %></center>
 	</br> 	 	
 	<center><%= link_to 'Customer', new_ledger_path+"?parGroupId=Customers/Debtors" ,:method => :get, :class => "Bbutton",:style => "padding:0px 30px;", data: { keybinding: 'alt+c' } %></center>
 	</br> 
-	<center><%= link_to 'Supplier', new_ledger_path+"?parGroupId=Suppliers/Creditors" ,:method => :get, :class => "Bbutton",:style => "padding:0px 30px;", data: { keybinding: 'alt+c' } %></center>
+	<center><%= link_to 'Supplier', new_ledger_path+"?parGroupId=Suppliers/Creditors" ,:method => :get, :class => "Bbutton",:style => "padding:0px 32px;", data: { keybinding: 'alt+c' } %></center>
 	</div>
 
 	

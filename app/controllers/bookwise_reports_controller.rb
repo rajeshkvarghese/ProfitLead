@@ -28,7 +28,14 @@ class BookwiseReportsController < ApplicationController
           @columnsDisp = 'name,current_balance,current_balance'.split(",")
           @DebitCol = 1
           @CreditCol = 2
-          @rowItems = Ledger.select('name,current_balance, dr_cr').where("name='Bank Current Account' OR name = 'Bank Overdraft'");
+          @bankLedg = Ledger.find_all_by_group('Bank')
+          @strLed =""
+          @bankLedg.each do |ldg|
+            
+              @strLed = @strLed + " name = '" + ldg.name + "' OR "   
+            
+          end
+          @rowItems = Ledger.select('name,current_balance, dr_cr').where(@strLed+" name = 'Bank Overdraft' ");
       else
          if @repType == "cashbook" then
             @columnsTitleDisp = "Account Name,Debit,Credit".split(",")

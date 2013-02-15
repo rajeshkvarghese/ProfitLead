@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  item_code: MyString
+  year: MyString
+  month: MyString
+  opening_balances: MyText
+  closing_balances: MyText
+  month_opening_balance: MyString
+  month_closing_balance: MyString
+
+two:
+  item_code: MyString
+  year: MyString
+  month: MyString
+  opening_balances: MyText
+  closing_balances: MyText
+  month_opening_balance: MyString
+  month_closing_balance: MyString

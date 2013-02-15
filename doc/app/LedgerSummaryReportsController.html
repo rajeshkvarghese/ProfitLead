@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class LedgerSummaryReportsController - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/controllers/ledger_summary_reports_controller.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-getSum">#getSum</a>
+    
+    <li><a href="#method-i-get_day_balance">#get_day_balance</a>
+    
+    <li><a href="#method-i-get_ledger_ClOp_Balances">#get_ledger_ClOp_Balances</a>
+    
+    <li><a href="#method-i-get_month_balance">#get_month_balance</a>
+    
+    <li><a href="#method-i-index">#index</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Accountgroup.html">Accountgroup</a>
+  
+    <li><a href="./AccountgroupsController.html">AccountgroupsController</a>
+  
+    <li><a href="./AccountgroupsHelper.html">AccountgroupsHelper</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./BookwiseReportsController.html">BookwiseReportsController</a>
+  
+    <li><a href="./BookwiseReportsHelper.html">BookwiseReportsHelper</a>
+  
+    <li><a href="./Customer.html">Customer</a>
+  
+    <li><a href="./CustomersController.html">CustomersController</a>
+  
+    <li><a href="./CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="./DataConfig.html">DataConfig</a>
+  
+    <li><a href="./DataConfigsController.html">DataConfigsController</a>
+  
+    <li><a href="./DataConfigsHelper.html">DataConfigsHelper</a>
+  
+    <li><a href="./DynamicModel.html">DynamicModel</a>
+  
+    <li><a href="./EmailValidator.html">EmailValidator</a>
+  
+    <li><a href="./FilteredReportsController.html">FilteredReportsController</a>
+  
+    <li><a href="./FilteredReportsHelper.html">FilteredReportsHelper</a>
+  
+    <li><a href="./Generaljournal.html">Generaljournal</a>
+  
+    <li><a href="./GeneraljournalsController.html">GeneraljournalsController</a>
+  
+    <li><a href="./GeneraljournalsHelper.html">GeneraljournalsHelper</a>
+  
+    <li><a href="./Invoice.html">Invoice</a>
+  
+    <li><a href="./InvoicesController.html">InvoicesController</a>
+  
+    <li><a href="./InvoicesHelper.html">InvoicesHelper</a>
+  
+    <li><a href="./InvoicessHelper.html">InvoicessHelper</a>
+  
+    <li><a href="./Item.html">Item</a>
+  
+    <li><a href="./Itemgroup.html">Itemgroup</a>
+  
+    <li><a href="./ItemgroupsController.html">ItemgroupsController</a>
+  
+    <li><a href="./ItemgroupsHelper.html">ItemgroupsHelper</a>
+  
+    <li><a href="./Itemorder.html">Itemorder</a>
+  
+    <li><a href="./ItemordersController.html">ItemordersController</a>
+  
+    <li><a href="./ItemordersHelper.html">ItemordersHelper</a>
+  
+    <li><a href="./ItemsController.html">ItemsController</a>
+  
+    <li><a href="./ItemsHelper.html">ItemsHelper</a>
+  
+    <li><a href="./JavascriptsController.html">JavascriptsController</a>
+  
+    <li><a href="./JournalEntriesController.html">JournalEntriesController</a>
+  
+    <li><a href="./JournalEntriesHelper.html">JournalEntriesHelper</a>
+  
+    <li><a href="./JournalEntry.html">JournalEntry</a>
+  
+    <li><a href="./Ledger.html">Ledger</a>
+  
+    <li><a href="./LedgerClOpBalances.html">LedgerClOpBalances</a>
+  
+    <li><a href="./LedgerSummaryReportsController.html">LedgerSummaryReportsController</a>
+  
+    <li><a href="./LedgerSummaryReportsHelper.html">LedgerSummaryReportsHelper</a>
+  
+    <li><a href="./LedgersController.html">LedgersController</a>
+  
+    <li><a href="./LedgersHelper.html">LedgersHelper</a>
+  
+    <li><a href="./MyValidator.html">MyValidator</a>
+  
+    <li><a href="./ReportBalancesheetController.html">ReportBalancesheetController</a>
+  
+    <li><a href="./ReportBalancesheetsController.html">ReportBalancesheetsController</a>
+  
+    <li><a href="./ReportBalancesheetsHelper.html">ReportBalancesheetsHelper</a>
+  
+    <li><a href="./TransRecPayJournal.html">TransRecPayJournal</a>
+  
+    <li><a href="./TransRecPayJournalsController.html">TransRecPayJournalsController</a>
+  
+    <li><a href="./TransRecPayJournalsHelper.html">TransRecPayJournalsHelper</a>
+  
+    <li><a href="./User.html">User</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class LedgerSummaryReportsController</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-getSum" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">getSum</span><span
+            class="method-args">(retValP, tmpItP)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="getSum-source">
+            <pre><span class="ruby-comment"># File app/controllers/ledger_summary_reports_controller.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getSum</span>(<span class="ruby-identifier">retValP</span>, <span class="ruby-identifier">tmpItP</span>)
+  <span class="ruby-identifier">retVal</span> = <span class="ruby-identifier">retValP</span>.<span class="ruby-identifier">to_f</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">tmpItP</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">tmpItP</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">retVal</span> = <span class="ruby-identifier">retVal</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tmpItP</span>.<span class="ruby-identifier">to_f</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- getSum-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- getSum-method -->
+
+    
+      <div id="method-i-get_day_balance" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_day_balance</span><span
+            class="method-args">(strBalText, strDateNumberOnly)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_day_balance-source">
+            <pre><span class="ruby-comment"># File app/controllers/ledger_summary_reports_controller.rb, line 127</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_day_balance</span>(<span class="ruby-identifier">strBalText</span>, <span class="ruby-identifier">strDateNumberOnly</span>) <span class="ruby-comment"># returns balance @ Dr/Cr #strDateNumberOnly = &quot;1&quot; etc</span>
+ <span class="ruby-identifier">retValT</span> = <span class="ruby-keyword">nil</span>
+ <span class="ruby-identifier">tmpArr</span> = <span class="ruby-identifier">strBalText</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;=&quot;</span>)
+ <span class="ruby-identifier">tmpArrInd</span> = <span class="ruby-identifier">tmpArr</span>.<span class="ruby-identifier">index</span>(<span class="ruby-node">&quot;#&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strDateNumberOnly</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#&quot;</span>)
+ <span class="ruby-keyword">if</span> <span class="ruby-identifier">tmpArrInd</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">then</span>
+   <span class="ruby-identifier">retValT</span> = <span class="ruby-identifier">tmpArr</span>[<span class="ruby-identifier">tmpArrInd</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>]
+ <span class="ruby-keyword">end</span> 
+ <span class="ruby-identifier">retValT</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_day_balance-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_day_balance-method -->
+
+    
+      <div id="method-i-get_ledger_ClOp_Balances" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_ledger_ClOp_Balances</span><span
+            class="method-args">(ledger_nameP, yearP, monthP, dayP, balance_type )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_ledger_ClOp_Balances-source">
+            <pre><span class="ruby-comment"># File app/controllers/ledger_summary_reports_controller.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_ledger_ClOp_Balances</span>(<span class="ruby-identifier">ledger_nameP</span>, <span class="ruby-identifier">yearP</span>, <span class="ruby-identifier">monthP</span>, <span class="ruby-identifier">dayP</span>, <span class="ruby-identifier">balance_type</span> ) <span class="ruby-comment">#balance_type = CL or OP</span>
+  <span class="ruby-identifier">retVal</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">filterConds</span> = <span class="ruby-string">&quot;ledger_name = '&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">ledger_nameP</span> <span class="ruby-operator">+</span><span class="ruby-string">&quot;'&quot;</span>
+ <span class="ruby-keyword">if</span> <span class="ruby-identifier">balance_type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;CL&quot;</span> <span class="ruby-keyword">then</span>  <span class="ruby-identifier">colName</span> =  <span class="ruby-string">&quot;closing_balances&quot;</span> <span class="ruby-keyword">else</span>  <span class="ruby-identifier">colName</span> =  <span class="ruby-string">&quot;opening_balances&quot;</span> <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">yearP</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">filterConds</span> = <span class="ruby-identifier">filterConds</span> <span class="ruby-operator">+</span><span class="ruby-string">&quot; AND year = '&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">yearP</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;'&quot;</span>
+  <span class="ruby-keyword">end</span>
+   <span class="ruby-keyword">if</span> <span class="ruby-identifier">monthP</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">filterConds</span> = <span class="ruby-identifier">filterConds</span> <span class="ruby-operator">+</span><span class="ruby-string">&quot; AND month = '&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">monthP</span> <span class="ruby-operator">+</span><span class="ruby-string">&quot;'&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">rowItemsArr</span> = <span class="ruby-constant">LedgerClOpBalances</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-string">&quot;select * from &quot;</span><span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">LedgerClOpBalances</span>.<span class="ruby-identifier">table_name</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot; where &quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">filterConds</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;;&quot;</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">rowItemsArr</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+    
+   <span class="ruby-keyword">else</span>
+     <span class="ruby-identifier">firstRowItem</span> = <span class="ruby-constant">LedgerClOpBalances</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">rowItemsArr</span>.<span class="ruby-identifier">first</span>[<span class="ruby-string">&quot;id&quot;</span>])
+     <span class="ruby-keyword">if</span> <span class="ruby-identifier">dayP</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-identifier">retVal</span> = <span class="ruby-identifier">get_month_balance</span>( <span class="ruby-identifier">firstRowItem</span>[<span class="ruby-identifier">colName</span>], <span class="ruby-identifier">dayP</span>)
+     <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">retVal</span> = <span class="ruby-identifier">get_day_balance</span>( <span class="ruby-identifier">firstRowItem</span>[<span class="ruby-identifier">colName</span>], <span class="ruby-identifier">dayP</span>)
+     <span class="ruby-keyword">end</span>    
+       
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">retVal</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">retVal</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">retVal</span> = <span class="ruby-constant">Ledger</span>.<span class="ruby-identifier">find_by_name</span>(<span class="ruby-identifier">ledger_nameP</span>).<span class="ruby-identifier">current_balance</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;@&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Ledger</span>.<span class="ruby-identifier">find_by_name</span>(<span class="ruby-identifier">ledger_nameP</span>).<span class="ruby-identifier">dr_cr</span>
+  <span class="ruby-keyword">end</span>
+   
+   <span class="ruby-identifier">retVal</span>
+   
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_ledger_ClOp_Balances-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_ledger_ClOp_Balances-method -->
+
+    
+      <div id="method-i-get_month_balance" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_month_balance</span><span
+            class="method-args">(strBalText, strDateNumberOnly)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_month_balance-source">
+            <pre><span class="ruby-comment"># File app/controllers/ledger_summary_reports_controller.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_month_balance</span>(<span class="ruby-identifier">strBalText</span>, <span class="ruby-identifier">strDateNumberOnly</span>) <span class="ruby-comment"># returns balance @ Dr/Cr #strDateNumberOnly = &quot;1&quot; etc</span>
+ <span class="ruby-identifier">retValT</span> = <span class="ruby-value">0.00</span>
+ <span class="ruby-identifier">tmpArr</span> = <span class="ruby-identifier">strBalText</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;=&quot;</span>)
+ <span class="ruby-identifier">intCntr</span> = <span class="ruby-value">0</span>
+ <span class="ruby-keyword">if</span> <span class="ruby-identifier">tmpArrInd</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">then</span>
+   <span class="ruby-identifier">tmpArr</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tmpIt</span><span class="ruby-operator">|</span>
+     <span class="ruby-identifier">intCntr</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+     <span class="ruby-keyword">if</span> <span class="ruby-identifier">intCntr</span> <span class="ruby-operator">%</span> <span class="ruby-value">2</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+       <span class="ruby-identifier">retValT</span> = <span class="ruby-identifier">getSum</span>(<span class="ruby-identifier">retValT</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">tmpIt</span>)
+     <span class="ruby-keyword">end</span>  
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span> 
+ <span class="ruby-identifier">retValT</span>.<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_month_balance-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_month_balance-method -->
+
+    
+      <div id="method-i-index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">index</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="index-source">
+            <pre><span class="ruby-comment"># File app/controllers/ledger_summary_reports_controller.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  
+  <span class="ruby-ivar">@ledger</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:ledger</span>]
+  <span class="ruby-ivar">@columnsWidth</span>= <span class="ruby-identifier">params</span>[<span class="ruby-value">:columnswidth</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;,&quot;</span>)
+  <span class="ruby-ivar">@datewise</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:datewise</span>]
+  
+  <span class="ruby-ivar">@repType</span> = <span class="ruby-string">&quot;bankbook&quot;</span>
+  
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@datewise</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;yearly&quot;</span> <span class="ruby-keyword">then</span>
+    
+ 
+    
+  <span class="ruby-keyword">else</span> 
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@datewise</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;monthly&quot;</span> <span class="ruby-keyword">then</span>
+      
+      <span class="ruby-comment">#  @getOpBalance =  get_ledger_ClOp_Balances(@ledger, Date.today.year.to_s, Date.today.month.to_s, Date.today.day.to_s, &quot;OP&quot; ) </span>
+  
+      <span class="ruby-comment">#  @getClBalance =  get_ledger_ClOp_Balances(@ledger, Date.today.year.to_s, Date.today.month.to_s, Date.today.day.to_s, &quot;CL&quot; ) </span>
+    
+        
+        <span class="ruby-ivar">@columnsTitleDisp</span> = <span class="ruby-string">&quot;Month,Debit,Credit,Balance&quot;</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;,&quot;</span>)
+        <span class="ruby-ivar">@columnsDisp</span> = <span class="ruby-string">'monthname,amount,amount,balance'</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;,&quot;</span>)
+        <span class="ruby-ivar">@DebitCol</span> = <span class="ruby-value">1</span>
+        <span class="ruby-ivar">@CreditCol</span> = <span class="ruby-value">2</span>
+        <span class="ruby-ivar">@rowItems</span> = <span class="ruby-constant">JournalEntry</span>.<span class="ruby-identifier">select</span>(<span class="ruby-string">&quot;YEAR(journal_date) AS yearJ, MONTH(journal_date) AS monthJ, MONTHNAME(journal_date) AS monthname, SUM(amount) as amount, dr_cr&quot;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;account_head = '&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@ledger</span> <span class="ruby-operator">+</span><span class="ruby-string">&quot;'&quot;</span>).<span class="ruby-identifier">group</span>(<span class="ruby-string">&quot;MONTH(journal_date)&quot;</span>);
+    
+        <span class="ruby-ivar">@rowItems</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rowIt</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-identifier">last_day_of_the_month</span> = (<span class="ruby-constant">Date</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">yearJ</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;-&quot;</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">monthJ</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;-01&quot;</span>) <span class="ruby-operator">-</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">mday</span>().<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">rescue</span> <span class="ruby-string">&quot;31&quot;</span>
+          
+          <span class="ruby-identifier">rowIt</span>[<span class="ruby-string">&quot;alink&quot;</span>] = <span class="ruby-identifier">ledger_summary_reports_path</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;?datewise=daily&amp;columnswidth=10,10,20,21,12,12&amp;ledger=Cash%20in%20Hand&amp;month=&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">monthJ</span>.<span class="ruby-identifier">to_s</span>
+          <span class="ruby-identifier">rowIt</span>[<span class="ruby-string">&quot;balance&quot;</span>] = <span class="ruby-identifier">get_ledger_ClOp_Balances</span>(<span class="ruby-ivar">@ledger</span>, <span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">yearJ</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">monthJ</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">last_day_of_the_month</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-string">&quot;CL&quot;</span> ).<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;@&quot;</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; &quot;</span>)
+        <span class="ruby-keyword">end</span>
+          
+    <span class="ruby-keyword">else</span> 
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@datewise</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;daily&quot;</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-ivar">@columnsTitleDisp</span> = <span class="ruby-string">&quot;Month,Debit,Credit,Balance&quot;</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;,&quot;</span>)
+        <span class="ruby-ivar">@columnsDisp</span> = <span class="ruby-string">'journal_date,amount,amount,balance'</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;,&quot;</span>)
+        <span class="ruby-ivar">@DebitCol</span> = <span class="ruby-value">1</span>
+        <span class="ruby-ivar">@CreditCol</span> = <span class="ruby-value">2</span>
+        
+        <span class="ruby-ivar">@rowItems</span> = <span class="ruby-constant">JournalEntry</span>.<span class="ruby-identifier">select</span>(<span class="ruby-string">&quot;YEAR(journal_date) AS yearJ, MONTH(journal_date) AS monthJ, journal_date, MONTHNAME(journal_date) AS monthname, SUM(amount) as amount, dr_cr&quot;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;account_head = '&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@ledger</span> <span class="ruby-operator">+</span><span class="ruby-string">&quot;' AND month(journal_date) = &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:month</span>]<span class="ruby-operator">+</span><span class="ruby-string">&quot;&quot;</span>).<span class="ruby-identifier">group</span>(<span class="ruby-string">&quot;DAY(journal_date)&quot;</span>);
+    
+        <span class="ruby-ivar">@rowItems</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rowIt</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-identifier">last_day_of_the_month</span> = (<span class="ruby-constant">Date</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">yearJ</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;-&quot;</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">monthJ</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;-01&quot;</span>) <span class="ruby-operator">-</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">mday</span>().<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">rescue</span> <span class="ruby-string">&quot;31&quot;</span>
+          
+          <span class="ruby-identifier">rowIt</span>[<span class="ruby-string">&quot;alink&quot;</span>] = <span class="ruby-identifier">ledger_summary_reports_path</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;?datewise=voucherwise&amp;columnswidth=10,10,20,21,12,12&amp;ledger=Cash%20in%20Hand&quot;</span>
+          <span class="ruby-identifier">rowIt</span>[<span class="ruby-string">&quot;balance&quot;</span>] = <span class="ruby-identifier">get_ledger_ClOp_Balances</span>(<span class="ruby-ivar">@ledger</span>, <span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">yearJ</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">monthJ</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">journal_date</span>.<span class="ruby-identifier">day</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-string">&quot;CL&quot;</span> ).<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;@&quot;</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; &quot;</span>)
+        <span class="ruby-keyword">end</span>
+        
+      <span class="ruby-keyword">else</span> 
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@datewise</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;voucherwise&quot;</span> <span class="ruby-keyword">then</span>
+          <span class="ruby-ivar">@columnsTitleDisp</span> = <span class="ruby-string">&quot;Month,Debit,Credit,Balance&quot;</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;,&quot;</span>)
+          <span class="ruby-ivar">@columnsDisp</span> = <span class="ruby-string">'journal_date,amount,amount,balance'</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;,&quot;</span>)
+          <span class="ruby-ivar">@DebitCol</span> = <span class="ruby-value">1</span>
+          <span class="ruby-ivar">@CreditCol</span> = <span class="ruby-value">2</span>
+        
+          <span class="ruby-ivar">@rowItems</span> = <span class="ruby-constant">JournalEntry</span>.<span class="ruby-identifier">select</span>(<span class="ruby-string">&quot;YEAR(journal_date) AS yearJ, MONTH(journal_date) AS monthJ, journal_date, MONTHNAME(journal_date) AS monthname, SUM(amount) as amount, dr_cr&quot;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;account_head = '&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@ledger</span> <span class="ruby-operator">+</span><span class="ruby-string">&quot;' AND month(journal_date) = &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:month</span>]<span class="ruby-operator">+</span><span class="ruby-string">&quot;&quot;</span>).<span class="ruby-identifier">group</span>(<span class="ruby-string">&quot;DAY(journal_date)&quot;</span>);
+    
+          <span class="ruby-ivar">@rowItems</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rowIt</span><span class="ruby-operator">|</span>
+          
+           <span class="ruby-identifier">last_day_of_the_month</span> = (<span class="ruby-constant">Date</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">yearJ</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;-&quot;</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">monthJ</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;-01&quot;</span>) <span class="ruby-operator">-</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">mday</span>().<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">rescue</span> <span class="ruby-string">&quot;31&quot;</span>
+          
+           <span class="ruby-identifier">rowIt</span>[<span class="ruby-string">&quot;alink&quot;</span>] = <span class="ruby-identifier">ledger_summary_reports_path</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;?datewise=voucherwise&amp;columnswidth=10,10,20,21,12,12&amp;ledger=Cash%20in%20Hand&quot;</span>
+           <span class="ruby-identifier">rowIt</span>[<span class="ruby-string">&quot;balance&quot;</span>] = <span class="ruby-identifier">get_ledger_ClOp_Balances</span>(<span class="ruby-ivar">@ledger</span>, <span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">yearJ</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">monthJ</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">rowIt</span>.<span class="ruby-identifier">journal_date</span>.<span class="ruby-identifier">day</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-string">&quot;CL&quot;</span> ).<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;@&quot;</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; &quot;</span>)
+          <span class="ruby-keyword">end</span>
+          
+          
+        <span class="ruby-keyword">else</span>
+          
+          
+        
+        <span class="ruby-keyword">end</span>  
+       
+      <span class="ruby-keyword">end</span>
+    
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  
+  
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- index-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- index-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

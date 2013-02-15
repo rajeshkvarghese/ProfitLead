@@ -81,7 +81,17 @@ end
 
 
 class Ledger < ActiveRecord::Base
-  attr_accessible :acct_no, :bank_branch, :bank_ifsc, :bank_name, :central_excise_no, :code, :comments, :credit_period, :cst_no, :currency, :current_balance, :dely_add_same_cont, :dely_addr_ship_to, :dely_city, :dely_contact_person, :dely_country, :dely_designation, :dely_district, :dely_email_id, :dely_fax, :dely_mobile_no, :dely_phone, :dely_pin_code, :dely_state, :dely_website, :discount_percentage, :dr_cr, :fleet_order, :grade, :group, :income_tax_no, :is_active, :license_no, :maximum_credit_limit, :maximum_debit_limit, :name, :name_to_print, :office_addr_bill_to, :office_city, :office_contact_person, :office_country, :office_designation, :office_district, :office_email_id, :office_fax, :office_mobile_no, :office_phone, :office_pin_code, :office_state, :office_website, :opening_balance, :rate, :salesman, :segment, :set_as_party, :short_name, :stop_if_amount_exceed, :stop_if_period_exceed, :tin_no, :use_voucher
+  attr_accessible :acct_no, :bank_branch, :bank_ifsc, :bank_name, :central_excise_no, :code, 
+  :comments, :credit_period, :cst_no, :currency, :current_balance, :dely_add_same_cont, 
+  :dely_addr_ship_to, :dely_city, :dely_contact_person, :dely_country, :dely_designation, 
+  :dely_district, :dely_email_id, :dely_fax, :dely_mobile_no, :dely_phone, :dely_pin_code, 
+  :dely_state, :dely_website, :discount_percentage, :dr_cr, :fleet_order, :grade, :group, 
+  :income_tax_no, :is_active, :license_no, :maximum_credit_limit, :maximum_debit_limit, 
+  :name, :name_to_print, :office_addr_bill_to, :office_city, :office_contact_person, 
+  :office_country, :office_designation, :office_district, :office_email_id, :office_fax, 
+  :office_mobile_no, :office_phone, :office_pin_code, :office_state, :office_website, 
+  :opening_balance, :rate, :salesman, :segment, :set_as_party, :short_name, 
+  :stop_if_amount_exceed, :stop_if_period_exceed, :tin_no, :use_voucher, :dr_cr_opening
 
    validates :name, :presence => true
    
@@ -96,9 +106,10 @@ class Ledger < ActiveRecord::Base
   
   
   
-   before_save do |ledgerT|
+   before_create do |ledgerT|
      if ledgerT.current_balance <= 0 then
        ledgerT.current_balance = ledgerT.opening_balance
+       ledgerT.dr_cr = ledgerT.dr_cr_opening
      end
    end
   
@@ -157,6 +168,7 @@ class Ledger < ActiveRecord::Base
   def put_ledger_ClOp_Balances(ledger_nameP, yearP, monthP, dayP, balance_type, strNewVal ) #balance_type = CL or OP
     filterConds = "ledger_name = '"+ledger_nameP +"'"
    if balance_type == "CL" then  colName =  "closing_balances" else  colName =  "opening_balances" end
+   if balance_type == "CL" then  monthColName =  "month_closing_balance" else  monthColName =  "month_opening_balance" end
     if yearP != "" then
       filterConds = filterConds +" AND year = '" + yearP+"'"
     end
@@ -165,19 +177,26 @@ class Ledger < ActiveRecord::Base
     end
     rowItemsArr = LedgerClOpBalances.connection.execute("select * from "<< LedgerClOpBalances.table_name << " where " << filterConds << ";")
     if rowItemsArr.count == 0 then
-       rowItems = LedgerClOpBalances.create(:ledger_name => ledger_nameP, :year => yearP, :month => monthP, :closing_balances => "", :opening_balances => ""  )
+       rowItems = LedgerClOpBalances.create(:ledger_name => ledger_nameP, :year => yearP, :month => monthP, :closing_balances => "", :opening_balances => "", :month_closing_balance => "", :month_opening_balance => "")
        rowItems[colName] = put_day_balance( rowItems[colName], dayP, strNewVal)
+       put_month_balances( rowItems, strNewVal)
        rowItems.save  
      else
        firstRowItem = LedgerClOpBalances.find_by_id(rowItemsArr.first["id"])
        firstRowItem[colName] = put_day_balance( firstRowItem[colName], dayP, strNewVal)
+       put_month_balances( firstRowItem, strNewVal)
        firstRowItem.save
     end
-    
-     
   end
   
- 
+  
+  def put_month_balances(rowItemsP, strNewValP)
+    if rowItemsP["month_opening_balance"] == nil or rowItemsP["month_opening_balance"] == "" then
+         rowItemsP["month_opening_balance"] = strNewValP
+    end    
+    rowItemsP["month_closing_balance"] = strNewValP
+  end
+  
   
   def put_day_balance(strBalText, strDateNumberOnly, strNewVal) # returns balance @ Dr/Cr #strDateNumberOnly = "1" etc
      retVal = "#" + strDateNumberOnly + "#="+strNewVal

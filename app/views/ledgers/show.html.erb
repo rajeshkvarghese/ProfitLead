@@ -64,19 +64,20 @@
   							</Tr>
   							<Tr>
   								<td><div class = 'Blabel'>Opening Balance</div></td><td><div class = 'Bfield'><%= @ledger.opening_balance %></div></td>
-  								<td><div class = 'Blabel'>Dr/Cr</div>&nbsp;&nbsp;&nbsp;</td><td><div class = 'Bfield'><%= @ledger.dr_cr %></div></td>  								
+  								<td><div class = 'Blabel'>Opening Dr/Cr</div>&nbsp;&nbsp;&nbsp;</td><td><div class = 'Bfield'><%= @ledger.dr_cr_opening %></div></td>  								
   							</Tr>  							
   							<Tr>
   								<td><div class = 'Blabel'>Current Balance</div></td><td><div class = 'Bfield'><%= @ledger.current_balance %></div></td>
-  								<td><div class = 'Blabel'>Set as party</div></td><td><div class = 'Bfield'><%= if @ledger.set_as_party =="1" then "Yes" else "No" end %></div></td>  								  								
+  								<td><div class = 'Blabel'>Dr/Cr</div>&nbsp;&nbsp;&nbsp;</td><td><div class = 'Bfield'><%= @ledger.dr_cr %></div></td>								  								
   							</Tr
   							<Tr>
   								<td><div class = 'Blabel'>Name to print in cheque</div></td><td><div class = 'Bfield'><%= @ledger.name_to_print %></div></td>
-  								<td><div class = 'Blabel'>Comments</div></td><td><div class = 'Bfield'><%= @ledger.comments %></div></td>
+  								<td><div class = 'Blabel'>Set as party</div></td><td><div class = 'Bfield'><%= if @ledger.set_as_party =="1" then "Yes" else "No" end %></div></td>  
   							</Tr>
-  							 							
+  							<Tr>
+  								<td><div class = 'Blabel'>Comments</div></td><td colspan = "3"><div class = 'Bfield'><%= @ledger.comments %></div></td>
+  							</Tr>							
   							</table></td></tr>
-  							
   						</table>  				
   					</div>
   					

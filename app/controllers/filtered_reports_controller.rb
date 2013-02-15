@@ -43,7 +43,7 @@ class FilteredReportsController < ApplicationController
       @firstLink = @firstLink + "&columnsdisp="+params[:columnsdisp]+"&datewise=day"+"&addcolumns="+params[:addcolumns]
       @firstLink = @firstLink + "&datecolumn="+params[:datecolumn]+"&filterconds="+ @filteredCondT
      
-      logger.debug '>>>>>>>>>> @firstLink = '+ @firstLink 
+     # logger.debug '>>>>>>>>>> @firstLink = '+ @firstLink 
       
       @strAddCol = "SELECT MONTH("+ dateColumn + ") AS  dateColumnP , MONTHNAME(" + dateColumn +") AS "+ dateColumn
       @remainCols.delete_if {|item| item == dateColumn } 
@@ -61,29 +61,21 @@ class FilteredReportsController < ApplicationController
      # puts "Select SUM("+addColumns.split(",").join("), SUM(") +") from  "+modelName+" ;"
      
    else
-        if  dateWise == "day" then
-          
-          
+     if  dateWise == "day" then
           
       if   params[:filterconds] != "" then
           @filteredCondT = params[:filterconds]+" AND DAY("+params[:datecolumn] +")="
       else
           @filteredCondT = " DAY("+params[:datecolumn] +")="
       end
-        
+      
         
       @firstLink = filtered_reports_path + "?modelname="+params[:modelname]
       @firstLink = @firstLink + "&columnswidth="+ params[:columnswidth] +"&columnstitledisp="+params[:columnstitledisp]
       @firstLink = @firstLink + "&columnsdisp="+params[:columnsdisp]+"&datewise=intraday"+"&addcolumns="+params[:addcolumns]
       @firstLink = @firstLink + "&datecolumn="+params[:datecolumn]+"&filterconds="+ @filteredCondT
      
-      logger.debug '>>>>>>>>>> @firstLink = '+ @firstLink 
-      
-          
-          
-          
-          
-          
+      #logger.debug '>>>>>>>>>> @firstLink = '+ @firstLink 
            @strAddCol = "SELECT  DAY("+ dateColumn + ") AS  dateColumnP , DAY(" + dateColumn +") AS "+ dateColumn
            @remainCols.delete_if {|item| item == dateColumn } 
            addColumns.each do |a| 
@@ -100,8 +92,8 @@ class FilteredReportsController < ApplicationController
           # puts "Select SUM("+addColumns.split(",").join("), SUM(") +") from  "+modelName+" ;"
        
         else
-          if  dateWise == "intraday" then
-            
+          
+         if  dateWise == "intraday" then
             @firstLink = "entt"
             
           if params[:modelname] == "journal_entries" then  

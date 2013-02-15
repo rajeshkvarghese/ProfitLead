@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128050514) do
+ActiveRecord::Schema.define(:version => 20130206130800) do
 
   create_table "accountgroups", :force => true do |t|
     t.string   "group_name"
@@ -146,6 +146,18 @@ ActiveRecord::Schema.define(:version => 20130128050514) do
 
   add_index "invoices", ["id"], :name => "id_UNIQUE", :unique => true
 
+  create_table "item_cl_op_balances", :force => true do |t|
+    t.string   "item_code"
+    t.string   "year"
+    t.string   "month"
+    t.text     "opening_balances"
+    t.text     "closing_balances"
+    t.string   "month_opening_balance"
+    t.string   "month_closing_balance"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
   create_table "itemgroups", :force => true do |t|
     t.string   "name",                                                            :null => false
     t.string   "code",              :limit => 50,                                 :null => false
@@ -204,9 +216,9 @@ ActiveRecord::Schema.define(:version => 20130128050514) do
     t.string   "hsn_code",                :limit => 50
     t.decimal  "min_retail_price",                       :precision => 18, :scale => 2
     t.string   "ean_code",                :limit => 50
-    t.decimal  "purchase_rate",                          :precision => 18, :scale => 2
+    t.decimal  "purchase_rate",                          :precision => 18, :scale => 2, :default => 0.0
     t.string   "vat_account",             :limit => 50
-    t.decimal  "sales_rate",                             :precision => 18, :scale => 2
+    t.decimal  "sales_rate",                             :precision => 18, :scale => 2, :default => 0.0
     t.string   "costing",                 :limit => 50
     t.decimal  "other_rate",                             :precision => 18, :scale => 2
     t.integer  "pack_numbers"
@@ -240,7 +252,13 @@ ActiveRecord::Schema.define(:version => 20130128050514) do
     t.string   "generaljournal_id",        :limit => 45
     t.datetime "created_at",                                                            :null => false
     t.datetime "updated_at",                                                            :null => false
+    t.string   "invoice_id",               :limit => 45
+    t.string   "line_item_ref",            :limit => 45
   end
+
+  add_index "journal_entries", ["account_head", "amount", "dr_cr"], :name => "index2"
+  add_index "journal_entries", ["amount"], :name => "index3"
+  add_index "journal_entries", ["dr_cr"], :name => "index4"
 
   create_table "ledger_cl_op_balances", :force => true do |t|
     t.string   "ledger_name"
@@ -248,19 +266,21 @@ ActiveRecord::Schema.define(:version => 20130128050514) do
     t.string   "month"
     t.text     "opening_balances"
     t.text     "closing_balances"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.string   "month_opening_balance", :limit => 100
+    t.string   "month_closing_balance", :limit => 100
   end
 
   create_table "ledgers", :force => true do |t|
     t.string   "is_active",             :limit => 50
-    t.string   "name",                                                               :null => false
+    t.string   "name",                                                                :null => false
     t.string   "short_name"
     t.string   "code"
     t.string   "group"
-    t.decimal  "opening_balance",                     :precision => 18, :scale => 2
-    t.string   "dr_cr"
-    t.decimal  "current_balance",                     :precision => 18, :scale => 2
+    t.decimal  "opening_balance",                      :precision => 18, :scale => 2
+    t.string   "dr_cr",                 :limit => 100
+    t.decimal  "current_balance",                      :precision => 18, :scale => 2
     t.string   "set_as_party"
     t.string   "name_to_print"
     t.text     "comments"
@@ -290,10 +310,10 @@ ActiveRecord::Schema.define(:version => 20130128050514) do
     t.string   "salesman"
     t.string   "income_tax_no"
     t.string   "use_voucher"
-    t.decimal  "discount_percentage",                 :precision => 18, :scale => 2
+    t.decimal  "discount_percentage",                  :precision => 18, :scale => 2
     t.integer  "credit_period"
-    t.decimal  "maximum_credit_limit",                :precision => 18, :scale => 2
-    t.decimal  "maximum_debit_limit",                 :precision => 18, :scale => 2
+    t.decimal  "maximum_credit_limit",                 :precision => 18, :scale => 2
+    t.decimal  "maximum_debit_limit",                  :precision => 18, :scale => 2
     t.string   "stop_if_period_exceed"
     t.string   "stop_if_amount_exceed"
     t.string   "segment"
@@ -313,8 +333,9 @@ ActiveRecord::Schema.define(:version => 20130128050514) do
     t.string   "dely_mobile_no"
     t.string   "dely_email_id"
     t.string   "dely_add_same_cont"
-    t.datetime "created_at",                                                         :null => false
-    t.datetime "updated_at",                                                         :null => false
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
+    t.string   "dr_cr_opening",         :limit => 100
   end
 
   add_index "ledgers", ["id"], :name => "id_UNIQUE", :unique => true
@@ -365,5 +386,12 @@ ActiveRecord::Schema.define(:version => 20130128050514) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
+
+  create_table "voucher_extra_data", :force => true do |t|
+    t.string   "voucher_no"
+    t.string   "ledger_balances", :limit => 1000
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
 
 end

@@ -1,5 +1,8 @@
 $(document).ready(function() {
 	$('#tabcustomers').dataTable( {
+		
+		// "aaSorting": [[ 2, "asc" ]]
+		
 		"fnFooterCallback": function ( nRow, aaData, iStart, iEnd, aiDisplay, aData, iDisplayIndex, iDisplayIndexFull  ) {
 			/*
 			 * Calculate the total market share for all browsers in this table (ie inc. outside
@@ -9,10 +12,10 @@ $(document).ready(function() {
 			var textCol = 0;
 			var drcol = 1;
 			var crcol = 2;
-			if (location.href.indexOf("reptype=daybook") != -1 ){
-				textCol = 3;
-				drcol = 4;
-				crcol = 5;
+			if (location.href.indexOf("ledger_summary_reports?datewise=voucherwise") != -1 ){
+				textCol = 5;
+				drcol = 6;
+				crcol = 7;
 			}
 			
 			var drTotFull = 0;

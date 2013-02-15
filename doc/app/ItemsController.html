@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class ItemsController - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/controllers/items_controller.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-create">#create</a>
+    
+    <li><a href="#method-i-destroy">#destroy</a>
+    
+    <li><a href="#method-i-edit">#edit</a>
+    
+    <li><a href="#method-i-hello">#hello</a>
+    
+    <li><a href="#method-i-index">#index</a>
+    
+    <li><a href="#method-i-new">#new</a>
+    
+    <li><a href="#method-i-render_pdf">#render_pdf</a>
+    
+    <li><a href="#method-i-show">#show</a>
+    
+    <li><a href="#method-i-update">#update</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Accountgroup.html">Accountgroup</a>
+  
+    <li><a href="./AccountgroupsController.html">AccountgroupsController</a>
+  
+    <li><a href="./AccountgroupsHelper.html">AccountgroupsHelper</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./BookwiseReportsController.html">BookwiseReportsController</a>
+  
+    <li><a href="./BookwiseReportsHelper.html">BookwiseReportsHelper</a>
+  
+    <li><a href="./Customer.html">Customer</a>
+  
+    <li><a href="./CustomersController.html">CustomersController</a>
+  
+    <li><a href="./CustomersHelper.html">CustomersHelper</a>
+  
+    <li><a href="./DataConfig.html">DataConfig</a>
+  
+    <li><a href="./DataConfigsController.html">DataConfigsController</a>
+  
+    <li><a href="./DataConfigsHelper.html">DataConfigsHelper</a>
+  
+    <li><a href="./DynamicModel.html">DynamicModel</a>
+  
+    <li><a href="./EmailValidator.html">EmailValidator</a>
+  
+    <li><a href="./FilteredReportsController.html">FilteredReportsController</a>
+  
+    <li><a href="./FilteredReportsHelper.html">FilteredReportsHelper</a>
+  
+    <li><a href="./Generaljournal.html">Generaljournal</a>
+  
+    <li><a href="./GeneraljournalsController.html">GeneraljournalsController</a>
+  
+    <li><a href="./GeneraljournalsHelper.html">GeneraljournalsHelper</a>
+  
+    <li><a href="./Invoice.html">Invoice</a>
+  
+    <li><a href="./InvoicesController.html">InvoicesController</a>
+  
+    <li><a href="./InvoicesHelper.html">InvoicesHelper</a>
+  
+    <li><a href="./InvoicessHelper.html">InvoicessHelper</a>
+  
+    <li><a href="./Item.html">Item</a>
+  
+    <li><a href="./Itemgroup.html">Itemgroup</a>
+  
+    <li><a href="./ItemgroupsController.html">ItemgroupsController</a>
+  
+    <li><a href="./ItemgroupsHelper.html">ItemgroupsHelper</a>
+  
+    <li><a href="./Itemorder.html">Itemorder</a>
+  
+    <li><a href="./ItemordersController.html">ItemordersController</a>
+  
+    <li><a href="./ItemordersHelper.html">ItemordersHelper</a>
+  
+    <li><a href="./ItemsController.html">ItemsController</a>
+  
+    <li><a href="./ItemsHelper.html">ItemsHelper</a>
+  
+    <li><a href="./JavascriptsController.html">JavascriptsController</a>
+  
+    <li><a href="./JournalEntriesController.html">JournalEntriesController</a>
+  
+    <li><a href="./JournalEntriesHelper.html">JournalEntriesHelper</a>
+  
+    <li><a href="./JournalEntry.html">JournalEntry</a>
+  
+    <li><a href="./Ledger.html">Ledger</a>
+  
+    <li><a href="./LedgerClOpBalances.html">LedgerClOpBalances</a>
+  
+    <li><a href="./LedgerSummaryReportsController.html">LedgerSummaryReportsController</a>
+  
+    <li><a href="./LedgerSummaryReportsHelper.html">LedgerSummaryReportsHelper</a>
+  
+    <li><a href="./LedgersController.html">LedgersController</a>
+  
+    <li><a href="./LedgersHelper.html">LedgersHelper</a>
+  
+    <li><a href="./MyValidator.html">MyValidator</a>
+  
+    <li><a href="./ReportBalancesheetController.html">ReportBalancesheetController</a>
+  
+    <li><a href="./ReportBalancesheetsController.html">ReportBalancesheetsController</a>
+  
+    <li><a href="./ReportBalancesheetsHelper.html">ReportBalancesheetsHelper</a>
+  
+    <li><a href="./TransRecPayJournal.html">TransRecPayJournal</a>
+  
+    <li><a href="./TransRecPayJournalsController.html">TransRecPayJournalsController</a>
+  
+    <li><a href="./TransRecPayJournalsHelper.html">TransRecPayJournalsHelper</a>
+  
+    <li><a href="./User.html">User</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class ItemsController</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-create" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>POST /items POST /items.json</p>
+          
+
+          
+          <div class="method-source-code" id="create-source">
+            <pre><span class="ruby-comment"># File app/controllers/items_controller.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@item</span> = <span class="ruby-constant">Item</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:item</span>])
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@item</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">'Item was successfully created.'</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@item</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@item</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;new&quot;</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create-method -->
+
+    
+      <div id="method-i-destroy" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">destroy</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>DELETE /items/1 DELETE /items/1.json</p>
+          
+
+          
+          <div class="method-source-code" id="destroy-source">
+            <pre><span class="ruby-comment"># File app/controllers/items_controller.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
+  <span class="ruby-ivar">@item</span> = <span class="ruby-constant">Item</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">destroy</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:back</span> } <span class="ruby-comment"># items_url }</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span> }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- destroy-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- destroy-method -->
+
+    
+      <div id="method-i-edit" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">edit</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /items/1/edit</p>
+          
+
+          
+          <div class="method-source-code" id="edit-source">
+            <pre><span class="ruby-comment"># File app/controllers/items_controller.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
+  <span class="ruby-ivar">@item</span> = <span class="ruby-constant">Item</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  
+  <span class="ruby-ivar">@itemGroupDiscount</span>  = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@itemGroupTax</span>  = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  
+  <span class="ruby-ivar">@itemgroups</span> = <span class="ruby-constant">Itemgroup</span>.<span class="ruby-identifier">all</span>
+  
+   <span class="ruby-ivar">@itemgroups</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">itmGrps</span><span class="ruby-operator">|</span>
+     <span class="ruby-keyword">if</span> <span class="ruby-identifier">itmGrps</span>.<span class="ruby-identifier">update_disc_child</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-ivar">@itemGroupDiscount</span>[<span class="ruby-identifier">itmGrps</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">itmGrps</span>.<span class="ruby-identifier">discount_per</span>.<span class="ruby-identifier">to_s</span>
+     <span class="ruby-keyword">end</span>  
+     <span class="ruby-keyword">if</span> <span class="ruby-identifier">itmGrps</span>.<span class="ruby-identifier">update_tax_child</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-ivar">@itemGroupTax</span>[<span class="ruby-identifier">itmGrps</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">itmGrps</span>.<span class="ruby-identifier">tax</span>.<span class="ruby-identifier">to_s</span>
+     <span class="ruby-keyword">end</span>  
+   <span class="ruby-keyword">end</span>
+  
+   
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- edit-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- edit-method -->
+
+    
+      <div id="method-i-hello" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hello</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>layout Application/pdf</p>
+          
+
+          
+          <div class="method-source-code" id="hello-source">
+            <pre><span class="ruby-comment"># File app/controllers/items_controller.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hello</span>
+<span class="ruby-comment">#  @text = &quot;Hello world&quot;</span>
+  <span class="ruby-identifier">render_pdf</span>(<span class="ruby-string">&quot;hello.pdf&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- hello-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- hello-method -->
+
+    
+      <div id="method-i-index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">index</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /items GET /items.json</p>
+          
+
+          
+          <div class="method-source-code" id="index-source">
+            <pre><span class="ruby-comment"># File app/controllers/items_controller.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-ivar">@items</span> = <span class="ruby-constant">Item</span>.<span class="ruby-identifier">all</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment"># index.html.erb</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@items</span> }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- index-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- index-method -->
+
+    
+      <div id="method-i-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /items/new GET /items/new.json</p>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File app/controllers/items_controller.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@item</span> = <span class="ruby-constant">Item</span>.<span class="ruby-identifier">new</span>
+  
+  
+  <span class="ruby-ivar">@itemGroupDiscount</span>  = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@itemGroupTax</span>  = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  
+  <span class="ruby-ivar">@itemgroups</span> = <span class="ruby-constant">Itemgroup</span>.<span class="ruby-identifier">all</span>
+  
+   <span class="ruby-ivar">@itemgroups</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">itmGrps</span><span class="ruby-operator">|</span>
+     <span class="ruby-keyword">if</span> <span class="ruby-identifier">itmGrps</span>.<span class="ruby-identifier">update_disc_child</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-ivar">@itemGroupDiscount</span>[<span class="ruby-identifier">itmGrps</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">itmGrps</span>.<span class="ruby-identifier">discount_per</span>.<span class="ruby-identifier">to_s</span>
+     <span class="ruby-keyword">end</span>  
+     <span class="ruby-keyword">if</span> <span class="ruby-identifier">itmGrps</span>.<span class="ruby-identifier">update_tax_child</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-ivar">@itemGroupTax</span>[<span class="ruby-identifier">itmGrps</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">itmGrps</span>.<span class="ruby-identifier">tax</span>.<span class="ruby-identifier">to_s</span>
+     <span class="ruby-keyword">end</span>  
+   <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">gon</span>.<span class="ruby-identifier">itemGroupDiscount</span> = <span class="ruby-ivar">@itemGroupDiscount</span>
+  <span class="ruby-identifier">gon</span>.<span class="ruby-identifier">itemGroupTax</span> = <span class="ruby-ivar">@itemGroupTax</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment"># new.html.erb</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@item</span> }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+      <div id="method-i-render_pdf" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">render_pdf</span><span
+            class="method-args">(filename)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="render_pdf-source">
+            <pre><span class="ruby-comment"># File app/controllers/items_controller.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">render_pdf</span>(<span class="ruby-identifier">filename</span>)
+  <span class="ruby-ivar">@html</span> = <span class="ruby-identifier">render_to_string</span>
+  <span class="ruby-identifier">html_file</span> = <span class="ruby-identifier">java</span>.<span class="ruby-identifier">io</span>.<span class="ruby-constant">File</span>.<span class="ruby-identifier">createTempFile</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:action</span>], <span class="ruby-string">&quot;.html&quot;</span>)
+  <span class="ruby-identifier">html_file</span>.<span class="ruby-identifier">delete_on_exit</span>
+  <span class="ruby-identifier">pdf_file</span> = <span class="ruby-identifier">java</span>.<span class="ruby-identifier">io</span>.<span class="ruby-constant">File</span>.<span class="ruby-identifier">createTempFile</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:action</span>], <span class="ruby-string">&quot;.pdf&quot;</span>)
+  <span class="ruby-identifier">pdf_file</span>.<span class="ruby-identifier">delete_on_exit</span>
+  <span class="ruby-identifier">file_output_stream</span> = <span class="ruby-identifier">java</span>.<span class="ruby-identifier">io</span>.<span class="ruby-constant">FileOutputStream</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">html_file</span>)
+  <span class="ruby-identifier">file_output_stream</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">java</span>.<span class="ruby-identifier">lang</span>.<span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@html</span>).<span class="ruby-identifier">get_bytes</span>(<span class="ruby-string">&quot;UTF-8&quot;</span>))
+  <span class="ruby-identifier">file_output_stream</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-identifier">renderer</span> = <span class="ruby-identifier">org</span>.<span class="ruby-identifier">xhtmlrenderer</span>.<span class="ruby-identifier">pdf</span>.<span class="ruby-constant">ITextRenderer</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-comment"># if you put custom fonts in the lib/fonts folder under your Rails project, they will be available to your PDF document</span>
+
+  <span class="ruby-comment"># Just specify  the correct font-family via CSS and Flying Saucer will use the correct font.</span>
+
+  <span class="ruby-identifier">fonts_path</span> = <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;/lib/fonts/*.ttf&quot;</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">fonts_path</span>)
+    <span class="ruby-identifier">font_resolver</span> = <span class="ruby-identifier">renderer</span>.<span class="ruby-identifier">getFontResolver</span>()
+    <span class="ruby-constant">Dir</span>[<span class="ruby-identifier">fonts_path</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">font_resolver</span>.<span class="ruby-identifier">add_font</span>(<span class="ruby-identifier">file</span>, <span class="ruby-keyword">true</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">renderer</span>.<span class="ruby-identifier">set_document</span>(<span class="ruby-identifier">html_file</span>)
+ <span class="ruby-comment"># renderer.setDocument(new File(filename));</span>
+  <span class="ruby-identifier">renderer</span>.<span class="ruby-identifier">layout</span>
+  <span class="ruby-identifier">renderer</span>.<span class="ruby-identifier">createPDF</span>(<span class="ruby-identifier">java</span>.<span class="ruby-identifier">io</span>.<span class="ruby-constant">FileOutputStream</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">pdf_file</span>), <span class="ruby-keyword">true</span>)
+
+  <span class="ruby-identifier">send_file</span> <span class="ruby-identifier">pdf_file</span>.<span class="ruby-identifier">path</span>, <span class="ruby-value">:type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;application/pdf&quot;</span>, <span class="ruby-value">:filename</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">filename</span>, <span class="ruby-value">:disposition</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;inline&quot;</span>
+  
+  
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- render_pdf-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- render_pdf-method -->
+
+    
+      <div id="method-i-show" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">show</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /items/1 GET /items/1.json</p>
+          
+
+          
+          <div class="method-source-code" id="show-source">
+            <pre><span class="ruby-comment"># File app/controllers/items_controller.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-ivar">@item</span> = <span class="ruby-constant">Item</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+
+
+ <span class="ruby-comment"># render_pdf('show.pdf')</span>
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+   <span class="ruby-comment"># format.html { render_pdf 'show.pdf' }</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>  <span class="ruby-comment"># show.html.erb</span>
+  
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@item</span> }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- show-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- show-method -->
+
+    
+      <div id="method-i-update" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>PUT /items/1 PUT /items/1.json</p>
+          
+
+          
+          <div class="method-source-code" id="update-source">
+            <pre><span class="ruby-comment"># File app/controllers/items_controller.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
+  <span class="ruby-ivar">@item</span> = <span class="ruby-constant">Item</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:item</span>])
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@item</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">'Item was successfully updated.'</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;edit&quot;</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@item</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- update-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- update-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

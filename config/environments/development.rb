@@ -18,7 +18,7 @@ ProfitLead::Application.configure do
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
-#  config.action_controller.page_cache_directory = RAILS_ROOT+"/app/cache/" 
+ # config.action_controller.page_cache_directory = Rails.root+"/app/cache/" 
 #config.assets.paths << Rails.root.join("app", "assets", "flash")
 
  
@@ -43,7 +43,7 @@ ProfitLead::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true 
+  config.assets.debug = false #true 
   
   #config.assets.compile = true
   

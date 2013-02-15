@@ -98,9 +98,31 @@ class Itemorder < ActiveRecord::Base
        end   
   end  
   
-  #after_destroy do |itemorderT|
-    
- # end
+   after_save do |itemorderT|
+     @item = Item.find_by_code(itemorderT.item_code)
+     
+     updateItemSPBalance(itemorderT.invoice_id, itemorderT.item_code, @item.quantity_on_hand.to_s+" in")
+   end
+   
+  
+  after_destroy do |itemorderT|
+     @ItemT = Item.find_by_code(itemorderT.item_code)
+    if @ItemT != nil then
+      if @ItemT.quantity_on_hand != nil then
+        
+         if itemorderT.transaction_name.downcase == "sales invoice" or itemorderT.transaction_name.downcase == "purchase returns" then
+            @ItemT.quantity_on_hand = @ItemT.quantity_on_hand + itemorderT.quantity
+            @ItemT.save
+         else
+            if itemorderT.transaction_name.downcase == "purchase invoice" or itemorderT.transaction_name.downcase == "sales returns" then
+               @ItemT.quantity_on_hand = @ItemT.quantity_on_hand - itemorderT.quantity
+               @ItemT.save
+            end
+         end     
+      end
+       updateItemSPBalance(itemorderT.invoice_id, itemorderT.item_code, @ItemT.quantity_on_hand.to_s+" in")
+    end
+  end
   
   after_create do |itemorderT|
     @ItemT = Item.find_by_code(itemorderT.item_code)
@@ -239,12 +261,12 @@ class Itemorder < ActiveRecord::Base
     if @ItemT != nil then
       if @ItemT.quantity_on_hand != nil then
         
-         if itemorderT.transaction_name.downcase == "sales invoice" or itemorderT.transaction_name.downcase == "purchase returns" then
+         if itemorderT.transaction_name_was.downcase == "sales invoice" or itemorderT.transaction_name_was.downcase == "purchase returns" then
             @ItemT.quantity_on_hand = @ItemT.quantity_on_hand + itemorderT.quantity_was
             @ItemT.quantity_on_hand = @ItemT.quantity_on_hand - itemorderT.quantity
             @ItemT.save
          else
-            if itemorderT.transaction_name.downcase == "purchase invoice" or itemorderT.transaction_name.downcase == "sales returns" then
+            if itemorderT.transaction_name_was.downcase == "purchase invoice" or itemorderT.transaction_name_was.downcase == "sales returns" then
               @ItemT.quantity_on_hand = @ItemT.quantity_on_hand - itemorderT.quantity_was
                @ItemT.quantity_on_hand = @ItemT.quantity_on_hand + itemorderT.quantity
                @ItemT.save
@@ -372,8 +394,6 @@ class Itemorder < ActiveRecord::Base
     
     
     
-    
-    
   end
   
   
@@ -458,8 +478,42 @@ class Itemorder < ActiveRecord::Base
     end
     
     @account.current_balance = @currentbalance
-     @account.save    
+    @account.save    
   end
+  
+  
+  
+  def updateItemSPBalance(voucherIdP, varItemNameP, valStrP)
+    @rowItem = VoucherExtraData.find_by_voucher_no(voucherIdP)
+    if @rowItem == nil then
+      @rowItem = VoucherExtraData.new
+      @rowItem.voucher_no = voucherIdP
+      @rowItem.item_balances = varItemNameP + "=" + valStrP
+    else
+      if @rowItem.item_balances  != nil and @rowItem.item_balances  != "" then
+        itArr = @rowItem.item_balances.split("@@")
+        intCnt = 0
+        flgT = 0
+        itArr.each do |itm|
+           if itm.split("=")[0] == varItemNameP then
+            itArr[intCnt] = varItemNameP + "=" + valStrP  
+             flgT = 1
+          end
+          intCnt += 1
+        end
+        if flgT != 1 then
+          itArr[intCnt] = varItemNameP + "=" + valStrP  
+        end
+        @rowItem.item_balances = itArr.join("@@")
+      else
+        @rowItem.item_balances = varItemNameP + "=" + valStrP  
+      end
+    end
+        
+  @rowItem.save
+  end  
+  
+  
   
   
 end 

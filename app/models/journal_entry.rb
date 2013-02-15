@@ -24,7 +24,8 @@ class JournalEntry < ActiveRecord::Base
   
   
   attr_accessible :dr_amount, :cr_amount, :account_head, :amount, :description, :dr_cr, :journal_date, 
-  :master_leg, :trans_type, :trans_rec_pay_journal_id, :generaljournal_id, :other_account_head, :invoice_id, :line_item_ref
+  :master_leg, :trans_type, :trans_rec_pay_journal_id, :generaljournal_id, :other_account_head, :invoice_id, 
+  :line_item_ref
    
    belongs_to :trans_rec_pay_journal
    belongs_to :generalledger
@@ -34,7 +35,7 @@ class JournalEntry < ActiveRecord::Base
    
   before_create do |journal_entry|
      
-    debitOrcredit journal_entry.account_head, journal_entry.dr_cr, journal_entry.amount
+    debitOrcreditJE journal_entry.account_head, journal_entry.dr_cr, journal_entry.amount, journal_entry
     
     begin
       token = SecureRandom.urlsafe_base64
@@ -66,13 +67,12 @@ class JournalEntry < ActiveRecord::Base
         jentry.save
         
         
-        debitOrcredit journal_entry.other_account_head, getOppositeDrCr(journal_entry.dr_cr), journal_entry.amount
+        debitOrcreditJE journal_entry.other_account_head, getOppositeDrCr(journal_entry.dr_cr), journal_entry.amount, journal_entry
     end    
      
    end
   
-  
-  
+ 
   
      
    before_update do |journal_entry|
@@ -80,15 +80,15 @@ class JournalEntry < ActiveRecord::Base
 #   before_save do |journal_entry|     
     
       if  journal_entry.other_account_head != nil and  journal_entry.other_account_head != "" then 
-             debitOrcredit journal_entry.other_account_head, journal_entry.dr_cr_was, journal_entry.amount_was
-             debitOrcredit journal_entry.other_account_head, getOppositeDrCr(journal_entry.dr_cr), journal_entry.amount
+             debitOrcreditJE journal_entry.other_account_head, journal_entry.dr_cr_was, journal_entry.amount_was, journal_entry
+             debitOrcreditJE journal_entry.other_account_head, getOppositeDrCr(journal_entry.dr_cr), journal_entry.amount, journal_entry
              
-             debitOrcredit journal_entry.other_account_head, journal_entry.dr_cr_was, journal_entry.amount_was
-             debitOrcredit journal_entry.other_account_head, getOppositeDrCr(journal_entry.dr_cr), journal_entry.amount
+             debitOrcreditJE journal_entry.other_account_head, journal_entry.dr_cr_was, journal_entry.amount_was, journal_entry
+             debitOrcreditJE journal_entry.other_account_head, getOppositeDrCr(journal_entry.dr_cr), journal_entry.amount, journal_entry
       end    
       
-       debitOrcredit journal_entry.account_head, getOppositeDrCr(journal_entry.dr_cr_was), journal_entry.amount_was
-       debitOrcredit journal_entry.account_head, journal_entry.dr_cr, journal_entry.amount
+       debitOrcreditJE journal_entry.account_head, getOppositeDrCr(journal_entry.dr_cr_was), journal_entry.amount_was, journal_entry
+       debitOrcreditJE journal_entry.account_head, journal_entry.dr_cr, journal_entry.amount, journal_entry
        
        
        @other_journal = JournalEntry.find(:first, :conditions => ["id != ? and line_item_ref = ?", journal_entry.id, journal_entry.line_item_ref])
@@ -132,14 +132,14 @@ class JournalEntry < ActiveRecord::Base
      
      
      if  journal_entry.dr_cr == "Cr" then  
-          debitOrcredit journal_entry.account_head, "Dr", journal_entry.amount
+          debitOrcreditJE journal_entry.account_head, "Dr", journal_entry.amount, journal_entry
          # if  journal_entry.other_account_head != nil and  journal_entry.other_account_head != "" then 
-         #     debitOrcredit journal_entry.other_account_head, "Cr", journal_entry.amount
+         #     debitOrcreditJE journal_entry.other_account_head, "Cr", journal_entry.amount
         #  end    
      else  
-         debitOrcredit journal_entry.account_head, "Cr", journal_entry.amount
+         debitOrcreditJE journal_entry.account_head, "Cr", journal_entry.amount, journal_entry
         # if  journal_entry.other_account_head != nil and  journal_entry.other_account_head != "" then
-        #    debitOrcredit journal_entry.other_account_head, "Dr", journal_entry.amount
+        #    debitOrcreditJE journal_entry.other_account_head, "Dr", journal_entry.amount
         # end   
      end 
   end  
@@ -155,7 +155,7 @@ class JournalEntry < ActiveRecord::Base
   end
   
   
-  def debitOrcredit varAccountName, varDr_Cr, varAmount
+  def debitOrcreditJE varAccountName, varDr_Cr, varAmount, journal_entry
    @account = Ledger.find_by_name(varAccountName)
      
      @currentbalance = 0.00
@@ -220,9 +220,56 @@ class JournalEntry < ActiveRecord::Base
     end
     
     @account.current_balance = @currentbalance
+    
+    @voucherId = ""
+    if journal_entry.trans_rec_pay_journal_id != nil then
+      @voucherId = journal_entry.trans_rec_pay_journal_id
+    else
+      if journal_entry.generaljournal_id != nil then
+        @voucherId = journal_entry.generaljournal_id
+      else
+        if journal_entry.invoice_id != nil then
+          @voucherId = journal_entry.invoice_id
+        end
+      end
+    end
+    
      @account.save    
+     
+     updateLedgerSPBalance(@voucherId, varAccountName, @currentbalance.to_s+" "+ @account.dr_cr)
   end
   
+  
+  
+  def updateLedgerSPBalance(voucherIdP, varAccountNameP, valStrP)
+    @rowItem = VoucherExtraData.find_by_voucher_no(voucherIdP)
+    if @rowItem == nil then
+      @rowItem = VoucherExtraData.new
+      @rowItem.voucher_no = voucherIdP
+      @rowItem.ledger_balances = varAccountNameP + "=" + valStrP
+    else
+      if @rowItem.ledger_balances  != "" then
+        itArr = @rowItem.ledger_balances.split("@@")
+        intCnt = 0
+        flgT = 0
+        itArr.each do |itm|
+           if itm.split("=")[0] == varAccountNameP then
+            itArr[intCnt] = varAccountNameP + "=" + valStrP  
+             flgT = 1
+          end
+          intCnt += 1
+        end
+        if flgT != 1 then
+          itArr[intCnt] = varAccountNameP + "=" + valStrP  
+        end
+        @rowItem.ledger_balances = itArr.join("@@")
+      else
+        @rowItem.ledger_balances = varAccountNameP + "=" + valStrP  
+      end
+    end
+        
+  @rowItem.save
+  end  
   
   
   

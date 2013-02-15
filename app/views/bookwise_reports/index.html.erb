@@ -22,7 +22,7 @@
 
   <div id="aaa"> </div>
   	<br>
-  	<h1 align="center" "> Day Book </h1>
+  	<h1 align="center" "> <%= if params[:reptype]=="daybook" then "Day Book" else if params[:reptype]=="cashbook" then "Cash Book" else if params[:reptype]=="bankbook" then "Bank Book" end end end %></h1>
   	  <%= render :file =>'outlineTableOpeningTag.html' %>
    		<tr>
    			
@@ -94,7 +94,7 @@
   										 	
   										 	 <td> <%=	link_to parId.to_s , parTableName+"/"+parId.to_s, :target => :blank %>   </td>
   										<% else if @repType == "bankbook" or @repType == "cashbook" then %> 	
-  												 <td>  <%= custT[colData].to_s %>  </td>
+  												 <td> <%=	link_to custT[colData].to_s , ledger_summary_reports_path+"?ledger="+custT["name"]+"&columnswidth=25,25,25,25&datewise=monthly", :target => :blank %>   </td>
   										  
   										<% end %> 
   										

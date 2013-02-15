@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>index.html</title>
+	  <%= yield :head %>
+  </head>
+  
+  
+  <body class = "Bbody">
+  	<%= render :file =>'formHeader001.html.erb' %>
+ 
+  	<%= yield %>
+  
+  	<div style="display:none"><%= link_to_function "click Next", 'clickNextPrev("tabcustomers_next")', data: { keybinding: 'right' } %></div>
+  	<div style="display:none"><%= link_to_function "click Previous", 'clickNextPrev("tabcustomers_previous")', data: { keybinding: 'left' } %></div> 
+  	
+  	<%= render :file =>'IndexPageKBShortCuts.html.erb' %>
+
+  <div id="aaa"> </div>
+  	<br>
+  	<h1 align="center" "> <%= params[:ledger] %> </h1>
+  	  <%= render :file =>'outlineTableOpeningTag.html' %>
+   		<tr>
+   			
+   		
+   				    <%= render :file =>'createMenu.html.erb' %>    	   				   
+   			
+  	
+  		<%= render :file =>'MHSTableStart.html' %>
+  				
+  				<table id = "tabcustomers" style="clear: both; margin-left: 10px; width : 100%">
+  					<thead>	    	
+  						<tr>
+  							<!-- ><th> Ledger Name </th>
+  							<th> Current Balance </th>
+  							<th> Dr/Cr </th>
+  							<th> Active?</th>  		-->
+  							<% @colTitleHTML = ""
+  								@cnt = 0
+  								@columnsTitleDisp.each do |colTitle|
+  									@colTitleHTML = @colTitleHTML + "<th width="+@columnsWidth[@cnt]+"% >" + colTitle + "</th>"
+  									@cnt = @cnt + 1
+  								end	
+  							 %>				
+  							<%= raw @colTitleHTML %>
+  						</tr>
+  						<tr>
+  							<% @colTitleHTML = ""
+  								@cnt = 0
+  								@columnsTitleDisp.each do |colTitle|
+  									
+  									if @cnt == @DebitCol -1 then
+  										 @colTitleHTML = @colTitleHTML + "<th>OPENING BALANCE</th>" 
+  									else
+  										if @cnt == @DebitCol then
+  											if @getOpBalance.split("@")[1] != "1in" then  
+  												@colTitleHTML = @colTitleHTML +"<th>"+@getOpBalance.split("@")[0]+"</th>" 
+  											else
+  												@colTitleHTML = @colTitleHTML + "<th></th>"	
+  											end	
+  										else
+  											if @cnt == @CreditCol then
+  												if @getOpBalance.split("@")[1] == "1out" then  
+  													@colTitleHTML = @colTitleHTML + "<th>"+@getOpBalance.split("@")[0]+"</th>" 
+  												else
+  													@colTitleHTML = @colTitleHTML + "<th></th>"	
+  												end	
+  											else
+  												@colTitleHTML = @colTitleHTML + "<th></th>"
+  											end		
+  										end		
+  									end		
+  									@cnt = @cnt + 1
+  								end	
+  							 %>				
+  							
+  							<%= raw @colTitleHTML %>
+  							</tr>
+  							
+  								
+  							
+  						
+  					</thead> 
+  					<tbody>
+  						<% @rowItems.each do |custT| %>
+  							<tr>	
+  								<% @colHTML = "" %>
+  								<%	@intCntr = 0 %>
+  								<%	@columnsDisp.each do |colData| %>
+  									<%	if @intCntr == 0  %>
+  											
+  										<% if @repType == "daybook" then %>
+  										 	 <% parTableName = DynamicModel.table_name %>
+  										 	 <% parId =  custT["id"] %>
+  										 	
+  										 	    <% if custT["trans_rec_pay_journal_id"] != nil then %>
+  										 	   		<% parTableName = "trans_rec_pay_journals" %>
+  										 	   		<% parId = custT["trans_rec_pay_journal_id"] %>
+  										 	   	<% else %>	
+  										 	   		<% if custT["generaljournal_id"]!= nil then  %>	
+  										 	   			<% parTableName = "generaljournals" %>
+  										 	   			<% parId = custT["generaljournal_id"] %>
+  										 	   		<% else %>	
+  										 	   			<% parTableName = "invoices" %>
+  										 	   			<% parId = custT["invoice_id"] %>
+  										 	   		<% end %>	
+  										 	   	<% end %>	  										 	   
+  										 	
+  										 	 <td> <%=	link_to parId.to_s , parTableName+"/"+parId.to_s, :target => :blank %>   </td>
+  										<% else if @repType == "bankbook" or @repType == "cashbook" then %> 	
+  											<% if colData == "monthname" or colData == "sales_date" then %>
+  												 <td> <%= link_to custT[colData].to_s, custT["alink"].to_s %>  </td>  											
+  												<% else if colData == "voucher_no" %>  	
+  												 	<% parTableName = "invoices" %>
+  												 	
+  										 		  <td> <%=	link_to custT[colData].to_s , parTableName+"/"+custT[colData].to_s %>   </td>		  	
+  												<% else %>									
+  												 <td>  <%= custT[colData].to_s %>  </td>  												 
+  												<% end %>	 
+  										  <% end %>
+  										<% end %> 
+  										
+  									 <% end %> 			
+  										 	
+  									<%	else	 %>
+  									 	
+  									
+  										<% if (@intCntr == @DebitCol and custT["in_out"] != "in") or (@intCntr == @CreditCol and custT["in_out"] != "out") then %>
+  										 	 <td>   </td>
+  										<%	else	 %>
+  											 <td>  <%= custT[colData].to_s %>  </td>
+  									    <% end %> 
+  										
+  										 
+  									
+  									<% end %>
+  										<% @intCntr = @intCntr + 1  %>
+  								<% end %>
+  							</tr>
+  						<% end %>  
+  					</tbody>
+  					
+  					<tfoot>
+  						<tr>
+  							<% @colTitleHTML = ""
+  								@cnt = 0
+  								@columnsTitleDisp.each do |colTitle|
+  									@colTitleHTML = @colTitleHTML + "<th></th>"	
+  								end	
+  							%>	
+  							<%= raw @colTitleHTML %>	
+  						</tr>	
+  						<tr>
+  						<% @colTitleHTML = ""
+  								@cnt = 0
+  								@columnsTitleDisp.each do |colTitle|
+  									
+  									if @cnt == @DebitCol -1 then
+  										 @colTitleHTML = @colTitleHTML + "<th>BALANCE</th>" 
+  									else
+  										if @cnt == @DebitCol then
+  											if @getOpBalance.split("@")[1] != "1in" then  
+  												@colTitleHTML = @colTitleHTML +"<th>"+@getClBalance.split("@")[0]+"</th>" 
+  											else
+  												@colTitleHTML = @colTitleHTML + "<th></th>"	
+  											end	
+  										else 
+  											if @cnt == @CreditCol then
+  												if @getOpBalance.split("@")[1] == "1out" then  
+  													@colTitleHTML = @colTitleHTML + "<th>"+@getClBalance.split("@")[0]+"</th>" 
+  												else
+  													@colTitleHTML = @colTitleHTML + "<th></th>"	
+  												end	
+  											else
+  												@colTitleHTML = @colTitleHTML + "<th></th>"
+  											end		
+  										end		
+  									end		
+  									@cnt = @cnt + 1
+  								end	
+  							 %>				
+  							
+  							<%= raw @colTitleHTML %>
+  						</tr>
+  						
+  					</tfoot>
+  						
+  				</table>
+  			</td>
+  			 <%= render :file =>'createRHSButtons.html.erb' %>  
+  		</Tr>
+  	</table>
+  
+  </body>
+</html>
+

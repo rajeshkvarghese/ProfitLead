@@ -56,6 +56,8 @@ ProfitLead::Application.routes.draw do
  resources :bookwise_reports
  
  resources :ledger_summary_reports
+ 
+ resources :item_summary_reports
   
   
   #resources :liabiltyTree

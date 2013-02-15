@@ -22,7 +22,7 @@
 
   <div id="aaa"> </div>
   	<br>
-  	<h1 align="center" "> Day Book </h1>
+  	<h1 align="center" "> <%= params[:ledger] %> </h1>
   	  <%= render :file =>'outlineTableOpeningTag.html' %>
    		<tr>
    			
@@ -48,22 +48,40 @@
   							 %>				
   							<%= raw @colTitleHTML %>
   						</tr>
-  						
-  							<%  if @repType == "daybook" then %>  
-  								<% @colTitleHTML ="<th></th>"+"<th></th>"+"<th></th>" %>
-  								<% @colTitleHTML = @colTitleHTML + "<th>OPENING BALANCE</th>" %>
-  								<% if @getCashInHandOpBalance.split("@")[1] != "Dr" then %> 
-  									<%@colTitleHTML = @colTitleHTML + "<th></th>"+"<th>"+@getCashInHandOpBalance.split("@")[0]+"</th>" %>
-  								<%	else	 %>
-  									<%@colTitleHTML = @colTitleHTML + "<th>"+@getCashInHandOpBalance.split("@")[0]+"</th><th></th>" %>
-  								<%	end	 %>
+  						<tr>
+  							<% @colTitleHTML = ""
+  								@cnt = 0
+  								@columnsTitleDisp.each do |colTitle|
+  									
+  									if @cnt == @DebitCol -1 then
+  										 @colTitleHTML = @colTitleHTML + "<th>OPENING BALANCE</th>" 
+  									else
+  										if @cnt == @DebitCol then
+  											if @getOpBalance.split("@")[1] == "Dr" then  
+  												@colTitleHTML = @colTitleHTML +"<th>"+@getOpBalance.split("@")[0]+"</th>" 
+  											else
+  												@colTitleHTML = @colTitleHTML + "<th></th>"	
+  											end	
+  										else
+  											if @cnt == @CreditCol then
+  												if @getOpBalance.split("@")[1] == "Cr" then  
+  													@colTitleHTML = @colTitleHTML + "<th>"+@getOpBalance.split("@")[0]+"</th>" 
+  												else
+  													@colTitleHTML = @colTitleHTML + "<th></th>"	
+  												end	
+  											else
+  												@colTitleHTML = @colTitleHTML + "<th></th>"
+  											end		
+  										end		
+  									end		
+  									@cnt = @cnt + 1
+  								end	
+  							 %>				
+  							
+  							<%= raw @colTitleHTML %>
+  							</tr>
+  							
   								
-  								<tr> <%= raw @colTitleHTML %> </tr>
-  								
-  							<%	else if @repType == "bankbook" then	 %>
-  								
-  							  <%	end	 %>	
-  							<%	end	 %>
   							
   						
   					</thead> 
@@ -94,13 +112,35 @@
   										 	
   										 	 <td> <%=	link_to parId.to_s , parTableName+"/"+parId.to_s, :target => :blank %>   </td>
   										<% else if @repType == "bankbook" or @repType == "cashbook" then %> 	
-  												 <td>  <%= custT[colData].to_s %>  </td>
-  										  
+  											<% if colData == "monthname" or colData == "journal_date" then %>
+  												 <td> <%= link_to custT[colData].to_s, custT["alink"].to_s %>  </td>  											
+  												<% else if colData == "voucher_no" %>  	
+  												 	<% parTableName = "journal_entries" %>
+  												 	<% parId =  custT["id"] %>
+  										 			<% if custT["trans_rec_pay_journal_id"] != nil then %>
+  										 	   			<% parTableName = "trans_rec_pay_journals" %>
+  										 	   			<% parId = custT["trans_rec_pay_journal_id"] %>
+  										 	   		<% else %>	
+  										 	   			<% if custT["generaljournal_id"]!= nil then  %>	
+  										 	   				<% parTableName = "generaljournals" %>
+  										 	   				<% parId = custT["generaljournal_id"] %>
+  										 	   			<% else %>	
+  										 	   				<% parTableName = "invoices" %>
+  										 	   				<% parId = custT["invoice_id"] %>
+  										 	   			<% end %>	
+  										 			<% end %>	
+  										 		  <td> <%=	link_to parId.to_s , parTableName+"/"+parId.to_s %>   </td>		  	
+  												<% else %>									
+  												 <td>  <%= custT[colData].to_s %>  </td>  												 
+  												<% end %>	 
+  										  <% end %>
   										<% end %> 
   										
   									 <% end %> 			
   										 	
   									<%	else	 %>
+  									 	
+  									
   										<% if (@intCntr == @DebitCol and custT["dr_cr"] != "Dr") or (@intCntr == @CreditCol and custT["dr_cr"] != "Cr") then %>
   										 	 <td>   </td>
   										<%	else	 %>
@@ -117,25 +157,48 @@
   					</tbody>
   					
   					<tfoot>
-  						<%  if @repType == "daybook" then %>  
   						<tr>
-  							<th></th><th></th><th></th><th></th><th></th><th></th>
+  							<% @colTitleHTML = ""
+  								@cnt = 0
+  								@columnsTitleDisp.each do |colTitle|
+  									@colTitleHTML = @colTitleHTML + "<th></th>"	
+  								end	
+  							%>	
+  							<%= raw @colTitleHTML %>	
   						</tr>	
   						<tr>
-  							<%  if @repType == "daybook" then %>  
-  								<% @colTitleHTML ="<th></th>"+"<th></th>"+"<th></th>" %>
-  								<% @colTitleHTML = @colTitleHTML + "<th>BALANCE</th>" %>
-  								<% if @getCashInHandClBalance.split("@")[1] != "Dr" then %> 
-  									<%@colTitleHTML = @colTitleHTML + "<th></th>"+"<th>"+@getCashInHandClBalance.split("@")[0]+"</th>" %>
-  								<%	else	 %>
-  									<%@colTitleHTML = @colTitleHTML + "<th>"+@getCashInHandClBalance.split("@")[0]+"</th><th></th>" %>
-  								<%	end	 %>
-  								
-  							<%	else	 %>
-  							<%	end	 %>
+  						<% @colTitleHTML = ""
+  								@cnt = 0
+  								@columnsTitleDisp.each do |colTitle|
+  									
+  									if @cnt == @DebitCol -1 then
+  										 @colTitleHTML = @colTitleHTML + "<th>BALANCE</th>" 
+  									else
+  										if @cnt == @DebitCol then
+  											if @getOpBalance.split("@")[1] == "Dr" then  
+  												@colTitleHTML = @colTitleHTML +"<th>"+@getClBalance.split("@")[0]+"</th>" 
+  											else
+  												@colTitleHTML = @colTitleHTML + "<th></th>"	
+  											end	
+  										else
+  											if @cnt == @CreditCol then
+  												if @getOpBalance.split("@")[1] == "Cr" then  
+  													@colTitleHTML = @colTitleHTML + "<th>"+@getClBalance.split("@")[0]+"</th>" 
+  												else
+  													@colTitleHTML = @colTitleHTML + "<th></th>"	
+  												end	
+  											else
+  												@colTitleHTML = @colTitleHTML + "<th></th>"
+  											end		
+  										end		
+  									end		
+  									@cnt = @cnt + 1
+  								end	
+  							 %>				
+  							
   							<%= raw @colTitleHTML %>
   						</tr>
-  						<% end %>
+  						
   					</tfoot>
   						
   				</table>
