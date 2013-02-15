@@ -37,7 +37,8 @@ add_breadcrumb "index", ledgers_path
     
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @ledger }
+      #format.json { render json: @ledger }
+       render :json => @ledgers 
     end
   end
 
@@ -48,7 +49,8 @@ add_breadcrumb "index", ledgers_path
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @ledger }
+      #format.json { render json: @ledger }
+       render :json => @ledgers 
     end
   end
 
@@ -64,11 +66,11 @@ add_breadcrumb "index", ledgers_path
 
     respond_to do |format|
       if @ledger.save
-        format.html { redirect_to @ledger, notice: 'Ledger was successfully created.' }
-        format.json { render json: @ledger, status: :created, location: @ledger }
+    #    format.html { redirect_to @ledger, notice: 'Ledger was successfully created.' }
+     #   format.json { render json: @ledger, status: :created, location: @ledger }
       else
-        format.html { render action: "new" }
-        format.json { render json: @ledger.errors, status: :unprocessable_entity }
+     #   format.html { render action: "new" }
+     #   format.json { render json: @ledger.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -80,11 +82,11 @@ add_breadcrumb "index", ledgers_path
 
     respond_to do |format|
       if @ledger.update_attributes(params[:ledger])
-        format.html { redirect_to @ledger, notice: 'Ledger was successfully updated.' }
-        format.json { head :no_content }
+    #    format.html { redirect_to @ledger, notice: 'Ledger was successfully updated.' }
+    #    format.json { head :no_content }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @ledger.errors, status: :unprocessable_entity }
+     #   format.html { render action: "edit" }
+    #    format.json { render json: @ledger.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -96,8 +98,8 @@ add_breadcrumb "index", ledgers_path
     @ledger.destroy
 
     respond_to do |format|
-      format.html { redirect_to :back } #ledgers_url }
-      format.json { head :no_content }
+   #   format.html { redirect_to :back } #ledgers_url }
+   #   format.json { head :no_content }
     end
   end
 end
