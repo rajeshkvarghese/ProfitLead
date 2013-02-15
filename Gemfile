@@ -28,7 +28,7 @@ gem 'jquery-rails'
 
 gem 'annotate', ">=2.5.0"
 
-gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+gem 'jquery-datatables-rails' #, github: 'rweng/jquery-datatables-rails'
 gem 'jquery-ui-rails'
 
 gem 'simple_form'
