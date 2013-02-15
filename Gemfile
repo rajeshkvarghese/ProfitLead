@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '3.2.9'
 
@@ -10,7 +10,7 @@ gem 'rails', '3.2.9'
 
 gem 'activerecord-jdbcmysql-adapter'
 
-gem 'jruby-openssl'
+#gem 'jruby-openssl'
 
 # Gems used only for assets and not required
 # in production environments by default.
