@@ -10,6 +10,8 @@ gem 'rails', '3.2.9'
 
 gem 'activerecord-jdbcmysql-adapter'
 
+gem 'trinidad'
+
 #gem 'jruby-openssl'
 
 # Gems used only for assets and not required
