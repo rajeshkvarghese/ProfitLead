@@ -26,7 +26,7 @@ ProfitLead::Application.routes.draw do
   resources :itemgroups
 
 
-  root to: 'ledgers#index' 
+  #root to: 'ledgers#index' 
   
   resources :itemorders
 
